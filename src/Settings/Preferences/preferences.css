@@ -1,0 +1,56 @@
+.preferences {
+}
+.preferences-item {
+  display: flex;
+  justify-content: space-between;
+}
+.preferences-item-title {
+}
+.preferences-item-select {
+  position: relative;
+}
+.preferences-item-select-title {
+  margin-right: 10px;
+  padding: 10px;
+  width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
+}
+.preferences-item-select-container {
+  /* 기본 필드 */
+  position: absolute;
+  right: 10px;
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* 변경 필드 */
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.preferences-item-select-container.open {
+  margin-top: 5px;
+  visibility: visible;
+  max-height: 200px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.preferences-item-select-item {
+  cursor: pointer;
+  text-align: center;
+}
+
+.preferences-item-select-item:hover {
+  color: var(--color-point);
+}
+.preferences-item-select-item.selected {
+  color: var(--color-point);
+  font-weight: bold;
+}

@@ -1,5 +1,12 @@
+import { Outlet } from "react-router-dom";
+
 function Test() {
-  return <div>안녕</div>;
+  return (
+    <>
+      gld
+      <Outlet />
+    </>
+  );
 }
 
 export default Test;
