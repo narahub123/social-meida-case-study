@@ -3,8 +3,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Test from "./Test.tsx";
-import Settings from "./Settings/Settings.tsx";
-import Preferences from "./Settings/Preferences/Preferences.tsx";
+import Settings from "./pages/Settings/Settings.tsx";
+import Preferences from "./pages/Settings/Preferences/Preferences.tsx";
 
 const router = createBrowserRouter([
   {
