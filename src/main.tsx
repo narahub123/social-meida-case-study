@@ -3,9 +3,13 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Test from "./Test.tsx";
+
+import Auth from "./pages/Auth/Auth.tsx";
+import Home from "./pages/Home/Home.tsx";
 import Settings from "./Settings/Settings.tsx";
 import Preferences from "./Settings/Preferences/Preferences.tsx";
 
+const login = false;
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +24,11 @@ const router = createBrowserRouter([
             element: <Preferences />,
           },
         ],
+      },
+      {
+        path: "auth",
+        element: login ? <Home /> : <Auth />,
+        children: [],
       },
     ],
   },
