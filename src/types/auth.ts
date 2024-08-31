@@ -1,3 +1,3 @@
-export interface UserSigninType {
+export interface UserSignupType {
   [key: string]: string;
 }

@@ -1,4 +1,4 @@
-.email-signin {
+.email-signup {
   position: absolute;
   left: 0;
   top: 0;
@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.41);
 }
 
-.email-signin-wrapper {
+.email-signup-wrapper {
   box-sizing: border-box;
   border-radius: 10px;
   position: absolute;
@@ -17,17 +17,32 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
-.email-signin-container {
+.email-signup-container {
+  position: relative;
   padding: 50px;
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.email-signin-title {
+.email-signup-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
 }
 
-.email-signin-input-container {
+.email-signup-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.email-signup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.email-signup-input-container {
   position: relative;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -37,45 +52,49 @@
   gap: 5px;
   padding: 10px;
 }
-.email-signin-input-container.focused {
+.email-signup-input-container.focused {
   border: 2px solid var(--color-point);
 }
 
-.email-signin-input-info {
+.email-signup-input-container.warning {
+  border: 2px solid var(red);
+}
+
+.email-signup-input-info {
   display: flex;
   justify-content: space-between;
 }
 
-.email-signin-input-info-title {
+.email-signup-input-info-title {
   flex: 1;
   padding: 10px 5px 5px;
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
-.email-signin-input-info-title.active {
+.email-signup-input-info-title.active {
   padding: 0px;
   font-size: 14px;
   transition: all 0.3s ease-in-out;
 }
-.email-signin-input-info-length {
+.email-signup-input-info-length {
   font-size: 14px;
   visibility: hidden;
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
-.email-signin-input-info-length.active {
+.email-signup-input-info-length.active {
   visibility: visible;
   opacity: 1;
   transition: all 0.3s ease-in-out;
 }
 
-.email-signin-input {
+.email-signup-input {
   flex: 1;
   max-height: 0;
   opacity: 0;
 }
 
-.email-signin-input.active {
+.email-signup-input.active {
   max-height: 20px;
   opacity: 1;
 
@@ -84,17 +103,21 @@
   font-size: 16px;
 }
 
-.email-signin-birth-container {
+.email-signup-item-warning {
+  font-size: 14px;
+  color: red;
 }
-.email-signin-birth-title {
+.email-signup-birth-container {
+}
+.email-signup-birth-title {
   margin-bottom: 15px;
 }
 
-.email-signin-birth-selection-container {
+.email-signup-birth-selection-container {
   display: flex;
   justify-content: space-between;
 }
-.email-signin-birth-input-wrapper {
+.email-signup-birth-input-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -104,20 +127,20 @@
   width: 100px;
   position: relative;
 }
-.email-signin-birth-input-wrapper.focused {
+.email-signup-birth-input-wrapper.focused {
   border: 2px solid var(--color-point);
 }
 
-.email-signin-birth-input-container {
+.email-signup-birth-input-container {
   flex: 85;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.email-signin-birth-input-title {
+.email-signup-birth-input-title {
   padding: 5px;
 }
-.email-signin-birth-input {
+.email-signup-birth-input {
   width: 100%;
   padding: 10px 10px 10px 0;
   border: none;
@@ -125,12 +148,12 @@
   text-align: center;
 }
 
-.email-signin-birth-input-icon {
+.email-signup-birth-input-icon {
   flex: 15;
   text-align: center;
 }
 
-.email-signin-birth-input-list {
+.email-signup-birth-input-list {
   position: absolute;
   bottom: 40px;
   background-color: #fff;
@@ -147,31 +170,38 @@
   transition: all 0.3s ease-in-out;
 }
 
-.email-signin-birth-input-list.focused {
+.email-signup-birth-input-list.open {
   visibility: visible;
   max-height: 300px;
   opacity: 1;
   transition: all 0.3s ease-in-out;
 }
 
-.email-signin-birth-input-item {
+.email-signup-birth-input-item {
   position: relative;
-  margin: 10px;
+  padding: 10px;
   width: 60px;
   cursor: pointer;
   text-align: center;
 }
 
-.email-signin-birth-input-item.selected {
+.email-signup-birth-input-item.selected {
+  background-color: var(--color-point);
+  color: #fff;
+}
+
+.email-signup-birth-input-item:hover {
   color: var(--color-point);
 }
 
-.email-signin-birth-input-item:hover {
-  color: var(--color-point);
-}
-
-.email-signin-button {
+.email-signup-button {
   border: none;
   border-radius: 10px;
   padding: 10px;
+}
+
+.email-signup-button.valid {
+  background-color: var(--color-point);
+  color: #fff;
+  cursor: pointer;
 }

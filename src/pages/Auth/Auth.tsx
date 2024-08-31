@@ -1,17 +1,19 @@
 import { useState } from "react";
 import "./auth.css";
 import AuthButton from "./components/AuthButton";
-import EmailSignin from "./EmailSignin";
+import EmailSignup from "./EmailSignup";
 
 const Auth = () => {
-  const [openEmailSignin, setOpenEmailSignin] = useState(false);
+  const [openEmailSignup, setOpenEmailSignup] = useState(false);
   return (
     <>
-      <EmailSignin />
+      {openEmailSignup && (
+        <EmailSignup setOpenEmailSignup={setOpenEmailSignup} />
+      )}
       <div className="auth">
-        <section className="auth-signin">
-          <div className="auth-signin-title">지금 가입하세요</div>
-          <div className="auth-signin-btns">
+        <section className="auth-signup">
+          <div className="auth-signup-title">지금 가입하세요</div>
+          <div className="auth-signup-btns">
             <AuthButton
               logo="/images/google-logo.webp"
               text="구글에서 가입하기"
@@ -25,13 +27,18 @@ const Auth = () => {
               text="카카오에서 가입하기"
             />
 
-            <div className="auth-signin-divider">
-              <p className="auth-signin-divider-line"></p>
+            <div className="auth-signup-divider">
+              <p className="auth-signup-divider-line"></p>
               <span>또는</span>
-              <p className="auth-signin-divider-line"></p>
+              <p className="auth-signup-divider-line"></p>
             </div>
 
-            <AuthButton logo="" text="계정 만들기" />
+            <div
+              className="auth-signup-wrapper"
+              onClick={() => setOpenEmailSignup(!openEmailSignup)}
+            >
+              <AuthButton logo="" text="계정 만들기" />
+            </div>
           </div>
         </section>
         <section className="auth-login">
