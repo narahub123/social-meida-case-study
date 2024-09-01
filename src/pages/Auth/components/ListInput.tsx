@@ -1,7 +1,7 @@
 import "./listInput.css";
 import { useEffect, useRef, useState } from "react";
 import { LuChevronDown } from "react-icons/lu";
-import { BirthType } from "../EmailSignup";
+import { BirthType } from "../EmailSignup/EmailSignup";
 import {
   handleFocus,
   handleKeyDown,
