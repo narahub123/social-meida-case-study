@@ -66,7 +66,7 @@ const handleInputChange = (
         [id]: false,
       }));
     } else {
-      setMessages(messages.join(" "));
+      setMessages("");
       setIsValid((prev) => ({
         ...prev,
         [id]: true,
@@ -74,7 +74,42 @@ const handleInputChange = (
     }
   }
 
-  // userSignup에 추가\
+  if (id === "password") {
+    // 조건 확인
+    if (
+      value.length < 8 || // 비밀번호 길이 체크
+      !/[A-Za-z]/.test(value) || // 영문자 체크
+      !/\d/.test(value) || // 숫자 체크
+      !/[@$!%*#?&]/.test(value) // 특수문자 체크
+    ) {
+      if (value.length < 8) {
+        messages.push("비밀번호는 최소 8자 이상이어야 합니다.");
+      }
+      if (!/[A-Za-z]/.test(value)) {
+        messages.push("영문자가 적어도 하나 포함되어야 합니다.");
+      }
+      if (!/\d/.test(value)) {
+        messages.push("숫자가 적어도 하나 포함되어야 합니다.");
+      }
+      if (!/[@$!%*#?&]/.test(value)) {
+        messages.push("특수문자 중 적어도 하나가 포함되어야 합니다.");
+      }
+
+      setMessages(messages.join(" "));
+      setIsValid((prev) => ({
+        ...prev,
+        [id]: false,
+      }));
+    } else {
+      setMessages("");
+      setIsValid((prev) => ({
+        ...prev,
+        [id]: true,
+      }));
+    }
+  }
+
+  // userSignup에 추가
   setUserSignup((prev) => ({
     ...prev,
     [id]: value,

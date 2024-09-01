@@ -53,8 +53,8 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }
   }, [birth]);
 
-  const handleNext = () => {
-    setStage(1);
+  const handleNext = (next: number) => {
+    setStage(next);
   };
 
   return (
@@ -128,7 +128,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       <section className="email-signup-section">
         <button
           className={`email-signup-button${validation ? " valid" : ""}`}
-          onClick={() => handleNext()}
+          onClick={() => handleNext(1)}
         >
           다음
         </button>
