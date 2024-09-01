@@ -1,13 +1,22 @@
 import "./listInput.css";
 import { useEffect, useRef, useState } from "react";
 import { LuChevronDown } from "react-icons/lu";
+import { BirthType } from "../EmailSignup";
+import {
+  handleFocus,
+  handleKeyDown,
+  handleOpenDropdown,
+  handleSelectItem,
+} from "../../../utils/auth";
 
 interface ListInputProps {
   field: string;
   unit: string;
   array: any[];
   focused: string;
+  birth: BirthType;
   setFocused: (value: string) => void;
+  setBirth: React.Dispatch<React.SetStateAction<BirthType>>;
 }
 
 const ListInput = ({
@@ -15,7 +24,9 @@ const ListInput = ({
   unit,
   array,
   focused,
+  birth,
   setFocused,
+  setBirth,
 }: ListInputProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,77 +63,26 @@ const ListInput = ({
     list.scrollTo({ top: scrollTop, behavior: "smooth" }); // 부드럽게 스크롤합니다.
   }, [index]);
 
-  // dropdown 여닫기
-  const handleOpenDropdown = () => {
-    console.log(1);
-
-    setOpenDropdown(!openDropdown);
-    setFocused(field);
-    inputRef.current?.focus();
-  };
-
-  // 리스트에서 아이템 선택하기
-  const handleSelectItem = (
-    e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    index: number
-  ) => {
-    console.log(2);
-
-    e.stopPropagation();
-    console.log(index);
-
-    setIndex(index);
-    if (!inputRef.current) return;
-    inputRef.current.value = array[index] + unit;
-
-    // setOpenDropdown(!openDropdown);
-  };
-
-  // tab 이동으로 focus 주기
-  const handleFocus = () => {
-    console.log(3);
-
-    setFocused(field);
-
-    // 포커스를 주면 input 박스에 값 표시하기
-    if (!inputRef.current) return;
-    inputRef.current.value = array[index] + unit;
-  };
-
-  // 키로 목록 이동
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(5);
-    e.stopPropagation();
-    if (!inputRef.current) return;
-
-    if (e.key === "Enter") {
-      setOpenDropdown(!openDropdown);
-    }
-
-    if (e.key === "Escape") {
-      setOpenDropdown(false);
-    }
-
-    let newIndex = index;
-    if (e.key === "ArrowDown") {
-      newIndex = index + 1;
-      if (newIndex > array.length - 1) return; // 목록 갯수보다 큰 경우
-      setIndex(newIndex);
-    }
-
-    if (e.key === "ArrowUp") {
-      newIndex = index - 1;
-      if (newIndex < 0) return; // 0보다 작은 경우
-      setIndex(newIndex);
-    }
-
-    inputRef.current.value = array[newIndex] + unit;
-  };
-
   return (
-    <div className="list-input" onClick={() => handleOpenDropdown()} ref={ref}>
+    <div
+      className="list-input"
+      onClick={() =>
+        handleOpenDropdown(
+          field,
+          openDropdown,
+          setOpenDropdown,
+          setFocused,
+          inputRef
+        )
+      }
+      ref={ref}
+    >
       <div
-        className={`list-input-wrapper${focused === field ? " focused" : ""}`}
+        className={`list-input-wrapper${
+          focused === field || birth[field as keyof BirthType] !== 0
+            ? " focused"
+            : ""
+        }`}
       >
         <div className="list-input-left">
           <div className="list-input-left-title">{unit}</div>
@@ -130,8 +90,23 @@ const ListInput = ({
             type="text"
             className="list-input-left-input"
             ref={inputRef}
-            onFocus={() => handleFocus()}
-            onKeyDown={(e) => handleKeyDown(e)}
+            onFocus={() =>
+              handleFocus(field, setFocused, inputRef, array, index, unit)
+            }
+            onKeyDown={(e) =>
+              handleKeyDown(
+                e,
+                inputRef,
+                setOpenDropdown,
+                openDropdown,
+                index,
+                array,
+                unit,
+                field,
+                setIndex,
+                setBirth
+              )
+            }
           />
         </div>
         <div className="list-input-right">
@@ -154,7 +129,20 @@ const ListInput = ({
               array[index] === item ? " selected" : ""
             }`}
             key={item}
-            onClick={(e) => handleSelectItem(e, idx)}
+            onClick={(e) =>
+              handleSelectItem(
+                e,
+                idx,
+                field,
+                unit,
+                array,
+                inputRef,
+                openDropdown,
+                setIndex,
+                setBirth,
+                setOpenDropdown
+              )
+            }
           >
             {item + unit}
           </li>
