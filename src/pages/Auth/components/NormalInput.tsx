@@ -3,6 +3,7 @@ import "./normalInput.css";
 import { UserSignupType, UserSignupValidType } from "../../../types/auth";
 import { debouncedInputChange, handleClick } from "../../../utils/auth";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { FaCheckCircle } from "react-icons/fa";
 interface NormalInputProps {
   title: string;
   field: string;
@@ -70,17 +71,24 @@ const NormalInput = ({
           onFocus={() => setFocused(field)}
           onBlur={() => setFocused("")}
         />
-        <div
-          className={`normal-input-eye${
-            focused === field || userSignup[field] !== "" ? " focused" : ""
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsVisible(!isVisible);
-          }}
-        >
-          {isVisible ? <IoMdEye /> : <IoMdEyeOff />}
-        </div>
+        {field === "password" && (
+          <div
+            className={`normal-input-eye${
+              focused === field || userSignup[field] !== "" ? " focused" : ""
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsVisible(!isVisible);
+            }}
+          >
+            {isVisible ? <IoMdEye /> : <IoMdEyeOff />}
+          </div>
+        )}
+        {field === "userId" && (
+          <div className="normal-input-correction">
+            <FaCheckCircle />
+          </div>
+        )}
       </div>
       {messages && focused === field && (
         <ul className={`normal-input-messages`}>

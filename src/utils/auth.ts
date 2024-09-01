@@ -228,3 +228,8 @@ export const handleKeyDown = (
 
   ref.current.value = array[newIndex] + unit;
 };
+
+//
+export const handleNext = (next: number, setStage: (value: number) => void) => {
+  setStage(next);
+};

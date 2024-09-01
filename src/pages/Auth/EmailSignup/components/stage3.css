@@ -1,0 +1,20 @@
+.email-signup-detail {
+  font-size: 14px;
+}
+.email-signup-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.email-signup-image-item {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+.email-signup-image-icon {
+  position: absolute;
+  top: 80px;
+  font-size: 25px;
+  color: #ccc;
+}

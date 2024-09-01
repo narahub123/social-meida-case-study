@@ -56,6 +56,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const handleNext = (next: number) => {
     setStage(next);
   };
+  
 
   return (
     <>
