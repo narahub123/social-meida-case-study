@@ -1,0 +1,100 @@
+.list-input {
+  width: 100px;
+  position: relative;
+}
+
+.list-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  padding: 10px;
+}
+
+.list-input-wrapper.focused {
+  border: 2px solid var(--color-point);
+}
+.list-input-wrapper.warning {
+  border: 2px solid red;
+}
+.list-input-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-input-left-title {
+  font-size: 14px;
+}
+
+input {
+  padding: 0;
+  border: none;
+  outline: 0;
+}
+.list-input-left-input {
+  width: 100%;
+  border: 0;
+  font-size: 17px;
+}
+.list-input-right {
+  display: flex;
+  justify-content: right;
+}
+
+.list-input-right-icon {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.list-input-right-icon.open {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+.list-input-list-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  overflow-y: auto;
+
+  visibility: hidden;
+  max-height: 0px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.list-input-list-container.open {
+  visibility: visible;
+  max-height: 250px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.list-input-list-item {
+  padding: 10px 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.list-input-list-item.selected {
+  background-color: var(--color-point);
+  color: #fff;
+}
+
+.list-input-list-item:hover {
+  color: var(--color-point);
+}
+
+.list-input-list-item.selected:hover {
+  color: #fff;
+}

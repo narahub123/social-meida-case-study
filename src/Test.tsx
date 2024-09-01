@@ -1,9 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 function Test() {
+  const { pathname } = useLocation();
+
   return (
     <>
-      gld
+      {pathname.includes("/auth") ? "" : "헤더"}
       <Outlet />
     </>
   );

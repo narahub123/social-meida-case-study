@@ -1,0 +1,207 @@
+.email-signup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.41);
+}
+
+.email-signup-wrapper {
+  box-sizing: border-box;
+  border-radius: 10px;
+  position: absolute;
+  width: 450px;
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.email-signup-container {
+  position: relative;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.email-signup-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.email-signup-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.email-signup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.email-signup-input-container {
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+.email-signup-input-container.focused {
+  border: 2px solid var(--color-point);
+}
+
+.email-signup-input-container.warning {
+  border: 2px solid var(red);
+}
+
+.email-signup-input-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.email-signup-input-info-title {
+  flex: 1;
+  padding: 10px 5px 5px;
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+.email-signup-input-info-title.active {
+  padding: 0px;
+  font-size: 14px;
+  transition: all 0.3s ease-in-out;
+}
+.email-signup-input-info-length {
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.email-signup-input-info-length.active {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.email-signup-input {
+  flex: 1;
+  max-height: 0;
+  opacity: 0;
+}
+
+.email-signup-input.active {
+  max-height: 20px;
+  opacity: 1;
+
+  outline: none;
+  border: none;
+  font-size: 16px;
+}
+
+.email-signup-item-warning {
+  font-size: 14px;
+  color: red;
+}
+.email-signup-birth-container {
+}
+.email-signup-birth-title {
+  margin-bottom: 15px;
+}
+
+.email-signup-birth-selection-container {
+  display: flex;
+  justify-content: space-between;
+}
+.email-signup-birth-input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100px;
+  position: relative;
+}
+.email-signup-birth-input-wrapper.focused {
+  border: 2px solid var(--color-point);
+}
+
+.email-signup-birth-input-container {
+  flex: 85;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.email-signup-birth-input-title {
+  padding: 5px;
+}
+.email-signup-birth-input {
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+.email-signup-birth-input-icon {
+  flex: 15;
+  text-align: center;
+}
+
+.email-signup-birth-input-list {
+  position: absolute;
+  bottom: 40px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  visibility: hidden;
+  max-height: 0px;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.email-signup-birth-input-list.open {
+  visibility: visible;
+  max-height: 300px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.email-signup-birth-input-item {
+  position: relative;
+  padding: 10px;
+  width: 60px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.email-signup-birth-input-item.selected {
+  background-color: var(--color-point);
+  color: #fff;
+}
+
+.email-signup-birth-input-item:hover {
+  color: var(--color-point);
+}
+
+.email-signup-button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.email-signup-button.valid {
+  background-color: var(--color-point);
+  color: #fff;
+  cursor: pointer;
+}

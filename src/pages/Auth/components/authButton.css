@@ -1,0 +1,25 @@
+.auth-button {
+  width: 300px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  color: var(--color-basic);
+  background-color: var(--color-bg);
+  cursor: pointer;
+}
+.auth-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.auth-button-logo {
+  width: 20px;
+  height: 20px;
+}
+.auth-button-text {
+  font-size: 14px;
+  font-weight: bold;
+}

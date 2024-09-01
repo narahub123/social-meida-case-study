@@ -5,7 +5,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Test from "./Test.tsx";
 import Settings from "./pages/Settings/Settings.tsx";
 import Preferences from "./pages/Settings/Preferences/Preferences.tsx";
+import Home from "./pages/Home/Home.tsx";
+import Auth from "./pages/Auth/Auth.tsx";
 
+const login = false;
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +23,11 @@ const router = createBrowserRouter([
             element: <Preferences />,
           },
         ],
+      },
+      {
+        path: "auth",
+        element: login ? <Home /> : <Auth />,
+        children: [],
       },
     ],
   },
