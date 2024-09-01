@@ -5,6 +5,7 @@
 }
 
 .normal-input-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -64,7 +65,17 @@
   border: none;
   max-height: 0;
 }
+.normal-input-eye {
+  position: absolute;
+  right: 10px;
+  bottom: 14px;
+  font-size: 24px;
 
+  visibility: hidden;
+}
+.normal-input-eye.focused {
+  visibility: visible;
+}
 .normal-input-input.focused {
   padding: 5px;
   max-height: 30px;
@@ -73,4 +84,8 @@
 .normal-input-messages {
   font-size: 14px;
   color: red;
+}
+
+.normal-input-messages-item {
+  padding: 5px;
 }
