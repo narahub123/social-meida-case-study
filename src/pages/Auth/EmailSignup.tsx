@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import "./emailsignup.css";
 
 import { LuChevronDown, LuX } from "react-icons/lu";
-import { months } from "./data/auth";
+import { months, years } from "./data/auth";
 import { debounce } from "../../utils/debounce";
 import { UserSignupType } from "../../types/auth";
+import ListInput from "./components/ListInput";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -172,15 +173,8 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     return lastDateOfMonth;
   };
 
-  const datesArray = Array.from(
-    { length: lastDate(birth.month) },
-    (_, i) => i + 1
-  );
+  const dates = Array.from({ length: lastDate(birth.month) }, (_, i) => i + 1);
 
-  console.log("isfocused", isFocused);
-  console.log("birth", birth);
-  console.log(userSignup);
-2
   const handleClickBirth = (field: string) => {
     setIsFocused(field);
     setOpenDropdown(field);
@@ -214,7 +208,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
         ? yearArray[idx]
         : id === "month"
         ? months[idx]
-        : datesArray[idx];
+        : dates[idx];
     if (e.key === "ArrowDown") {
       setIndex((prev) => ({
         ...prev,
@@ -226,7 +220,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
           ? yearArray[idx + 1]
           : id === "month"
           ? months[idx + 1]
-          : datesArray[idx + 1];
+          : dates[idx + 1];
     }
 
     if (e.key === "ArrowUp") {
@@ -240,7 +234,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
           ? yearArray[idx - 1]
           : id === "month"
           ? months[idx - 1]
-          : datesArray[idx - 1];
+          : dates[idx - 1];
     }
 
     setBirth((prev) => ({
@@ -361,7 +355,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
               <div className="email-signup-birth-title">생년월일</div>
               <div className="email-signup-birth-selection-container">
                 {/* 년 */}
-                <div
+                {/* <div
                   className={`email-signup-birth-input-wrapper${
                     isFocused === "year" ? " focused" : ""
                   }`}
@@ -406,9 +400,23 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </div> */}
+                <ListInput
+                  field="year"
+                  unit={"년"}
+                  array={years}
+                  focused={isFocused}
+                  setFocused={setIsFocused}
+                />
                 {/* 월 */}
-                <div
+                <ListInput
+                  field="month"
+                  unit={"월"}
+                  array={months}
+                  focused={isFocused}
+                  setFocused={setIsFocused}
+                />
+                {/* <div
                   className={`email-signup-birth-input-wrapper${
                     isFocused === "month" ? " focused" : ""
                   }`}
@@ -447,9 +455,16 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </div> */}
                 {/* 일 */}
-                <div
+                <ListInput
+                  field="date"
+                  unit={"일"}
+                  array={dates}
+                  focused={isFocused}
+                  setFocused={setIsFocused}
+                />
+                {/* <div
                   className={`email-signup-birth-input-wrapper${
                     isFocused === "date" ? " focused" : ""
                   }`}
@@ -488,7 +503,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </section>
