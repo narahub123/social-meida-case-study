@@ -54,6 +54,8 @@ const ListInput = ({
 
   // dropdown 여닫기
   const handleOpenDropdown = () => {
+    console.log(1);
+
     setOpenDropdown(!openDropdown);
     setFocused(field);
     inputRef.current?.focus();
@@ -62,20 +64,24 @@ const ListInput = ({
   // 리스트에서 아이템 선택하기
   const handleSelectItem = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    value: number
+    index: number
   ) => {
-    if (!inputRef.current) return;
+    console.log(2);
 
     e.stopPropagation();
+    console.log(index);
 
-    setIndex(value);
-    inputRef.current.value = array[value] + unit;
+    setIndex(index);
+    if (!inputRef.current) return;
+    inputRef.current.value = array[index] + unit;
 
-    setOpenDropdown(!openDropdown);
+    // setOpenDropdown(!openDropdown);
   };
 
   // tab 이동으로 focus 주기
   const handleFocus = () => {
+    console.log(3);
+
     setFocused(field);
 
     // 포커스를 주면 input 박스에 값 표시하기
@@ -83,17 +89,9 @@ const ListInput = ({
     inputRef.current.value = array[index] + unit;
   };
 
-  // tab 이동으로 blur 주기
-  const handleBlur = () => {
-    setFocused("");
-
-    // 포커스를 빼면 input 박스에 값 표시하기
-    if (!inputRef.current) return;
-    inputRef.current.value = array[index] + unit;
-  };
-
   // 키로 목록 이동
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(5);
     e.stopPropagation();
     if (!inputRef.current) return;
 
@@ -133,7 +131,6 @@ const ListInput = ({
             className="list-input-left-input"
             ref={inputRef}
             onFocus={() => handleFocus()}
-            onBlur={() => handleBlur()}
             onKeyDown={(e) => handleKeyDown(e)}
           />
         </div>
