@@ -32,12 +32,10 @@
   font-size: 14px;
 }
 
-input {
+input.list-input-left-input {
   padding: 0;
   border: none;
   outline: 0;
-}
-.list-input-left-input {
   width: 100%;
   border: 0;
   font-size: 17px;

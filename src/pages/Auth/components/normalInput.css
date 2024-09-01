@@ -1,0 +1,76 @@
+.normal-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.normal-input-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.normal-input-container.focused {
+  transition: all 0.3s ease;
+  gap: 10px;
+  border: 2px solid var(--color-point);
+}
+
+.normal-input-info {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.normal-input-info-title {
+  flex: 1;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.normal-input-info-title.active {
+  font-weight: normal;
+  font-size: 16px;
+  padding: 0px;
+  transition: all 0.3s ease;
+}
+
+.normal-input-info-count {
+  font-size: 14px;
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.normal-input-info-count.active {
+  visibility: visible;
+  max-height: 16px;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+.normal-input-input {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  max-height: 0;
+}
+
+.normal-input-input.focused {
+  padding: 5px;
+  max-height: 30px;
+  font-size: 18px;
+}
+.normal-input-messages {
+  font-size: 14px;
+  color: red;
+}
