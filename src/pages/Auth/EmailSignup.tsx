@@ -2,18 +2,16 @@ import { useEffect, useState } from "react";
 import "./emailsignup.css";
 import { LuX } from "react-icons/lu";
 import { dates, months, years } from "./data/auth";
-import { UserSignupType } from "../../types/auth";
+import {
+  BirthType,
+  UserSignupType,
+  UserSignupValidType,
+} from "../../types/auth";
 import ListInput from "./components/ListInput";
 import NormalInput from "./components/NormalInput";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface BirthType {
-  month: number;
-  date: number;
-  year: number;
 }
 
 const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
@@ -29,7 +27,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     date: 0,
   });
   // 유효성 확인
-  const [isValid, setIsValid] = useState({
+  const [isValid, setIsValid] = useState<UserSignupValidType>({
     username: false,
     email: false,
     birth: false,
@@ -58,11 +56,6 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
       }));
     }
   }, [birth]);
-
-  console.log(birth);
-  console.log(userSignup);
-
-  console.log(isValid);
 
   return (
     <div className="email-signup">

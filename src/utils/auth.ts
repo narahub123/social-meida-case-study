@@ -1,5 +1,4 @@
-import { BirthType } from "../pages/Auth/EmailSignup";
-import { UserSignupType } from "../types/auth";
+import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
 import { debounce } from "./debounce";
 
 // NormalInput.tsx
@@ -17,13 +16,7 @@ export const handleClick = (
 const handleInputChange = (
   e: React.ChangeEvent<HTMLInputElement>,
   setMessages: React.Dispatch<React.SetStateAction<string>>,
-  setIsValid: React.Dispatch<
-    React.SetStateAction<{
-      username: boolean;
-      email: boolean;
-      birth: boolean;
-    }>
-  >,
+  setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>,
   setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
 ) => {
   const { id, value } = e.target;

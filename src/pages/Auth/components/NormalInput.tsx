@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import "./normalInput.css";
-import { UserSignupType } from "../../../types/auth";
-import { debounce } from "../../../utils/debounce";
+import { UserSignupType, UserSignupValidType } from "../../../types/auth";
 import { debouncedInputChange, handleClick } from "../../../utils/auth";
 interface NormalInputProps {
   title: string;
@@ -11,13 +10,7 @@ interface NormalInputProps {
   setFocused: React.Dispatch<React.SetStateAction<string>>;
   userSignup: UserSignupType;
   setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>;
-  setIsValid: React.Dispatch<
-    React.SetStateAction<{
-      username: boolean;
-      email: boolean;
-      birth: boolean;
-    }>
-  >;
+  setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>;
 }
 
 const NormalInput = ({
