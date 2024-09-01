@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./auth.css";
 import AuthButton from "./components/AuthButton";
-import EmailSignup from "./EmailSignup";
+import EmailSignup from "./EmailSignup/EmailSignup";
 
 const Auth = () => {
   const [openEmailSignup, setOpenEmailSignup] = useState(false);

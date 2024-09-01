@@ -56,6 +56,24 @@ const handleInputChange = (
     }
   }
 
+  const authCode = "1234";
+  if (id === "emailAuth") {
+    if (value !== authCode) {
+      messages.push(`잘못된 인증코드를 입력하셨습니다.`);
+      setMessages(messages.join(" "));
+      setIsValid((prev) => ({
+        ...prev,
+        [id]: false,
+      }));
+    } else {
+      setMessages(messages.join(" "));
+      setIsValid((prev) => ({
+        ...prev,
+        [id]: true,
+      }));
+    }
+  }
+
   // userSignup에 추가\
   setUserSignup((prev) => ({
     ...prev,
