@@ -73,6 +73,16 @@
 
   visibility: hidden;
 }
+.normal-input-correction {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: red;
+}
+
+.normal-input-correction.correct {
+  color: var(--color-point);
+}
 .normal-input-eye.focused {
   visibility: visible;
 }
