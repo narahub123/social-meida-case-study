@@ -29,6 +29,7 @@ const NormalInput = ({
   const [messages, setMessages] = useState("");
   const defaultVisible = field === "password" ? false : true;
   const [isVisible, setIsVisible] = useState(defaultVisible);
+  const [correct, setCorrect] = useState(true);
 
   return (
     <div
@@ -85,7 +86,9 @@ const NormalInput = ({
           </div>
         )}
         {field === "userId" && (
-          <div className="normal-input-correction">
+          <div
+            className={`normal-input-correction${correct ? " correct" : ""}`}
+          >
             <FaCheckCircle />
           </div>
         )}
