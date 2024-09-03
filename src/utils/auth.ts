@@ -1,4 +1,4 @@
-import { checkEmailDuplicateAPI } from "../apis/auth";
+import { checkEmailDuplicateAPI, checkUserIdDuplicateAPI } from "../apis/auth";
 import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
 import { debounce } from "./debounce";
 
@@ -127,19 +127,27 @@ const handleInputChange = async (
       if (/^\d+$/.test(value)) {
         messages.push("영문 소문자는 적어도 한 글자 이상 포함되어야 합니다.");
       }
-    }
 
-    setMessages(messages.join(" "));
-    setIsValid((prev) => ({
-      ...prev,
-      [id]: false,
-    }));
-  } else {
-    setMessages("");
-    setIsValid((prev) => ({
-      ...prev,
-      [id]: true,
-    }));
+      setMessages(messages.join(" "));
+      setIsValid((prev) => ({
+        ...prev,
+        [id]: false,
+      }));
+    } else {
+      await checkUserIdDuplicateAPI(value)
+        .then((res) => {
+          console.log(res);
+          setMessages(res.message);
+          setIsValid((prev) => ({
+            ...prev,
+            [id]: true,
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+          setMessages(err.message);
+        });
+    }
   }
 
   // userSignup에 추가
