@@ -1,16 +1,24 @@
 import "./stage3.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Stage0Props } from "./Stage0";
-import { MdAddAPhoto, MdOutlineAddAPhoto } from "react-icons/md";
+import { MdAddAPhoto } from "react-icons/md";
 import { handleNext } from "../../../../utils/auth";
-import { UserSignupValidType } from "../../../../types/auth";
+import useImagePreview from "../../../../hooks/useImagePreview";
 
 const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const imageRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState("");
-  const [isValid, setIseValid] = useState<UserSignupValidType>({
-    image: false,
-  });
+  const { handleImageChange, imgUrl } = useImagePreview();
+
+  useEffect(() => {
+    if (imgUrl !== null && typeof imgUrl === "string") {
+      setUserSignup((prev) => ({
+        ...prev,
+        imgUrl: imgUrl,
+      }));
+    }
+  }, [imgUrl]);
+
+  console.log(userSignup);
 
   return (
     <>
@@ -23,9 +31,18 @@ const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       <section className="email-signup-section">
         {/* 이미지 업로드 */}
         <div className="email-signup-image-wrapper">
-          <input type="file" ref={imageRef} hidden />
+          <input
+            type="file"
+            ref={imageRef}
+            hidden
+            onChange={(e) => handleImageChange(e)}
+          />
           <img
-            src="./images/default-profile.png   "
+            src={
+              typeof imgUrl === "string"
+                ? imgUrl
+                : "./images/default-profile.png"
+            }
             alt="사진"
             className="email-signup-image-item"
             onClick={() => imageRef.current?.click()}
@@ -34,17 +51,16 @@ const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
             className="email-signup-image-icon"
             onClick={() => imageRef.current?.click()}
           >
-            {/* <MdOutlineAddAPhoto />  */}
             <MdAddAPhoto />
           </i>
         </div>
       </section>
       <section className="email-signup-section">
         <button
-          className={`email-signup-button${isValid.image ? " valid" : ""}`}
+          className={`email-signup-button${imgUrl ? " valid" : ""}`}
           onClick={() => handleNext("userId", setStage)}
         >
-          다음
+          {imgUrl ? "다음" : "건너뛰기"}
         </button>
       </section>
     </>

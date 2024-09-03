@@ -33,6 +33,13 @@ const NormalInput = ({
   const [isVisible, setIsVisible] = useState(defaultVisible);
   const [correct, setCorrect] = useState(true);
 
+  const handlePasswordHideVisible = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    setIsVisible(!isVisible);
+  };
+
   return (
     <div
       className="normal-input"
@@ -72,17 +79,14 @@ const NormalInput = ({
             debouncedInputChange(e, setMessages, setIsValid, setUserSignup)
           }
           onFocus={() => setFocused(field)}
-          onBlur={() => setFocused("")}
         />
         {field === "password" && (
           <div
             className={`normal-input-eye${
               focused === field || userSignup[field] !== "" ? " focused" : ""
             }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsVisible(!isVisible);
-            }}
+            // 비밀번호 노출/숨김
+            onClick={(e) => handlePasswordHideVisible(e)}
           >
             {isVisible ? <IoMdEye /> : <IoMdEyeOff />}
           </div>
@@ -95,10 +99,11 @@ const NormalInput = ({
           </div>
         )}
       </div>
-      {messages && focused === field && (
+      {messages && focused === field && userSignup[field] && (
         <ul className={`normal-input-messages`}>
-          {messages.split(". ").map((msg) => (
+          {messages.split(". ").map((msg, idx) => (
             <li
+              key={idx}
               className={`normal-input-messages-item${
                 isValid[field] ? " valid" : ""
               }`}
