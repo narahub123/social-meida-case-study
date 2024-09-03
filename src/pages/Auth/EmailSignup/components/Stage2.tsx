@@ -2,16 +2,13 @@ import { useState } from "react";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/auth";
+import { handleNext } from "../../../../utils/auth";
 
 const Stage2 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [focused, setFocused] = useState("");
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     password: false,
   });
-
-  const handleNext = (next: number) => {
-    setStage(next);
-  };
 
   return (
     <>
@@ -26,13 +23,14 @@ const Stage2 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setFocused={setFocused}
           userSignup={userSignup}
           setUserSignup={setUserSignup}
+          isValid={isValid}
           setIsValid={setIsValid}
         />
       </section>
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.password ? " valid" : ""}`}
-          onClick={() => handleNext(3)}
+          onClick={() => handleNext("profile", setStage)}
         >
           다음
         </button>

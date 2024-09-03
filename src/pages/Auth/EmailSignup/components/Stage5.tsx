@@ -31,7 +31,7 @@ const Stage5 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.alarm ? " valid" : ""}`}
-          onClick={() => handleNext(6, setStage)}
+          onClick={() => handleNext("language", setStage)}
         >
           {isValid ? "다음" : "지금은 넘어가기"}
         </button>

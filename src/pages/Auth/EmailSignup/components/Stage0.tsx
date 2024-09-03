@@ -7,12 +7,12 @@ import {
   UserSignupType,
   UserSignupValidType,
 } from "../../../../types/auth";
-import { sendAuthEmailAPI } from "../../../../apis/auth";
+import { handleNext } from "../../../../utils/auth";
 
 export interface Stage0Props {
   userSignup: UserSignupType;
   setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>;
-  setStage: React.Dispatch<React.SetStateAction<number>>;
+  setStage: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
@@ -53,15 +53,6 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       }));
     }
   }, [birth]);
-
-  console.log(userSignup.email);
-
-  const handleNext = async (next: number) => {
-    try {
-      await sendAuthEmailAPI(userSignup).then((res) => console.log(res));
-      // setStage(next);
-    } catch (error) {}
-  };
 
   return (
     <>
@@ -136,7 +127,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       <section className="email-signup-section">
         <button
           className={`email-signup-button${validation ? " valid" : ""}`}
-          onClick={() => handleNext(1)}
+          onClick={() => handleNext("password", setStage)}
         >
           다음
         </button>

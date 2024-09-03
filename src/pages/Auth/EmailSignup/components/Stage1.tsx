@@ -11,10 +11,6 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
     emailAuth: false,
   });
 
-  const handleNext = (next: number) => {
-    setStage(next);
-  };
-
   return (
     <>
       <section className="email-signup-section">
@@ -29,6 +25,7 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
           setFocused={setFocused}
           userSignup={userSignup}
           setUserSignup={setUserSignup}
+          isValid={isValid}
           setIsValid={setIsValid}
         />
         <p className="email-signup-noemail">이메일을 받지 못하셨나요?</p>
@@ -38,7 +35,7 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
           className={`email-signup-button${
             isValid["emailAuth"] ? " valid" : ""
           }`}
-          onClick={() => handleNext(2)}
+          onClick={() => {}}
         >
           다음
         </button>

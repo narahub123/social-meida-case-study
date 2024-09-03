@@ -42,7 +42,7 @@ const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.image ? " valid" : ""}`}
-          onClick={() => handleNext(4, setStage)}
+          onClick={() => handleNext("userId", setStage)}
         >
           다음
         </button>

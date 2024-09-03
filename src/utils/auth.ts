@@ -235,6 +235,6 @@ export const handleKeyDown = (
 };
 
 //
-export const handleNext = (next: number, setStage: (value: number) => void) => {
+export const handleNext = (next: string, setStage: (value: string) => void) => {
   setStage(next);
 };
