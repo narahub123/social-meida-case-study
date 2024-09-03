@@ -26,13 +26,14 @@ const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setFocused={setFocused}
           userSignup={userSignup}
           setUserSignup={setUserSignup}
+          isValid={isValid}
           setIsValid={setIsValid}
         />
       </section>
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.userId ? " valid" : ""}`}
-          onClick={() => handleNext(5, setStage)}
+          onClick={() => handleNext("alarm", setStage)}
         >
           다음
         </button>

@@ -23,7 +23,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     password: "",
   });
 
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState("username");
 
   return (
     <div className="email-signup">
@@ -34,49 +34,49 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
             title="닫기"
             onClick={() => setOpenEmailSignup(false)}
           />
-          {stage === 0 && (
+          {stage === "username" && (
             <Stage0
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 1 && (
+          {stage === "auth" && (
             <Stage1
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 2 && (
+          {stage === "password" && (
             <Stage2
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 3 && (
+          {stage === "profile" && (
             <Stage3
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 4 && (
+          {stage === "userId" && (
             <Stage4
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 5 && (
+          {stage === "alarm" && (
             <Stage5
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
             />
           )}
-          {stage === 6 && (
+          {stage === "language" && (
             <Stage6
               userSignup={userSignup}
               setUserSignup={setUserSignup}
