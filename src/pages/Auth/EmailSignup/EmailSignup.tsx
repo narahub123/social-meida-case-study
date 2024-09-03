@@ -21,9 +21,10 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     birth: "",
     imgUrl: "",
     password: "",
+    userId: "",
   });
 
-  const [stage, setStage] = useState("profile");
+  const [stage, setStage] = useState("userId");
 
   return (
     <div className="email-signup">

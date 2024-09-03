@@ -114,6 +114,34 @@ const handleInputChange = async (
     }
   }
 
+  if (id === "userId") {
+    if (!/^(?=.*[a-z])[a-z0-9]{4,16}$/.test(value)) {
+      if (value.length < 4 || value.length > 16) {
+        messages.push("아이디는 4자 이상 16자 이하로 정해주세요");
+      }
+
+      if (/[^a-z0-9]/.test(value)) {
+        messages.push("아이디는 영문 소문자와 숫자의 조합이어야 합니다.");
+      }
+
+      if (/^\d+$/.test(value)) {
+        messages.push("영문 소문자는 적어도 한 글자 이상 포함되어야 합니다.");
+      }
+    }
+
+    setMessages(messages.join(" "));
+    setIsValid((prev) => ({
+      ...prev,
+      [id]: false,
+    }));
+  } else {
+    setMessages("");
+    setIsValid((prev) => ({
+      ...prev,
+      [id]: true,
+    }));
+  }
+
   // userSignup에 추가
   setUserSignup((prev) => ({
     ...prev,
