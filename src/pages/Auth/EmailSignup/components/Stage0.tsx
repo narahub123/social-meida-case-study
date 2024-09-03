@@ -54,6 +54,8 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }
   }, [birth]);
 
+  console.log(userSignup);
+
   return (
     <>
       {/* 제목 */}

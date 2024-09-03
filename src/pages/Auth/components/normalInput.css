@@ -85,6 +85,7 @@
 }
 .normal-input-eye.focused {
   visibility: visible;
+  cursor: pointer;
 }
 .normal-input-input.focused {
   padding: 5px;
