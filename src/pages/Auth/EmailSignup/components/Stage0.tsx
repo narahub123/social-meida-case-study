@@ -7,6 +7,7 @@ import {
   UserSignupType,
   UserSignupValidType,
 } from "../../../../types/auth";
+import { sendAuthEmailAPI } from "../../../../apis/auth";
 
 export interface Stage0Props {
   userSignup: UserSignupType;
@@ -53,10 +54,14 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }
   }, [birth]);
 
-  const handleNext = (next: number) => {
-    setStage(next);
+  console.log(userSignup.email);
+
+  const handleNext = async (next: number) => {
+    try {
+      await sendAuthEmailAPI(userSignup).then((res) => console.log(res));
+      // setStage(next);
+    } catch (error) {}
   };
-  
 
   return (
     <>

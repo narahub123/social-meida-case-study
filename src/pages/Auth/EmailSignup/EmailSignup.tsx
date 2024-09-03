@@ -23,7 +23,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     password: "",
   });
 
-  const [stage, setStage] = useState(6);
+  const [stage, setStage] = useState(0);
 
   return (
     <div className="email-signup">
