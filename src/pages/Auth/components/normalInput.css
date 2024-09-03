@@ -99,3 +99,7 @@
 .normal-input-messages-item {
   padding: 5px;
 }
+
+.normal-input-messages-item.valid {
+  color: var(--color-point);
+}

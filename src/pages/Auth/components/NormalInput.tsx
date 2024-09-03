@@ -12,6 +12,7 @@ interface NormalInputProps {
   setFocused: React.Dispatch<React.SetStateAction<string>>;
   userSignup: UserSignupType;
   setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>;
+  isValid: UserSignupValidType;
   setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>;
 }
 
@@ -23,6 +24,7 @@ const NormalInput = ({
   setFocused,
   userSignup,
   setUserSignup,
+  isValid,
   setIsValid,
 }: NormalInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -96,7 +98,13 @@ const NormalInput = ({
       {messages && focused === field && (
         <ul className={`normal-input-messages`}>
           {messages.split(". ").map((msg) => (
-            <li className="normal-input-messages-item">{msg}</li>
+            <li
+              className={`normal-input-messages-item${
+                isValid[field] ? " valid" : ""
+              }`}
+            >
+              {msg}
+            </li>
           ))}
         </ul>
       )}

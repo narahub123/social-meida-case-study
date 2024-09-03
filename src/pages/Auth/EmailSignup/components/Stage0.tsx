@@ -79,6 +79,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setFocused={setIsFocused}
           userSignup={userSignup}
           setUserSignup={setUserSignup}
+          isValid={isValid}
           setIsValid={setIsValid}
         />
       </section>
@@ -91,6 +92,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setFocused={setIsFocused}
           userSignup={userSignup}
           setUserSignup={setUserSignup}
+          isValid={isValid}
           setIsValid={setIsValid}
         />
       </section>
