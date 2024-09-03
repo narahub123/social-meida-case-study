@@ -1,3 +1,4 @@
+import { checkEmailDuplicateAPI } from "../apis/auth";
 import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
 import { debounce } from "./debounce";
 
@@ -13,7 +14,7 @@ export const handleClick = (
 };
 
 // input typing
-const handleInputChange = (
+const handleInputChange = async (
   e: React.ChangeEvent<HTMLInputElement>,
   setMessages: React.Dispatch<React.SetStateAction<string>>,
   setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>,
@@ -48,7 +49,11 @@ const handleInputChange = (
       }));
     } else {
       // 형식에 맞는 경우
-      setMessages("");
+      await checkEmailDuplicateAPI(value).then((res) => {
+        console.log(res);
+        setMessages(res.message);
+      });
+
       setIsValid((prev) => ({
         ...prev,
         [id]: true,
