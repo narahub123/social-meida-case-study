@@ -55,3 +55,22 @@ export const checkUserIdDuplicateAPI = async (userId: string) => {
     throw error;
   }
 };
+
+// 회원 가입
+export const signupAPI = async (userSignup: UserSignupType) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userSignup),
+    });
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

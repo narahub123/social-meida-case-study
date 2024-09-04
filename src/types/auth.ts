@@ -1,6 +1,7 @@
 export interface UserSignupType {
   [key: string]:
     | string
+    | number
     | {
         [key: string]: boolean;
       };
