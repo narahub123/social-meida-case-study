@@ -1,13 +1,19 @@
 import "./stage6.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleNext } from "../../../../utils/auth";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/auth";
+import LanguageCheck from "./LanguageCheck";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
-  const [isValid, setIsValid] = useState<UserSignupValidType>({
-    language: false,
-  });
+  const [selected, setSelected] = useState("Korean");
+
+  useEffect(() => {
+    setUserSignup((prev) => ({
+      ...prev,
+      language: selected,
+    }));
+  }, [selected]);
+
   return (
     <>
       <section className="email-signup-section">
@@ -18,24 +24,24 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       </section>
       <section className="email-signup-section">
         <div className="email-signup-language-container">
-          <div className="email-signup-language-item">
-            <span className="email-signup-language-title">영어 - English</span>
-            <span className="email-signup-language-selection">
-              <input type="checkbox" />
-            </span>
-          </div>
-          <div className="email-signup-language-item">
-            <span className="email-signup-language-title">한국어</span>
-            <span className="email-signup-language-selection">
-              <input type="checkbox" />
-            </span>
-          </div>
+          <LanguageCheck
+            title={"한국어"}
+            language={"Korean"}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <LanguageCheck
+            title={"영어"}
+            language={"English"}
+            selected={selected}
+            setSelected={setSelected}
+          />
         </div>
       </section>
 
       <section className="email-signup-section">
         <button
-          className={`email-signup-button${isValid.language ? " valid" : ""}`}
+          className={`email-signup-button valid`}
           onClick={() => handleNext("follow", setStage)}
         >
           다음
