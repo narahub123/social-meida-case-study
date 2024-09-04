@@ -1,4 +1,5 @@
 import { checkEmailDuplicateAPI, checkUserIdDuplicateAPI } from "../apis/auth";
+import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test";
 import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
 import { debounce } from "./debounce";
 
@@ -273,4 +274,62 @@ export const handleKeyDown = (
 //
 export const handleNext = (next: string, setStage: (value: string) => void) => {
   setStage(next);
+};
+
+//EmailSignup.tsx
+// 성공적으로 위도 경도를 불러왔을 때
+const successCallback = async (
+  position: GeolocationPosition,
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+) => {
+  const lat = position.coords.latitude;
+  const lng = position.coords.longitude;
+
+  try {
+    // 위도 경도로 주소 알아내기
+    const location = await fetchAddressByLatLng(lat, lng);
+    setUserSignup((prev) => ({
+      ...prev,
+      location,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch address:", error);
+  }
+};
+
+// 위도 경도를 불러오는 것을 실패했을 때
+const errorCallback = (error: GeolocationPositionError) => {
+  console.error("Geolocation error:", error);
+};
+
+// 위도 경도를 알아내는 함수
+export const getUserLocation = (
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+) => {
+  // 위치 정보 요청
+  navigator.geolocation.getCurrentPosition(
+    (position) => successCallback(position, setUserSignup),
+    errorCallback,
+    {
+      enableHighAccuracy: true,
+      timeout: 1000, // 10초 후에 타임아웃
+      maximumAge: 0, // 캐시된 위치 정보를 사용하지 않음
+    }
+  );
+};
+
+// ip를 알아내는 함수
+export const fetchIPInfo = async (
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+) => {
+  try {
+    const res = await fetchIPAPI();
+    const ip = res;
+    setUserSignup((prev) => ({
+      ...prev,
+      ip,
+    }));
+  } catch (error) {
+    console.error("Failed to fetch IP info:", error);
+  }
 };

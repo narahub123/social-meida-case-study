@@ -5,6 +5,8 @@ import { Stage0Props } from "./Stage0";
 import LanguageCheck from "./LanguageCheck";
 import { languageList } from "../../../../data/settings";
 import { LanguageListType } from "../../../../types/settings";
+import { UserSignupType } from "../../../../types/auth";
+import { signupAPI } from "../../../../apis/auth";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [selected, setSelected] = useState("Korean");
@@ -39,6 +41,12 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     setLangList(newLangList);
   }, [selected]);
 
+  const handleSignup = async (userSignup: UserSignupType) => {
+    await signupAPI(userSignup)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <section className="email-signup-section">
@@ -64,9 +72,15 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       </section>
 
       <section className="email-signup-section">
-        <button
+        {/* <button
           className={`email-signup-button valid`}
           onClick={() => handleNext("follow", setStage)}
+        >
+          다음
+        </button> */}
+        <button
+          className={`email-signup-button valid`}
+          onClick={() => handleSignup(userSignup)}
         >
           다음
         </button>

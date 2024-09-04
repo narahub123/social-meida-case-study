@@ -1,5 +1,5 @@
 import "./emailsignup.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserSignupType } from "../../../types/auth";
 import Stage0 from "./components/Stage0";
 import { LuX } from "react-icons/lu";
@@ -11,6 +11,7 @@ import Stage5 from "./components/Stage5";
 import Stage6 from "./components/Stage6";
 import Stage8 from "./components/Stage8";
 import Stage7 from "./components/Stage7";
+import { fetchIPInfo, getUserLocation } from "../../../utils/auth";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,18 +22,18 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     username: "",
     email: "",
     birth: "",
-    imgUrl: "",
-    password: "",
-    userId: "",
-    alarms: {
-      message: false,
-      comment: false,
-      following: false,
-      newPost: false,
-    },
   });
 
-  const [stage, setStage] = useState("language");
+  const [stage, setStage] = useState("username");
+
+  useEffect(() => {
+    // 주소
+    getUserLocation(setUserSignup);
+    // ip
+    fetchIPInfo(setUserSignup);
+  }, []);
+
+  console.log(userSignup);
 
   return (
     <div className="email-signup">

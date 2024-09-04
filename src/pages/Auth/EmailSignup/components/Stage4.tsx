@@ -9,6 +9,7 @@ const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     userId: false,
   });
+  
   return (
     <>
       <section className="email-signup-section">
