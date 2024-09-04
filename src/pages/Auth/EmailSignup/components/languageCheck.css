@@ -10,12 +10,14 @@
   gap: 5px;
 }
 
-.language-check-info-title {
+.language-check-info-selected-name {
   font-weight: bold;
 }
 
 .language-check-info-detail {
   font-size: 12px;
+  display: flex;
+  gap: 5px;
 }
 
 .language-check-selection {
