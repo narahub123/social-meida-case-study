@@ -1,5 +1,9 @@
 export interface UserSignupType {
-  [key: string]: string;
+  [key: string]:
+    | string
+    | {
+        [key: string]: boolean;
+      };
 }
 
 export interface BirthType {

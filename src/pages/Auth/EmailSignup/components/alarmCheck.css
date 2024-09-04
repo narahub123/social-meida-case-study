@@ -1,0 +1,30 @@
+.alarm-check {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alarm-check-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alarm-check-info-title {
+  font-weight: bold;
+}
+.alarm-check-info-detail {
+  font-size: 13px;
+}
+
+.alarm-check-selection {
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--color-basic);
+  transition: color 0.3s ease;
+}
+
+.alarm-check-selection.selected {
+  color: var(--color-point);
+  transition: color 0.3s ease;
+}

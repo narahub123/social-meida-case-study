@@ -22,18 +22,18 @@ const Stage5 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       </section>
       <section className="email-signup-section">
         <button
-          className={`email-signup-button`}
-          //   onClick={() => handleNext(6, setStage)} // 알람 설정
+          className={`email-signup-button alarm`}
+          onClick={() => handleNext("alarm-setup", setStage)} // 알람 설정
         >
           알림 허용
         </button>
       </section>
       <section className="email-signup-section">
         <button
-          className={`email-signup-button${isValid.alarm ? " valid" : ""}`}
+          className={`email-signup-button valid`}
           onClick={() => handleNext("language", setStage)}
         >
-          {isValid ? "다음" : "지금은 넘어가기"}
+          지금은 넘어가기
         </button>
       </section>
     </>
