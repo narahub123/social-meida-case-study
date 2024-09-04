@@ -5,3 +5,7 @@ export interface PreferencesType {
 export interface PreferencesOpenDropdownType {
   [key: string]: boolean;
 }
+
+export interface LanguageListType {
+  [key: string]: string;
+}

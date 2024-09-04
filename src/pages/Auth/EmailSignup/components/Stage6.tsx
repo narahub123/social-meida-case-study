@@ -3,15 +3,40 @@ import { useEffect, useState } from "react";
 import { handleNext } from "../../../../utils/auth";
 import { Stage0Props } from "./Stage0";
 import LanguageCheck from "./LanguageCheck";
+import { languageList } from "../../../../data/settings";
+import { LanguageListType } from "../../../../types/settings";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [selected, setSelected] = useState("Korean");
+  const [langList, setLangList] = useState<(LanguageListType | undefined)[]>(
+    []
+  );
 
   useEffect(() => {
     setUserSignup((prev) => ({
       ...prev,
       language: selected,
     }));
+  }, [selected]);
+
+  useEffect(() => {
+    // 선택된 언어를 첫 요소로 설정
+    const first = languageList.find(
+      (language) => language.English === selected
+    );
+    // 선택된 언어를 제외한 언어들은 선택된 언어를 기준으로 정렬
+    const rest = languageList
+      .filter((language) => language.English !== selected)
+      .sort((a, b) => {
+        return a[selected as keyof LanguageListType].localeCompare(
+          b[selected as keyof LanguageListType]
+        );
+      });
+
+    // 합치기
+    const newLangList = [first, ...rest];
+
+    setLangList(newLangList);
   }, [selected]);
 
   return (
@@ -24,18 +49,17 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       </section>
       <section className="email-signup-section">
         <div className="email-signup-language-container">
-          <LanguageCheck
-            title={"한국어"}
-            language={"Korean"}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          <LanguageCheck
-            title={"영어"}
-            language={"English"}
-            selected={selected}
-            setSelected={setSelected}
-          />
+          {langList &&
+            langList.map((language) => (
+              <LanguageCheck
+                key={language?.ownName}
+                selectedName={language?.[selected as keyof typeof language]}
+                englishName={language?.English}
+                ownName={language?.ownName}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            ))}
         </div>
       </section>
 
