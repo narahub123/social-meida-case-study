@@ -1,0 +1,27 @@
+.language-check {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.language-check-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.language-check-info-title {
+  font-weight: bold;
+}
+
+.language-check-info-detail {
+  font-size: 12px;
+}
+
+.language-check-selection {
+  font-size: 20px;
+}
+.language-check-selection.selected {
+  color: var(--color-point);
+  transition: color 0.3s ease-in-out;
+}

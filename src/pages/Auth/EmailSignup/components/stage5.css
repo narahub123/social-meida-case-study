@@ -3,3 +3,14 @@
   margin: 0 auto;
   font-size: 30px;
 }
+
+.email-signup-button.alarm {
+  background-color: var(--color-point);
+  opacity: 0.9;
+  color: #fff;
+  cursor: pointer;
+}
+
+.email-signup-button.alarm:hover {
+  opacity: 1;
+}

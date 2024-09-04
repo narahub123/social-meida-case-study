@@ -9,6 +9,8 @@ import Stage3 from "./components/Stage3";
 import Stage4 from "./components/Stage4";
 import Stage5 from "./components/Stage5";
 import Stage6 from "./components/Stage6";
+import Stage8 from "./components/Stage8";
+import Stage7 from "./components/Stage7";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,9 +24,15 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
     imgUrl: "",
     password: "",
     userId: "",
+    alarms: {
+      message: false,
+      comment: false,
+      following: false,
+      newPost: false,
+    },
   });
 
-  const [stage, setStage] = useState("userId");
+  const [stage, setStage] = useState("language");
 
   return (
     <div className="email-signup">
@@ -77,8 +85,22 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
               setStage={setStage}
             />
           )}
+          {stage === "alarm-setup" && (
+            <Stage8
+              userSignup={userSignup}
+              setUserSignup={setUserSignup}
+              setStage={setStage}
+            />
+          )}
           {stage === "language" && (
             <Stage6
+              userSignup={userSignup}
+              setUserSignup={setUserSignup}
+              setStage={setStage}
+            />
+          )}
+          {stage === "follow" && (
+            <Stage7
               userSignup={userSignup}
               setUserSignup={setUserSignup}
               setStage={setStage}
