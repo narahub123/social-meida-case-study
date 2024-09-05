@@ -51,15 +51,23 @@ const handleInputChange = async (
       }));
     } else {
       // 형식에 맞는 경우
-      await checkEmailDuplicateAPI(value).then((res) => {
-        console.log(res);
-        setMessages(res.message);
-      });
+      await checkEmailDuplicateAPI(value)
+        .then((res) => {
+          console.log(res);
+          setMessages(res.message);
+          setIsValid((prev) => ({
+            ...prev,
+            [id]: true,
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
 
-      setIsValid((prev) => ({
-        ...prev,
-        [id]: true,
-      }));
+          setIsValid((prev) => ({
+            ...prev,
+            [id]: false,
+          }));
+        });
     }
   }
 
@@ -148,6 +156,10 @@ const handleInputChange = async (
         .catch((err) => {
           console.log(err);
           setMessages(err.message);
+          setIsValid((prev) => ({
+            ...prev,
+            [id]: false,
+          }));
         });
     }
   }

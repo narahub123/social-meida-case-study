@@ -19,8 +19,6 @@ const Stage8 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }));
   }, [alarms]);
 
-  console.log(userSignup);
-
   return (
     <>
       <section className="email-signup-section">

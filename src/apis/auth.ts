@@ -29,6 +29,12 @@ export const checkEmailDuplicateAPI = async (email: string) => {
       body: JSON.stringify({ email }),
     });
 
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw new Error(errorData.message);
+    }
+
     const data = await response.json();
 
     return data;
@@ -47,6 +53,12 @@ export const checkUserIdDuplicateAPI = async (userId: string) => {
       },
       body: JSON.stringify({ userId }),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw new Error(errorData.message);
+    }
 
     const data = await response.json();
 
@@ -67,9 +79,15 @@ export const signupAPI = async (userSignup: UserSignupType) => {
       body: JSON.stringify(userSignup),
     });
 
-    const data = await response.json();
+    if (!response.ok) {
+      const errorData = await response.json();
 
-    return data;
+      throw new Error(errorData.message);
+    }
+
+    const success = response.status === 201;
+
+    return success;
   } catch (error) {
     throw error;
   }

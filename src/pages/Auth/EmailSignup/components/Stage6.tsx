@@ -7,8 +7,11 @@ import { languageList } from "../../../../data/settings";
 import { LanguageListType } from "../../../../types/settings";
 import { UserSignupType } from "../../../../types/auth";
 import { signupAPI } from "../../../../apis/auth";
+import { useNavigate } from "react-router-dom";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
+  const navigate = useNavigate();
+  const [loading, setLoding] = useState(false);
   const [selected, setSelected] = useState("Korean");
   const [langList, setLangList] = useState<(LanguageListType | undefined)[]>(
     []
@@ -42,9 +45,15 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   }, [selected]);
 
   const handleSignup = async (userSignup: UserSignupType) => {
+    setLoding(true);
     await signupAPI(userSignup)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((success) => {
+        if (success) {
+          navigate("/checkAuthCode");
+        }
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoding(false));
   };
 
   return (
@@ -79,7 +88,7 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           다음
         </button> */}
         <button
-          className={`email-signup-button valid`}
+          className={`email-signup-button valid${loading ? " loading" : ""}`}
           onClick={() => handleSignup(userSignup)}
         >
           다음

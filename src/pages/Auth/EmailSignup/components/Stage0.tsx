@@ -55,7 +55,9 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }
   }, [birth]);
 
-  console.log(userSignup);
+  console.log(validation);
+  console.log(isValid);
+  
 
   return (
     <>
