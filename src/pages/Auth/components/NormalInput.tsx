@@ -14,6 +14,7 @@ interface NormalInputProps {
   setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>;
   isValid: UserSignupValidType;
   setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NormalInput = ({
@@ -26,6 +27,7 @@ const NormalInput = ({
   setUserSignup,
   isValid,
   setIsValid,
+  setLoading,
 }: NormalInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState("");
@@ -78,7 +80,13 @@ const NormalInput = ({
           }`}
           ref={inputRef}
           onChange={(e) =>
-            debouncedInputChange(e, setMessages, setIsValid, setUserSignup)
+            debouncedInputChange(
+              e,
+              setMessages,
+              setIsValid,
+              setUserSignup,
+              setLoading
+            )
           }
           onFocus={() => setFocused(field)}
         />

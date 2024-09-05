@@ -27,7 +27,8 @@ const handleInputChange = async (
   e: React.ChangeEvent<HTMLInputElement>,
   setMessages: React.Dispatch<React.SetStateAction<string>>,
   setIsValid: React.Dispatch<React.SetStateAction<UserSignupValidType>>,
-  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const { id, value } = e.target;
 
@@ -57,6 +58,7 @@ const handleInputChange = async (
         [id]: false,
       }));
     } else {
+      setLoading(true);
       // 형식에 맞는 경우
       await checkEmailDuplicateAPI(value)
         .then((res) => {
@@ -74,6 +76,9 @@ const handleInputChange = async (
             ...prev,
             [id]: false,
           }));
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }
@@ -151,6 +156,7 @@ const handleInputChange = async (
         [id]: false,
       }));
     } else {
+      setLoading(true);
       await checkUserIdDuplicateAPI(value)
         .then((res) => {
           console.log(res);
@@ -161,13 +167,13 @@ const handleInputChange = async (
           }));
         })
         .catch((err) => {
-          console.log(err);
           setMessages(err.message);
           setIsValid((prev) => ({
             ...prev,
             [id]: false,
           }));
-        });
+        })
+        .finally(() => setLoading(false));
     }
   }
 
@@ -180,8 +186,8 @@ const handleInputChange = async (
 
 // debounce를 이용한 타이핑 렌더링 줄이기
 export const debouncedInputChange = debounce<typeof handleInputChange>(
-  (e, setMessages, setIsValid, setUserSignup) =>
-    handleInputChange(e, setMessages, setIsValid, setUserSignup),
+  (e, setMessages, setIsValid, setUserSignup, setLoading) =>
+    handleInputChange(e, setMessages, setIsValid, setUserSignup, setLoading),
   500
 );
 

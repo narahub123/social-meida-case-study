@@ -9,6 +9,7 @@ import {
 } from "../../../../types/authTypes";
 import { handleNext } from "../../../../utils/authUtils";
 import GenderInput from "./GenderInput";
+import { LuLoader2 } from "react-icons/lu";
 
 export interface Stage0Props {
   userSignup: UserSignupType;
@@ -17,6 +18,7 @@ export interface Stage0Props {
 }
 
 const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
+  const [loading, setLoading] = useState(false);
   const [isFocused, setIsFocused] = useState("");
   // 유효성 확인
   const [isValid, setIsValid] = useState<UserSignupValidType>({
@@ -55,8 +57,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     }
   }, [birth]);
 
-  console.log(validation);
-  console.log(isValid);
+  console.log(loading);
 
   return (
     <>
@@ -76,6 +77,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+          setLoading={setLoading}
         />
       </section>
       <section className="email-signup-section">
@@ -99,6 +101,7 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+          setLoading={setLoading}
         />
       </section>
       {/* 생년월일 */}
@@ -140,10 +143,21 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       {/* 다음 버튼 */}
       <section className="email-signup-section">
         <button
-          className={`email-signup-button${validation ? " valid" : ""}`}
+          className={`email-signup-button${
+            validation ? " valid" : loading ? " loading" : ""
+          }`}
+          disabled={loading || !validation}
           onClick={() => handleNext("password", setStage)}
         >
-          다음
+          {loading ? (
+            <LuLoader2
+              className={`email-signup-button-spinner${
+                loading ? " loading" : ""
+              }`}
+            />
+          ) : (
+            "다음"
+          )}
         </button>
       </section>
     </>

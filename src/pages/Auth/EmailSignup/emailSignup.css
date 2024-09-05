@@ -195,10 +195,26 @@
   border: none;
   border-radius: 10px;
   padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .email-signup-button.valid {
   background-color: var(--color-point);
   color: #fff;
   cursor: pointer;
+}
+
+.email-signup-button-spinner.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: 1s infinite linear rotation;
+}
+
+@keyframes rotation {
+  100% {
+    transform: rotate(360deg);
+  }
 }

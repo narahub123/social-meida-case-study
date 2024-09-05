@@ -1,5 +1,5 @@
 import "./stage3.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Stage0Props } from "./Stage0";
 import { MdAddAPhoto } from "react-icons/md";
 import { handleNext } from "../../../../utils/authUtils";
@@ -17,8 +17,6 @@ const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       }));
     }
   }, [imgUrl]);
-
-  console.log(userSignup);
 
   return (
     <>

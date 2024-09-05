@@ -3,12 +3,14 @@ import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/authTypes";
 import { handleNext } from "../../../../utils/authUtils";
+import { LuLoader2 } from "react-icons/lu";
 
 const Stage2 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [focused, setFocused] = useState("");
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     password: false,
   });
+  const [loading, setLoading] = useState(true);
 
   return (
     <>
@@ -25,11 +27,13 @@ const Stage2 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+          setLoading={setLoading}
         />
       </section>
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.password ? " valid" : ""}`}
+          disabled={!isValid.password}
           onClick={() => handleNext("profile", setStage)}
         >
           다음

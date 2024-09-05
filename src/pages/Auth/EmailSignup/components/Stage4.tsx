@@ -3,12 +3,16 @@ import { handleNext } from "../../../../utils/authUtils";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/authTypes";
+import { LuLoader2 } from "react-icons/lu";
 
 const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [focused, setFocused] = useState("");
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     userId: false,
   });
+  const [loading, setLoading] = useState(false);
+
+  console.log(loading);
 
   return (
     <>
@@ -29,14 +33,24 @@ const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+          setLoading={setLoading}
         />
       </section>
       <section className="email-signup-section">
         <button
           className={`email-signup-button${isValid.userId ? " valid" : ""}`}
+          disabled={!isValid.userId || loading}
           onClick={() => handleNext("alarm", setStage)}
         >
-          다음
+          {loading ? (
+            <LuLoader2
+              className={`email-signup-button-spinner${
+                loading ? " loading" : ""
+              }`}
+            />
+          ) : (
+            "다음"
+          )}
         </button>
       </section>
     </>
