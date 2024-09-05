@@ -33,24 +33,28 @@ const Stage8 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
             detail="새로운 메시지를 받는 경우 알림을 받습니다."
             subField="message"
             setAlarms={setAlarms}
+            index={0}
           />
           <AlarmCheck
             title="댓글"
             detail="새로운 댓글이 있는 경우 알림을 받습니다."
             subField="comment"
             setAlarms={setAlarms}
+            index={0}
           />
           <AlarmCheck
             title="팔로잉"
             detail="새로운 팔로잉이 있는 경우 알림을 받습니다."
             subField="following"
             setAlarms={setAlarms}
+            index={0}
           />
           <AlarmCheck
             title="새 글"
             detail="팔로어 중 새 글이 있는 경우 알림을 받습니다."
             subField="newPost"
             setAlarms={setAlarms}
+            index={0}
           />
         </div>
       </section>

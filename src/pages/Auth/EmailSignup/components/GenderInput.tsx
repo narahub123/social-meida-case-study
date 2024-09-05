@@ -1,8 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UserSignupType } from "../../../../types/authTypes";
 import { genderList } from "../../data/authData";
 import "./genderInput.css";
-import { getFocused, handleChooseGender } from "../../../../utils/authUtils";
+import {
+  getFocused,
+  handleChooseGender,
+  handleKeyDownObject,
+} from "../../../../utils/authUtils";
 
 interface GenderInputProps {
   title: string;
@@ -21,8 +25,26 @@ const GenderInput = ({
   userSignup,
   setUserSignup,
 }: GenderInputProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+
+      if (ref.current && !ref.current.contains(target)) {
+        setOpenDropdown(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.addEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div
@@ -30,6 +52,7 @@ const GenderInput = ({
       onClick={() =>
         getFocused(field, openDropdown, setOpenDropdown, setFocused)
       }
+      ref={ref}
     >
       <div
         className={`gender-input-container${
@@ -59,6 +82,20 @@ const GenderInput = ({
               ? " focused"
               : ""
           }`}
+          onFocus={() => setFocused(field)}
+          onKeyDown={(e) =>
+            handleKeyDownObject(
+              e,
+              inputRef,
+              openDropdown,
+              setOpenDropdown,
+              field,
+              index,
+              setIndex,
+              genderList,
+              setUserSignup
+            )
+          }
         />
         <ul className={`gender-input-list${openDropdown ? " open" : ""}`}>
           {genderList.map((gender) => (
@@ -68,7 +105,7 @@ const GenderInput = ({
                 (userSignup[field] !== "" && userSignup[field])
                   ? " open"
                   : ""
-              }`}
+              }${gender.name === genderList[index].name ? " selected" : ""}`}
               key={gender.value}
               id={gender.value}
               onClick={(e) =>

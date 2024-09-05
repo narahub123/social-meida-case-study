@@ -95,6 +95,6 @@
 }
 
 .gender-input-list-item.selected {
-  color: var(--color-point);
+  background-color: var(--color-point);
+  color: #fff;
 }
-

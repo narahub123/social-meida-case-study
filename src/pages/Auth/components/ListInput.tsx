@@ -98,14 +98,14 @@ const ListInput = ({
               handleKeyDown(
                 e,
                 inputRef,
-                setOpenDropdown,
                 openDropdown,
-                index,
-                array,
-                unit,
+                setOpenDropdown,
                 field,
+                index,
                 setIndex,
-                setBirth
+                setBirth,
+                array,
+                unit
               )
             }
           />

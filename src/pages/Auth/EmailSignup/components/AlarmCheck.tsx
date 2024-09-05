@@ -17,12 +17,14 @@ interface AlarmCheckProps {
       newPost: boolean;
     }>
   >;
+  index: number;
 }
 const AlarmCheck = ({
   title,
   detail,
   subField,
   setAlarms,
+  index,
 }: AlarmCheckProps) => {
   const [selected, setSelected] = useState(false);
   const handleChangeCheckbox = () => {
@@ -45,7 +47,25 @@ const AlarmCheck = ({
         className={`alarm-check-selection${selected ? " selected" : ""}`}
         onClick={() => handleChangeCheckbox()}
       >
-        {selected ? <IoCheckbox /> : <IoSquareOutline />}
+        {selected ? (
+          <IoCheckbox
+            tabIndex={index}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleChangeCheckbox();
+              }
+            }}
+          />
+        ) : (
+          <IoSquareOutline
+            tabIndex={index}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleChangeCheckbox();
+              }
+            }}
+          />
+        )}
       </div>
     </div>
   );

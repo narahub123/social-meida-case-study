@@ -10,6 +10,7 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     emailAuth: false,
   });
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
@@ -27,6 +28,7 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+          setLoading={setLoading}
         />
         <p className="email-signup-noemail">이메일을 받지 못하셨나요?</p>
       </section>

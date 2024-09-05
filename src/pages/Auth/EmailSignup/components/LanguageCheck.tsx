@@ -8,6 +8,7 @@ interface LanguageCheckProps {
   ownName: string | undefined;
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
+  index: number;
 }
 
 const LanguageCheck = ({
@@ -16,6 +17,7 @@ const LanguageCheck = ({
   ownName,
   selected,
   setSelected,
+  index,
 }: LanguageCheckProps) => {
   const handleClickCheckbox = (language: string | undefined) => {
     if (!language) return;
@@ -39,7 +41,25 @@ const LanguageCheck = ({
         }`}
         onClick={() => handleClickCheckbox(englishName)}
       >
-        {selected === englishName ? <IoCheckbox /> : <IoSquareOutline />}
+        {selected === englishName ? (
+          <IoCheckbox
+            tabIndex={index}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleClickCheckbox(englishName);
+              }
+            }}
+          />
+        ) : (
+          <IoSquareOutline
+            tabIndex={index}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleClickCheckbox(englishName);
+              }
+            }}
+          />
+        )}
       </span>
     </div>
   );

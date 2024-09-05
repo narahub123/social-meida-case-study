@@ -33,7 +33,6 @@ const NormalInput = ({
   const [messages, setMessages] = useState("");
   const defaultVisible = field === "password" ? false : true;
   const [isVisible, setIsVisible] = useState(defaultVisible);
-  const [correct, setCorrect] = useState(true);
 
   const handlePasswordHideVisible = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -103,7 +102,9 @@ const NormalInput = ({
         )}
         {field === "userId" && (
           <div
-            className={`normal-input-correction${correct ? " correct" : ""}`}
+            className={`normal-input-correction${
+              isValid.userId ? " valid" : ""
+            }`}
           >
             <FaCheckCircle />
           </div>

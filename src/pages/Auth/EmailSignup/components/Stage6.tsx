@@ -7,10 +7,9 @@ import { languageList } from "../../../../data/settingsData";
 import { LanguageListType } from "../../../../types/settingsTypes";
 import { UserSignupType } from "../../../../types/authTypes";
 import { signupAPI } from "../../../../apis/authAPIs";
-import { useNavigate } from "react-router-dom";
+import { LuLoader2 } from "react-icons/lu";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
-  const navigate = useNavigate();
   const [loading, setLoding] = useState(false);
   const [selected, setSelected] = useState("Korean");
   const [langList, setLangList] = useState<(LanguageListType | undefined)[]>(
@@ -49,7 +48,7 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
     await signupAPI(userSignup)
       .then((success) => {
         if (success) {
-          navigate("/checkAuthCode");
+          handleNext("authCode", setStage);
         }
       })
       .catch((err) => console.log(err))
@@ -75,6 +74,7 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
                 ownName={language?.ownName}
                 selected={selected}
                 setSelected={setSelected}
+                index={0}
               />
             ))}
         </div>
@@ -89,9 +89,18 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
         </button> */}
         <button
           className={`email-signup-button valid${loading ? " loading" : ""}`}
+          disabled={loading}
           onClick={() => handleSignup(userSignup)}
         >
-          다음
+          {loading ? (
+            <LuLoader2
+              className={`email-signup-button-spinner${
+                loading ? " loading" : ""
+              }`}
+            />
+          ) : (
+            "제출"
+          )}
         </button>
       </section>
     </>

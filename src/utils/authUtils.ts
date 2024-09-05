@@ -249,18 +249,68 @@ export const handleFocus = (
   ref.current.value = array[index] + unit;
 };
 
+// gender 키로 이동
+export const handleKeyDownObject = (
+  e: React.KeyboardEvent<HTMLInputElement>,
+  ref: React.RefObject<HTMLInputElement>,
+  openDropdown: boolean,
+  setOpenDropdown: (value: boolean) => void,
+  field: string,
+  index: number,
+  setIndex: (value: number) => void,
+  array: any[],
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+) => {
+  e.stopPropagation();
+  if (!ref.current) return;
+
+  if (e.key === "Enter") {
+    setOpenDropdown(!openDropdown);
+  }
+
+  if (e.key === "Escape") {
+    setOpenDropdown(false);
+  }
+
+  let newIndex = index;
+  if (e.key === "ArrowDown") {
+    newIndex = index + 1;
+    if (newIndex > array.length - 1) return; // 목록 갯수보다 큰 경우
+    const value = array[newIndex].value;
+
+    setIndex(newIndex);
+    setUserSignup((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
+  if (e.key === "ArrowUp") {
+    newIndex = index - 1;
+    if (newIndex < 0) return; // 0보다 작은 경우
+    const value = array[newIndex].value;
+    setIndex(newIndex);
+    setUserSignup((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  }
+
+  ref.current.value = array[newIndex].name;
+};
+
 // 키로 목록 이동
 export const handleKeyDown = (
   e: React.KeyboardEvent<HTMLInputElement>,
   ref: React.RefObject<HTMLInputElement>,
-  setOpenDropdown: (value: boolean) => void,
   openDropdown: boolean,
-  index: number,
-  array: any[],
-  unit: string,
+  setOpenDropdown: (value: boolean) => void,
   field: string,
+  index: number,
   setIndex: (value: number) => void,
-  setBirth: React.Dispatch<React.SetStateAction<BirthType>>
+  setBirth: React.Dispatch<React.SetStateAction<BirthType>>,
+  array: any[],
+  unit: string
 ) => {
   e.stopPropagation();
   if (!ref.current) return;
@@ -278,10 +328,12 @@ export const handleKeyDown = (
     newIndex = index + 1;
     if (newIndex > array.length - 1) return; // 목록 갯수보다 큰 경우
     setIndex(newIndex);
-    setBirth((prev) => ({
-      ...prev,
-      [field]: array[newIndex],
-    }));
+    setBirth &&
+      array &&
+      setBirth((prev) => ({
+        ...prev,
+        [field]: array[newIndex],
+      }));
   }
 
   if (e.key === "ArrowUp") {

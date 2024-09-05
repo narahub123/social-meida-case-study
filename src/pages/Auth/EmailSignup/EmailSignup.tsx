@@ -51,7 +51,7 @@ const EmailSignup = ({ setOpenEmailSignup }: EmailSignupProps) => {
               setStage={setStage}
             />
           )}
-          {stage === "auth" && (
+          {stage === "authCode" && (
             <Stage1
               userSignup={userSignup}
               setUserSignup={setUserSignup}

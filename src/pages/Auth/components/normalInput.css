@@ -80,7 +80,7 @@
   color: red;
 }
 
-.normal-input-correction.correct {
+.normal-input-correction.valid {
   color: var(--color-point);
 }
 .normal-input-eye.focused {

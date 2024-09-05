@@ -41,9 +41,15 @@ const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
                 ? imgUrl
                 : "./images/default-profile.png"
             }
+            tabIndex={0}
             alt="사진"
             className="email-signup-image-item"
             onClick={() => imageRef.current?.click()}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                imageRef.current?.click();
+              }
+            }}
           />
           <i
             className="email-signup-image-icon"
