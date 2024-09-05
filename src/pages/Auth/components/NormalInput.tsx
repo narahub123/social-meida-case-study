@@ -64,7 +64,9 @@ const NormalInput = ({
                 focused === field ? " active" : ""
               }`}
             >
-              {userSignup[field].length}/{limitOfLetters}
+              {typeof userSignup[field] === "string" &&
+                userSignup[field].length}
+              /{limitOfLetters}
             </span>
           )}
         </div>
