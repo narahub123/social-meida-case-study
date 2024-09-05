@@ -1,5 +1,6 @@
 import { checkEmailDuplicateAPI, checkUserIdDuplicateAPI } from "../apis/auth";
 import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test";
+import { genderList } from "../pages/Auth/data/auth";
 import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
 import { debounce } from "./debounce";
 
@@ -332,4 +333,45 @@ export const fetchIPInfo = async (
   } catch (error) {
     console.error("Failed to fetch IP info:", error);
   }
+};
+
+// 성별 표기하기
+export const showGenderName = (value: string) => {
+  const found = genderList.find((gender) => gender.value === value);
+
+  return found ? found.name : "";
+};
+
+// gender input 포커스 주기
+export const getFocused = (
+  field: string,
+  openDropdown: boolean,
+  setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>,
+  setFocused: React.Dispatch<React.SetStateAction<string>>
+) => {
+  setFocused(field);
+  setOpenDropdown(!openDropdown);
+};
+
+// 성별 선택하기
+export const handleChooseGender = (
+  e: React.MouseEvent<HTMLLIElement, MouseEvent>,
+  ref: React.RefObject<HTMLInputElement>,
+  field: string,
+  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>,
+  setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (!ref.current) return;
+  const gender = e.currentTarget.id;
+
+  if (!gender) return;
+
+  ref.current.value = showGenderName(gender);
+
+  setUserSignup((prev) => ({
+    ...prev,
+    [field]: gender,
+  }));
+
+  setOpenDropdown(false);
 };

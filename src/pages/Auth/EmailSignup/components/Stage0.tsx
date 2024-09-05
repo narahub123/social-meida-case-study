@@ -8,6 +8,7 @@ import {
   UserSignupValidType,
 } from "../../../../types/auth";
 import { handleNext } from "../../../../utils/auth";
+import GenderInput from "./GenderInput";
 
 export interface Stage0Props {
   userSignup: UserSignupType;
@@ -74,6 +75,16 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           setUserSignup={setUserSignup}
           isValid={isValid}
           setIsValid={setIsValid}
+        />
+      </section>
+      <section className="email-signup-section">
+        <GenderInput
+          title="성별"
+          field="gender"
+          focused={isFocused}
+          setFocused={setIsFocused}
+          userSignup={userSignup}
+          setUserSignup={setUserSignup}
         />
       </section>
       {/* 이메일 */}

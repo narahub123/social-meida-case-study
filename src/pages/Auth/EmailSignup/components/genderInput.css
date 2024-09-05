@@ -1,0 +1,100 @@
+.gender-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gender-input-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.gender-input-container.focused {
+  transition: all 0.3s ease;
+  gap: 10px;
+  border: 2px solid var(--color-point);
+}
+.gender-input-info {
+  position: relative;
+  display: flex;
+}
+
+.gender-input-info-title {
+  flex: 1;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+.gender-input-info-title.active {
+  font-weight: normal;
+  font-size: 16px;
+  padding: 0px;
+  transition: all 0.3s ease;
+}
+
+.gender-input-input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  max-height: 0;
+}
+.gender-input-input.focused {
+  padding: 5px;
+  max-height: 30px;
+  font-size: 18px;
+}
+
+.gender-input-list {
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  bottom: 35px;
+  right: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px 10px 0 0;
+  background-color: #fff;
+
+  /* 변경되는 값 */
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.gender-input-list.open {
+  visibility: visible;
+  max-height: 300px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.gender-input-list-item {
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.gender-input-list-item.open {
+  opacity: 1;
+  padding: 7px 0;
+}
+
+.gender-input-list-item.open:hover {
+  color: #fff;
+  background-color: var(--color-point);
+}
+
+.gender-input-list-item.selected {
+  color: var(--color-point);
+}
+
