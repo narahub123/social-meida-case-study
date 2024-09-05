@@ -1,8 +1,8 @@
 import { useState } from "react";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/auth";
-import { handleNext } from "../../../../utils/auth";
+import { UserSignupValidType } from "../../../../types/authTypes";
+import { handleNext } from "../../../../utils/authUtils";
 
 const Stage2 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [focused, setFocused] = useState("");

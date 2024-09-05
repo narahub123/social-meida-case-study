@@ -1,5 +1,5 @@
 import "./stage8.css";
-import { handleNext } from "../../../../utils/auth";
+import { handleNext } from "../../../../utils/authUtils";
 import { Stage0Props } from "./Stage0";
 import AlarmCheck from "./AlarmCheck";
 import { useEffect, useState } from "react";

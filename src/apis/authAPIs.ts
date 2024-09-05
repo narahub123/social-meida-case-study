@@ -1,4 +1,4 @@
-import { UserSignupType } from "../types/auth";
+import { UserSignupType } from "../types/authTypes";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 

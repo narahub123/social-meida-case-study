@@ -1,6 +1,6 @@
 import "./emailsignup.css";
 import { useEffect, useState } from "react";
-import { UserSignupType } from "../../../types/auth";
+import { UserSignupType } from "../../../types/authTypes";
 import Stage0 from "./components/Stage0";
 import { LuX } from "react-icons/lu";
 import Stage1 from "./components/Stage1";
@@ -11,7 +11,7 @@ import Stage5 from "./components/Stage5";
 import Stage6 from "./components/Stage6";
 import Stage8 from "./components/Stage8";
 import Stage7 from "./components/Stage7";
-import { fetchIPInfo, getUserLocation } from "../../../utils/auth";
+import { fetchIPInfo, getUserLocation } from "../../../utils/authUtils";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;

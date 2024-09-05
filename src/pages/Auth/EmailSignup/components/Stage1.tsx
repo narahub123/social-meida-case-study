@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/auth";
+import { UserSignupValidType } from "../../../../types/authTypes";
 
 interface Stage1Props extends Stage0Props {}
 

@@ -1,12 +1,12 @@
 import "./stage6.css";
 import { useEffect, useState } from "react";
-import { handleNext } from "../../../../utils/auth";
+import { handleNext } from "../../../../utils/authUtils";
 import { Stage0Props } from "./Stage0";
 import LanguageCheck from "./LanguageCheck";
-import { languageList } from "../../../../data/settings";
-import { LanguageListType } from "../../../../types/settings";
-import { UserSignupType } from "../../../../types/auth";
-import { signupAPI } from "../../../../apis/auth";
+import { languageList } from "../../../../data/settingsData";
+import { LanguageListType } from "../../../../types/settingsTypes";
+import { UserSignupType } from "../../../../types/authTypes";
+import { signupAPI } from "../../../../apis/authAPIs";
 import { useNavigate } from "react-router-dom";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {

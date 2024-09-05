@@ -1,9 +1,9 @@
 import "./stage5.css";
 import { LuBell } from "react-icons/lu";
 import { Stage0Props } from "./Stage0";
-import { handleNext } from "../../../../utils/auth";
+import { handleNext } from "../../../../utils/authUtils";
 import { useState } from "react";
-import { UserSignupValidType } from "../../../../types/auth";
+import { UserSignupValidType } from "../../../../types/authTypes";
 
 const Stage5 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [isValid, setIsValid] = useState<UserSignupValidType>({

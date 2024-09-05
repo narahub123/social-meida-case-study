@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { handleNext } from "../../../../utils/auth";
+import { handleNext } from "../../../../utils/authUtils";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/auth";
+import { UserSignupValidType } from "../../../../types/authTypes";
 
 const Stage7 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [isValid, setIsValid] = useState<UserSignupValidType>({

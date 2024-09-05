@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import ListInput from "../../components/ListInput";
 import NormalInput from "../../components/NormalInput";
-import { dates, months, years } from "../../data/auth";
+import { dates, months, years } from "../../data/authData";
 import {
   BirthType,
   UserSignupType,
   UserSignupValidType,
-} from "../../../../types/auth";
-import { handleNext } from "../../../../utils/auth";
+} from "../../../../types/authTypes";
+import { handleNext } from "../../../../utils/authUtils";
 import GenderInput from "./GenderInput";
 
 export interface Stage0Props {
@@ -57,7 +57,6 @@ const Stage0 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
 
   console.log(validation);
   console.log(isValid);
-  
 
   return (
     <>

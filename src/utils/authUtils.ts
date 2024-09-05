@@ -1,7 +1,14 @@
-import { checkEmailDuplicateAPI, checkUserIdDuplicateAPI } from "../apis/auth";
-import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test";
-import { genderList } from "../pages/Auth/data/auth";
-import { BirthType, UserSignupType, UserSignupValidType } from "../types/auth";
+import {
+  checkEmailDuplicateAPI,
+  checkUserIdDuplicateAPI,
+} from "../apis/authAPIs";
+import { fetchAddressByLatLng, fetchIPAPI } from "../apis/testAPIs";
+import { genderList } from "../pages/Auth/data/authData";
+import {
+  BirthType,
+  UserSignupType,
+  UserSignupValidType,
+} from "../types/authTypes";
 import { debounce } from "./debounce";
 
 // NormalInput.tsx

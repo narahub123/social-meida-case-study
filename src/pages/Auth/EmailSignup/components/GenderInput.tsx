@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { UserSignupType } from "../../../../types/auth";
-import { genderList } from "../../data/auth";
+import { UserSignupType } from "../../../../types/authTypes";
+import { genderList } from "../../data/authData";
 import "./genderInput.css";
-import { getFocused, handleChooseGender } from "../../../../utils/auth";
+import { getFocused, handleChooseGender } from "../../../../utils/authUtils";
 
 interface GenderInputProps {
   title: string;

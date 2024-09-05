@@ -1,4 +1,4 @@
-import { LanguageListType } from "../types/settings";
+import { LanguageListType } from "../types/settingsTypes";
 
 export const languageList: LanguageListType[] = [
   {

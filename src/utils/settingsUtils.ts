@@ -1,7 +1,7 @@
 import {
   PreferencesOpenDropdownType,
   PreferencesType,
-} from "../types/settings";
+} from "../types/settingsTypes";
 
 export const handleScreenMode = (
   mode: string,

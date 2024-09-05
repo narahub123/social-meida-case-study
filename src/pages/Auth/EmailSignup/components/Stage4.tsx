@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { handleNext } from "../../../../utils/auth";
+import { handleNext } from "../../../../utils/authUtils";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/auth";
+import { UserSignupValidType } from "../../../../types/authTypes";
 
 const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [focused, setFocused] = useState("");
   const [isValid, setIsValid] = useState<UserSignupValidType>({
     userId: false,
   });
-  
+
   return (
     <>
       <section className="email-signup-section">
