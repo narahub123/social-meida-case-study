@@ -81,12 +81,6 @@ const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
       </section>
 
       <section className="email-signup-section">
-        {/* <button
-          className={`email-signup-button valid`}
-          onClick={() => handleNext("follow", setStage)}
-        >
-          다음
-        </button> */}
         <button
           className={`email-signup-button valid${loading ? " loading" : ""}`}
           disabled={loading}

@@ -4,6 +4,7 @@ import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/authTypes";
 import { LuLoader2 } from "react-icons/lu";
+import { requestAuthCode, verifyAuthCodeAPI } from "../../../../apis/authAPIs";
 
 interface Stage1Props extends Stage0Props {}
 
@@ -13,8 +14,33 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
     emailAuth: false,
   });
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [text, setText] = useState("normal");
 
-  const handleResendAuthCode = () => {};
+  const handleResendAuthCode = async () => {
+    const userId = userSignup.userId as string;
+    await requestAuthCode(userId)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
+
+  const verifyAuthCode = async () => {
+    const authCode = userSignup.emailAuth as string;
+    const userId = userSignup.userId as string;
+
+    await verifyAuthCodeAPI(authCode, userId)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err);
+
+        if (err.success === "expired") {
+          setText("expired");
+        }
+
+        setMessage(err.message);
+      });
+  };
+
   return (
     <>
       <section className="email-signup-section">
@@ -33,6 +59,7 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
           setIsValid={setIsValid}
           setLoading={setLoading}
         />
+        <p>{message}</p>
         <p className="email-signup-resend" onClick={handleResendAuthCode}>
           이메일을 받지 못하셨나요?
         </p>
@@ -41,6 +68,11 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
         <button
           className={`email-signup-button valid${loading ? " loading" : ""}`}
           disabled={loading}
+          onClick={
+            text === "expired"
+              ? () => handleResendAuthCode()
+              : () => verifyAuthCode()
+          }
         >
           {loading ? (
             <LuLoader2
@@ -48,6 +80,8 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
                 loading ? " loading" : ""
               }`}
             />
+          ) : text === "expired" ? (
+            "인증 코드 재발송"
           ) : (
             "인증 코드 확인"
           )}

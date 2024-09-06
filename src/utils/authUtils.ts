@@ -1,6 +1,7 @@
 import {
   checkEmailDuplicateAPI,
   checkUserIdDuplicateAPI,
+  verifyAuthCodeAPI,
 } from "../apis/authAPIs";
 import { fetchAddressByLatLng, fetchIPAPI } from "../apis/testAPIs";
 import { genderList } from "../pages/Auth/data/authData";
@@ -83,22 +84,11 @@ const handleInputChange = async (
     }
   }
 
-  const authCode = "1234";
   if (id === "emailAuth") {
-    if (value !== authCode) {
-      messages.push(`잘못된 인증코드를 입력하셨습니다.`);
-      setMessages(messages.join(" "));
-      setIsValid((prev) => ({
-        ...prev,
-        [id]: false,
-      }));
-    } else {
-      setMessages("");
-      setIsValid((prev) => ({
-        ...prev,
-        [id]: true,
-      }));
-    }
+    setIsValid((prev) => ({
+      ...prev,
+      [id]: true,
+    }));
   }
 
   if (id === "password") {
