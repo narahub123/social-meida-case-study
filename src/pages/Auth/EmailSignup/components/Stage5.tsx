@@ -3,7 +3,7 @@ import { LuBell } from "react-icons/lu";
 import { Stage0Props } from "./Stage0";
 import { handleNext } from "../../../../utils/auth.utils";
 import { useEffect, useState } from "react";
-import { UserSignupValidType } from "../../../../types/authTypes";
+import { UserSignupValidType } from "../../../../types/auth.types";
 
 const Stage5 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   const [isValid, setIsValid] = useState<UserSignupValidType>({

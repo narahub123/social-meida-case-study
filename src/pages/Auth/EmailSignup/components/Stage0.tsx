@@ -6,7 +6,7 @@ import {
   BirthType,
   UserSignupType,
   UserSignupValidType,
-} from "../../../../types/authTypes";
+} from "../../../../types/auth.types";
 import { handleNext } from "../../../../utils/auth.utils";
 import GenderInput from "./GenderInput";
 import { LuLoader2 } from "react-icons/lu";

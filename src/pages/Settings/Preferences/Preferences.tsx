@@ -3,7 +3,7 @@ import "./preferences.css";
 import {
   PreferencesOpenDropdownType,
   PreferencesType,
-} from "../../../types/settingsTypes";
+} from "../../../types/settings.types";
 import { handleScreenMode } from "../../../utils/settings.utils";
 
 const Preferences = () => {

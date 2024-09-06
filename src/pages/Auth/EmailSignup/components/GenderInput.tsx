@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { UserSignupType } from "../../../../types/authTypes";
+import { UserSignupType } from "../../../../types/auth.types";
 import { genderList } from "../../data/authData";
 import "./genderInput.css";
 import {

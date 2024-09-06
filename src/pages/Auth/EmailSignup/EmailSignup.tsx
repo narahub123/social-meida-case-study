@@ -1,6 +1,6 @@
 import "./emailsignup.css";
 import { useEffect, useState } from "react";
-import { UserSignupType } from "../../../types/authTypes";
+import { UserSignupType } from "../../../types/auth.types";
 import Stage0 from "./components/Stage0";
 import { LuX } from "react-icons/lu";
 import Stage1 from "./components/Stage1";

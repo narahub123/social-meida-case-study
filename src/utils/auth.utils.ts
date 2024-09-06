@@ -8,7 +8,7 @@ import {
   BirthType,
   UserSignupType,
   UserSignupValidType,
-} from "../types/authTypes";
+} from "../types/auth.types";
 import { debounce } from "./debounce";
 
 // NormalInput.tsx

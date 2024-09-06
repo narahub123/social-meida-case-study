@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/authTypes";
+import { UserSignupValidType } from "../../../../types/auth.types";
 import { handleNext } from "../../../../utils/auth.utils";
 import { LuLoader2 } from "react-icons/lu";
 

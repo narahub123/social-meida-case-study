@@ -2,7 +2,7 @@ import { useState } from "react";
 import { handleNext } from "../../../../utils/auth.utils";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/authTypes";
+import { UserSignupValidType } from "../../../../types/auth.types";
 import { LuLoader2 } from "react-icons/lu";
 
 const Stage4 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {

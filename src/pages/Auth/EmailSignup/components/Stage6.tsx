@@ -4,8 +4,8 @@ import { handleNext } from "../../../../utils/auth.utils";
 import { Stage0Props } from "./Stage0";
 import LanguageCheck from "./LanguageCheck";
 import { languageList } from "../../../../data/settingsData";
-import { LanguageListType } from "../../../../types/settingsTypes";
-import { UserSignupType } from "../../../../types/authTypes";
+import { LanguageListType } from "../../../../types/settings.types";
+import { UserSignupType } from "../../../../types/auth.types";
 import { signupAPI } from "../../../../apis/auth.apis";
 import { LuLoader2 } from "react-icons/lu";
 

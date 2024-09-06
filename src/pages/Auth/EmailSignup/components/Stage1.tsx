@@ -2,7 +2,7 @@ import "./stage1.css";
 import { useState } from "react";
 import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
-import { UserSignupValidType } from "../../../../types/authTypes";
+import { UserSignupValidType } from "../../../../types/auth.types";
 import { LuLoader2 } from "react-icons/lu";
 import { requestAuthCode, verifyAuthCodeAPI } from "../../../../apis/auth.apis";
 
