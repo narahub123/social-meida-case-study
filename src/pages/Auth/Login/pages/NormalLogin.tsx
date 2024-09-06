@@ -1,25 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import AuthButton from "../../components/AuthButton";
-import AuthDivider from "../../components/AuthDivider";
 import LoginNormalInput from "../components/LoginNormalInput";
 import { LoginProps } from "../Login";
 import { LoginInfoType } from "../../../../types/auth.types";
+import LoginDisabledInput from "../components/LoginDisabledInput";
+import AuthButton from "../../components/AuthButton";
 
-interface LoginListProps extends LoginProps {
+interface NormalLoginProps extends LoginProps {
   loginInfo: LoginInfoType;
   setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfoType>>;
   setStage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const LoginList = ({
+const NormalLogin = ({
   setOpenLogin,
   loginInfo,
   setLoginInfo,
   setStage,
-}: LoginListProps) => {
+}: NormalLoginProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
+  const [initial, setInitial] = useState<{ key: string; value: string }>({
+    key: "",
+    value: "",
+  });
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
   useEffect(() => {
@@ -49,46 +53,53 @@ const LoginList = ({
     };
   }, []);
 
-  const abled = Object.values(loginInfo).every((value) => value !== "");
+  //처음 페이지로 이동했을 때의 key와 value 값
+  useEffect(() => {
+    const key = Object.keys(loginInfo)[0];
+    const value = Object.values(loginInfo)[0];
 
-  const handleNext = (
-    value: string,
-    abled: boolean,
-    setStage: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    if (!abled) return;
+    if (!key || !value) return;
 
-    setStage(value);
-  };
+    setInitial({
+      key,
+      value,
+    });
+  }, []);
+
+  const handleLogin = () => {};
 
   return (
     <div className="login-main">
       <section className="login-main-header">
-        <div className="login-main-header-logo">PlayGround</div>
-        <div className="login-main-header-title">PlayGround에 가입하세요</div>
+        <div className="login-main-header-title">비밀번호를 입력하세요</div>
       </section>
       <section className="login-main-content">
-        <AuthButton logo="/images/google-logo.webp" text="구글 로그인" />
-        <AuthButton logo="/images/naver-logo.webp" text="네이버 로그인" />
-        <AuthButton logo="/images/kakao-logo.webp" text="카카오 로그인" />
-        <AuthDivider text="또는" />
+        <LoginDisabledInput
+          title={initial.key === "userId" ? "사용자 아이디" : "이메일"}
+          value={initial.value}
+        />
         <LoginNormalInput
-          title="사용자 아이디 혹은 이메일 주소"
-          field="mixed"
+          title={"비밀번호"}
+          field="password"
           focused={focused}
           divRef={divRef}
           inputRef={inputRef}
           setLoginInfo={setLoginInfo}
+          width="100%"
         />
+      </section>
+      <section className="login-main-btn">
         <div
           className="login-main-wrapper"
-          onClick={
-            abled ? () => handleNext("normalLogin", abled, setStage) : undefined
-          }
+          onClick={loginInfo[`password`] ? () => handleLogin() : undefined}
         >
-          <AuthButton logo="" text="다음" disabled={!abled} />
+          <AuthButton
+            logo=""
+            text="로그인하기"
+            width="100%"
+            disabled={!loginInfo[`password`]}
+          />
         </div>
-        <AuthButton logo="" text="비밀번호를 잊으셨나요?" />
       </section>
       <section className="login-main-bottom">
         계정이 없으신가요?
@@ -103,4 +114,4 @@ const LoginList = ({
   );
 };
 
-export default LoginList;
+export default NormalLogin;

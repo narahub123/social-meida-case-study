@@ -455,3 +455,13 @@ export const classifyField = (value: string) => {
 
   return field;
 };
+
+// NormalLogin.tsx
+export const validatePassword = (value: string) => {
+  const isValidPassword =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,30}$/.test(
+      value
+    );
+
+  return isValidPassword;
+};
