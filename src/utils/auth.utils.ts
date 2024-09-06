@@ -1,7 +1,6 @@
 import {
   checkEmailDuplicateAPI,
   checkUserIdDuplicateAPI,
-  verifyAuthCodeAPI,
 } from "../apis/auth.apis";
 import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test.apis";
 import { genderList } from "../pages/Auth/data/authData";
@@ -441,4 +440,18 @@ export const handleChooseGender = (
   }));
 
   setOpenDropdown(false);
+};
+
+// Login.tsx
+// 입력 정보가 userId 인지 email 인지 구별하기
+export const classifyField = (value: string) => {
+  let field = "";
+
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+    field = "email";
+  } else {
+    field = "userId";
+  }
+
+  return field;
 };
