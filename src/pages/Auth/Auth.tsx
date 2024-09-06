@@ -2,14 +2,21 @@ import { useState } from "react";
 import "./auth.css";
 import AuthButton from "./components/AuthButton";
 import EmailSignup from "./EmailSignup/EmailSignup";
+import Login from "./Login/Login";
 
 const Auth = () => {
   const [openEmailSignup, setOpenEmailSignup] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+
+  const handleLogin = () => {
+    setOpenLogin(!openLogin);
+  };
   return (
     <>
       {openEmailSignup && (
         <EmailSignup setOpenEmailSignup={setOpenEmailSignup} />
       )}
+      {openLogin && <Login setOpenLogin={setOpenLogin} />}
       <div className="auth">
         <section className="auth-signup">
           <div className="auth-signup-title">지금 가입하세요</div>
@@ -43,7 +50,7 @@ const Auth = () => {
         </section>
         <section className="auth-login">
           <div className="auth-login-title">이미 가입하셨나요?</div>
-          <div className="auth-login-btn">
+          <div className="auth-login-btn" onClick={handleLogin}>
             <AuthButton logo="" text="로그인" />
           </div>
         </section>

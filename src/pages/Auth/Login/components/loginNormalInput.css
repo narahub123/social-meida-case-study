@@ -1,0 +1,55 @@
+/* LoginNormalInput.css */
+.login-normal-input {
+  /* 고정 */
+  box-sizing: border-box;
+  width: 300px;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  /* 변동 */
+  border: 1px solid #ccc;
+  gap: 0;
+
+  transition: all 0.3s linear;
+}
+
+.login-normal-input.focused {
+  border: 2px solid var(--color-point);
+  gap: 7px;
+  transition: all 0.3s linear;
+}
+
+.login-normal-input-title {
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s linear;
+}
+
+.login-normal-input-title.focused {
+  font-size: 14px;
+  font-weight: normal;
+  transition: all 0.3s linear;
+}
+
+.login-normal-input-input {
+  /* 고정 */
+  flex: 1;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  /* 변동 */
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s linear;
+}
+.login-normal-input-input.focused {
+  /* 변동 */
+  padding: 8px;
+  visibility: visible;
+  max-height: 30px;
+  opacity: 1;
+  transition: all 0.3s linear;
+}

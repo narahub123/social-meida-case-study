@@ -9,16 +9,24 @@
   background-color: var(--color-bg);
   cursor: pointer;
 }
+
+.auth-button.disabled {
+  color: #ccc;
+  cursor: default;
+}
+
 .auth-button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
 }
+
 .auth-button-logo {
   width: 20px;
   height: 20px;
 }
+
 .auth-button-text {
   font-size: 14px;
   font-weight: bold;

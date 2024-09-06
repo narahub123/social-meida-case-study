@@ -1,0 +1,26 @@
+.auth-divider {
+  box-sizing: border-box;
+
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-divider-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.auth-divider-line {
+  flex: 1;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  width: 120px;
+  margin-top: 3px;
+}
+
+.auth-divider-text {
+  font-size: 14px;
+}
