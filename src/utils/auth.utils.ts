@@ -445,11 +445,11 @@ export const handleChooseGender = (
 // Login.tsx
 // 입력 정보가 userId 인지 email 인지 구별하기
 export const classifyField = (value: string) => {
-  let field = "";
+  let field = "wrong";
 
   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
     field = "email";
-  } else {
+  } else if (/^(?=.*[a-z])[a-z0-9]{4,16}$/.test(value)) {
     field = "userId";
   }
 
