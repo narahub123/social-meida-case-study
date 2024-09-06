@@ -1,3 +1,5 @@
+import { LoginInfoType } from "../../../../types/auth.types";
+import { classifyField } from "../../../../utils/auth.utils";
 import { debounce } from "../../../../utils/debounce";
 import "./loginNormalInput.css";
 
@@ -5,18 +7,24 @@ interface LoginNormalInputProps {
   focused: boolean;
   divRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfoType>>;
 }
 
 const LoginNormalInput = ({
   focused,
   divRef,
   inputRef,
-  setValue,
+  setLoginInfo,
 }: LoginNormalInputProps) => {
   const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setValue(value);
+
+    // 필드 구별
+    const field = classifyField(value);
+
+    // 중간에 포멧이 바뀔 수도 있기 때문에
+    // 기존 정보를 가지고 업데이트 하기 보다는 새로 작성하는 방법을 사용
+    setLoginInfo({ [field]: value });
   };
 
   const debouncedHandleValue = debounce<typeof handleValue>(handleValue, 500);

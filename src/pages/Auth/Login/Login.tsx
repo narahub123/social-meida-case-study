@@ -4,6 +4,7 @@ import AuthButton from "../components/AuthButton";
 import AuthDivider from "../components/AuthDivider";
 import { useEffect, useRef, useState } from "react";
 import LoginNormalInput from "./components/LoginNormalInput";
+import { LoginInfoType } from "../../../types/auth.types";
 
 interface LoginProps {
   setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,7 +14,9 @@ const Login = ({ setOpenLogin }: LoginProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState("");
+  const [loginInfo, setLoginInfo] = useState<LoginInfoType>({
+    password: "",
+  });
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
   useEffect(() => {
@@ -43,7 +46,9 @@ const Login = ({ setOpenLogin }: LoginProps) => {
     };
   }, []);
 
-  console.log(value);
+  const abled = Object.values(loginInfo).every((value) => value !== "");
+
+  console.log(loginInfo);
 
   return (
     <div className="login">
@@ -68,9 +73,9 @@ const Login = ({ setOpenLogin }: LoginProps) => {
                 focused={focused}
                 divRef={divRef}
                 inputRef={inputRef}
-                setValue={setValue}
+                setLoginInfo={setLoginInfo}
               />
-              <AuthButton logo="" text="다음" disabled={!value} />
+              <AuthButton logo="" text="다음" disabled={!abled} />
               <AuthButton logo="" text="비밀번호를 잊으셨나요?" />
             </section>
             <section className="login-main-bottom">

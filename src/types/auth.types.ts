@@ -16,3 +16,8 @@ export interface BirthType {
 export interface UserSignupValidType {
   [key: string]: boolean;
 }
+
+// 로그인 정보 타입
+export interface LoginInfoType {
+  [key: string]: string;
+}
