@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./normalInput.css";
 import { UserSignupType, UserSignupValidType } from "../../../types/authTypes";
-import { debouncedInputChange, handleClick } from "../../../utils/authUtils";
+import { debouncedInputChange, handleClick } from "../../../utils/auth.utils";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { FaCheckCircle } from "react-icons/fa";
 interface NormalInputProps {

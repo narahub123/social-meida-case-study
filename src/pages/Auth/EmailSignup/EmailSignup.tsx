@@ -11,7 +11,7 @@ import Stage5 from "./components/Stage5";
 import Stage6 from "./components/Stage6";
 import Stage8 from "./components/Stage8";
 import Stage7 from "./components/Stage7";
-import { fetchIPInfo, getUserLocation } from "../../../utils/authUtils";
+import { fetchIPInfo, getUserLocation } from "../../../utils/auth.utils";
 
 interface EmailSignupProps {
   setOpenEmailSignup: React.Dispatch<React.SetStateAction<boolean>>;

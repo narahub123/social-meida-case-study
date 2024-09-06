@@ -4,7 +4,7 @@ import {
   PreferencesOpenDropdownType,
   PreferencesType,
 } from "../../../types/settingsTypes";
-import { handleScreenMode } from "../../../utils/settingsUtils";
+import { handleScreenMode } from "../../../utils/settings.utils";
 
 const Preferences = () => {
   const [preferences, setPreferences] = useState<PreferencesType | undefined>(

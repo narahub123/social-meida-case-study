@@ -7,7 +7,7 @@ import {
   handleKeyDown,
   handleOpenDropdown,
   handleSelectItem,
-} from "../../../utils/authUtils";
+} from "../../../utils/auth.utils";
 import { BirthType } from "../../../types/authTypes";
 
 interface ListInputProps {

@@ -6,7 +6,7 @@ import {
   getFocused,
   handleChooseGender,
   handleKeyDownObject,
-} from "../../../../utils/authUtils";
+} from "../../../../utils/auth.utils";
 
 interface GenderInputProps {
   title: string;

@@ -2,8 +2,8 @@ import {
   checkEmailDuplicateAPI,
   checkUserIdDuplicateAPI,
   verifyAuthCodeAPI,
-} from "../apis/authAPIs";
-import { fetchAddressByLatLng, fetchIPAPI } from "../apis/testAPIs";
+} from "../apis/auth.apis";
+import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test.apis";
 import { genderList } from "../pages/Auth/data/authData";
 import {
   BirthType,

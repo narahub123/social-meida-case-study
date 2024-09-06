@@ -7,7 +7,7 @@ import {
   UserSignupType,
   UserSignupValidType,
 } from "../../../../types/authTypes";
-import { handleNext } from "../../../../utils/authUtils";
+import { handleNext } from "../../../../utils/auth.utils";
 import GenderInput from "./GenderInput";
 import { LuLoader2 } from "react-icons/lu";
 

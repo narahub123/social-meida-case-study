@@ -1,12 +1,12 @@
 import "./stage6.css";
 import { useEffect, useState } from "react";
-import { handleNext } from "../../../../utils/authUtils";
+import { handleNext } from "../../../../utils/auth.utils";
 import { Stage0Props } from "./Stage0";
 import LanguageCheck from "./LanguageCheck";
 import { languageList } from "../../../../data/settingsData";
 import { LanguageListType } from "../../../../types/settingsTypes";
 import { UserSignupType } from "../../../../types/authTypes";
-import { signupAPI } from "../../../../apis/authAPIs";
+import { signupAPI } from "../../../../apis/auth.apis";
 import { LuLoader2 } from "react-icons/lu";
 
 const Stage6 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {

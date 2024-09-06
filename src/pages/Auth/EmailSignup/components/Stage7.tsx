@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { handleNext } from "../../../../utils/authUtils";
+import { handleNext } from "../../../../utils/auth.utils";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/authTypes";
 

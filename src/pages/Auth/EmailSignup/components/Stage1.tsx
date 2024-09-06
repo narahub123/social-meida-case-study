@@ -4,7 +4,7 @@ import NormalInput from "../../components/NormalInput";
 import { Stage0Props } from "./Stage0";
 import { UserSignupValidType } from "../../../../types/authTypes";
 import { LuLoader2 } from "react-icons/lu";
-import { requestAuthCode, verifyAuthCodeAPI } from "../../../../apis/authAPIs";
+import { requestAuthCode, verifyAuthCodeAPI } from "../../../../apis/auth.apis";
 
 interface Stage1Props extends Stage0Props {}
 

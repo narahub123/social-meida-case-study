@@ -2,7 +2,7 @@ import "./stage3.css";
 import { useEffect, useRef, useState } from "react";
 import { Stage0Props } from "./Stage0";
 import { MdAddAPhoto } from "react-icons/md";
-import { handleNext } from "../../../../utils/authUtils";
+import { handleNext } from "../../../../utils/auth.utils";
 import useImagePreview from "../../../../hooks/useImagePreview";
 
 const Stage3 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
