@@ -71,7 +71,7 @@ const handleInputChange = async (
         })
         .catch((err) => {
           console.log(err);
-
+          setMessages(err.message);
           setIsValid((prev) => ({
             ...prev,
             [id]: false,
