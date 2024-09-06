@@ -18,11 +18,15 @@ export const sendAuthEmailAPI = async (userSignup: UserSignupType) => {
   } catch (error) {}
 };
 
+// 인증 코드 확인
 export const verifyAuthCodeAPI = async (
   authCode: string,
   userId?: string,
   email?: string
 ) => {
+  if (!userId && !email) {
+    throw { message: "이메일 혹은 사용자 아이디가 없습니다." };
+  }
   try {
     const response = await fetch(
       `${baseUrl}/auth/verifyAuthCode?authCode=${authCode}&userId=${userId}&email=${email}`,
@@ -125,20 +129,52 @@ export const signupAPI = async (userSignup: UserSignupType) => {
 };
 
 // 인증 코드 재요청
-export const requestAuthCode = async (userId: string) => {
+export const requestAuthCode = async (userId?: string, email?: string) => {
+  if (!userId && !email) {
+    throw { message: "이메일 혹은 사용자 아이디가 없습니다." };
+  }
   try {
     const response = await fetch(`${baseUrl}/auth/requestAuthCode`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId }),
+      body: JSON.stringify({ userId, email }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
 
       throw new Error(errorData.message);
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// 로그인 요청
+export const loginAPI = async (
+  password: string,
+  userId?: string,
+  email?: string
+) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, email, password }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
     }
 
     const data = await response.json();

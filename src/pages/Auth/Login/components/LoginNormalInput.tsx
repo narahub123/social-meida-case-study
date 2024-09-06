@@ -11,6 +11,7 @@ interface LoginNormalInputProps {
   focused: boolean;
   divRef: React.RefObject<HTMLDivElement>;
   inputRef: React.RefObject<HTMLInputElement>;
+  loginInfo: LoginInfoType;
   setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfoType>>;
   width?: string;
 }
@@ -21,6 +22,7 @@ const LoginNormalInput = ({
   focused,
   divRef,
   inputRef,
+  loginInfo,
   setLoginInfo,
   width = "300px",
 }: LoginNormalInputProps) => {
@@ -61,6 +63,20 @@ const LoginNormalInput = ({
         }
       }
 
+      if (field === "authCode") {
+        const isValid = /^\d{6}$/.test(value);
+
+        if (!isValid) {
+          setLoginInfo((prev) => ({
+            ...prev,
+            authCode: "",
+          }));
+          setMessage("잘못된 형식의 인증코드입니다.");
+
+          return;
+        }
+      }
+
       setLoginInfo((prev) => ({
         ...prev,
         [field]: value,
@@ -75,21 +91,35 @@ const LoginNormalInput = ({
     e.stopPropagation();
     setIsVisible(!isVisible);
   };
+
   return (
-    <>
+    <div className="login-normal-input-container" style={{ width }}>
       <div
-        className={`login-normal-input${focused ? " focused" : ""}`}
+        className={`login-normal-input${
+          focused || (loginInfo[field] && loginInfo[field] !== "")
+            ? " focused"
+            : ""
+        }`}
         ref={divRef}
-        style={{ width }}
       >
-        <p className={`login-normal-input-title${focused ? " focused" : ""}`}>
+        <p
+          className={`login-normal-input-title${
+            focused || (loginInfo[field] && loginInfo[field] !== "")
+              ? " focused"
+              : ""
+          }`}
+        >
           {title}
         </p>
         {field !== "password" && (
           <input
             type="text"
             ref={inputRef}
-            className={`login-normal-input-input${focused ? " focused" : ""}`}
+            className={`login-normal-input-input${
+              focused || (loginInfo[field] && loginInfo[field] !== "")
+                ? " focused"
+                : ""
+            }`}
             onChange={debouncedHandleValue}
           />
         )}
@@ -98,17 +128,29 @@ const LoginNormalInput = ({
             <input
               type={isVisible ? "text" : "password"}
               ref={inputRef}
-              className={`login-normal-input-input${focused ? " focused" : ""}`}
+              className={`login-normal-input-input${
+                focused || (loginInfo[field] && loginInfo[field] !== "")
+                  ? " focused"
+                  : ""
+              }`}
               onChange={debouncedHandleValue}
             />
             {isVisible ? (
               <IoMdEye
-                className="login-normal-input-input-icon"
+                className={`login-normal-input-input-icon${
+                  focused || (loginInfo[field] && loginInfo[field] !== "")
+                    ? " focused"
+                    : ""
+                }`}
                 onClick={(e) => handleVisible(e)}
               />
             ) : (
               <IoMdEyeOff
-                className="login-normal-input-input-icon"
+                className={`login-normal-input-input-icon${
+                  focused || (loginInfo[field] && loginInfo[field] !== "")
+                    ? " focused"
+                    : ""
+                }`}
                 onClick={(e) => handleVisible(e)}
               />
             )}
@@ -120,7 +162,7 @@ const LoginNormalInput = ({
       >
         {message}
       </div>
-    </>
+    </div>
   );
 };
 

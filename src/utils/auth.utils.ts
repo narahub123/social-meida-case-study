@@ -465,3 +465,9 @@ export const validatePassword = (value: string) => {
 
   return isValidPassword;
 };
+
+export const validAuthCode = (value: string) => {
+  const isValidAuthCode = /^\d{6}$/.test(value);
+
+  return isValidAuthCode;
+};

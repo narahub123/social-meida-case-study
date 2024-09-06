@@ -1,3 +1,4 @@
+import { LuLoader2 } from "react-icons/lu";
 import "./authButton.css";
 
 interface AuthButtonProps {
@@ -5,6 +6,7 @@ interface AuthButtonProps {
   text: string;
   disabled?: boolean;
   width?: string;
+  loading?: boolean;
 }
 
 const AuthButton = ({
@@ -12,6 +14,7 @@ const AuthButton = ({
   text,
   disabled,
   width = "300px",
+  loading = false,
 }: AuthButtonProps) => {
   return (
     <button
@@ -21,7 +24,9 @@ const AuthButton = ({
     >
       <div className="auth-button-container">
         {logo && <img src={logo} alt="로고" className="auth-button-logo" />}
-        <p className="auth-button-text">{text}</p>
+        <p className="auth-button-text">
+          {loading ? <LuLoader2 className="auth-button-spinner" /> : text}
+        </p>
       </div>
     </button>
   );

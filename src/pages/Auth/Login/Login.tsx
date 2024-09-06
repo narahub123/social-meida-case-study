@@ -4,6 +4,7 @@ import { useState } from "react";
 import { LoginInfoType } from "../../../types/auth.types";
 import LoginList from "./pages/LoginList";
 import NormalLogin from "./pages/NormalLogin";
+import LoginAuthenticate from "./pages/LoginAuthenticate";
 
 export interface LoginProps {
   setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,6 +35,14 @@ const Login = ({ setOpenLogin }: LoginProps) => {
           )}
           {stage === "normalLogin" && (
             <NormalLogin
+              loginInfo={loginInfo}
+              setLoginInfo={setLoginInfo}
+              setOpenLogin={setOpenLogin}
+              setStage={setStage}
+            />
+          )}
+          {stage === "loginAuthCode" && (
+            <LoginAuthenticate
               loginInfo={loginInfo}
               setLoginInfo={setLoginInfo}
               setOpenLogin={setOpenLogin}

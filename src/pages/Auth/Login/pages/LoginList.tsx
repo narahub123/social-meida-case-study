@@ -78,6 +78,7 @@ const LoginList = ({
           focused={focused}
           divRef={divRef}
           inputRef={inputRef}
+          loginInfo={loginInfo}
           setLoginInfo={setLoginInfo}
         />
         <div

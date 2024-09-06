@@ -31,3 +31,16 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.auth-button-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: 1s infinite linear rotation;
+}
+
+@keyframes rotation {
+  100% {
+    transform: rotate(360deg);
+  }
+}

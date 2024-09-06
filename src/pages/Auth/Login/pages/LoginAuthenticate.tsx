@@ -1,30 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoginNormalInput from "../components/LoginNormalInput";
 import { LoginProps } from "../Login";
 import { LoginInfoType } from "../../../../types/auth.types";
-import LoginDisabledInput from "../components/LoginDisabledInput";
 import AuthButton from "../../components/AuthButton";
-import { loginAPI } from "../../../../apis/auth.apis";
+import { requestAuthCode, verifyAuthCodeAPI } from "../../../../apis/auth.apis";
 
-interface NormalLoginProps extends LoginProps {
+interface LoginAuthenticateProps extends LoginProps {
   loginInfo: LoginInfoType;
   setLoginInfo: React.Dispatch<React.SetStateAction<LoginInfoType>>;
   setStage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const NormalLogin = ({
+const LoginAuthenticate = ({
   setOpenLogin,
   loginInfo,
   setLoginInfo,
   setStage,
-}: NormalLoginProps) => {
+}: LoginAuthenticateProps) => {
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
-  const [initial, setInitial] = useState<{ key: string; value: string }>({
-    key: "",
-    value: "",
-  });
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
@@ -55,53 +51,57 @@ const NormalLogin = ({
     };
   }, []);
 
-  //처음 페이지로 이동했을 때의 key와 value 값
-  useEffect(() => {
-    const key = Object.keys(loginInfo)[0];
-    const value = Object.values(loginInfo)[0];
+  const verifyAuthCode = async () => {
+    const authCode = loginInfo.authCode;
+    const userId = loginInfo.userId;
+    const email = loginInfo.email;
 
-    if (!key || !value) return;
-
-    setInitial({
-      key,
-      value,
-    });
-  }, []);
-
-  const handleLogin = async (
-    password: string,
-    userId?: string,
-    email?: string
-  ) => {
     setLoading(true);
-    await loginAPI(password, userId, email)
-      .then((res) => console.log(res))
+    await verifyAuthCodeAPI(authCode, userId, email)
+      .then((res) => {
+        console.log(res);
+
+        setStage("loginList");
+      })
       .catch((err) => {
         console.log(err);
-        if (err.success === "unautenticated") {
-          setStage("loginAuthCode");
-        } else if (err.success === "unregistered") {
-          setStage("loginList");
-        }
+        setMessage(err.message);
       })
       .finally(() => {
         setLoading(false);
+        setLoginInfo((prev) => ({
+          ...prev,
+          authCode: "",
+        }));
       });
+  };
+
+  const resendAuthCode = async () => {
+    const userId = loginInfo[`userId`];
+    const email = loginInfo[`email`];
+    setLoading(true);
+    await requestAuthCode(userId, email)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   return (
     <div className="login-main">
       <section className="login-main-header">
-        <div className="login-main-header-title">비밀번호를 입력하세요</div>
+        <p className="login-main-header-title">
+          인증 코드 확인을 하지 않은 가입자입니다.
+        </p>
+        <p className="login-main-header-detail">
+          등록하신 이메일에 전송된 메시지를 확인 후 인증 코드를 입력해주세요.
+        </p>
       </section>
       <section className="login-main-content">
-        <LoginDisabledInput
-          title={initial.key === "userId" ? "사용자 아이디" : "이메일"}
-          value={initial.value}
-        />
         <LoginNormalInput
-          title={"비밀번호"}
-          field="password"
+          title={"인증 코드"}
+          field="authCode"
           focused={focused}
           divRef={divRef}
           inputRef={inputRef}
@@ -109,41 +109,32 @@ const NormalLogin = ({
           setLoginInfo={setLoginInfo}
           width="100%"
         />
-      </section>
-      <section className="login-main-btn">
+
+        <div className="login-main-warnning">{message}</div>
+
         <div
-          className="login-main-wrapper"
-          onClick={
-            loginInfo[`password`] || !loading
-              ? () =>
-                  handleLogin(
-                    loginInfo.password,
-                    loginInfo.userId,
-                    loginInfo.email
-                  )
-              : undefined
-          }
+          className="login-main-resendEmail"
+          onClick={() => resendAuthCode()}
         >
-          <AuthButton
-            logo=""
-            text="로그인하기"
-            width="100%"
-            disabled={!loginInfo[`password`]}
-            loading={loading}
-          />
+          인증코드 다시 받기
         </div>
       </section>
       <section className="login-main-bottom">
-        계정이 없으신가요?
-        <span
-          className="login-main-bottom-link"
-          onClick={() => setOpenLogin(false)}
+        <div
+          className="login-main-wrapper"
+          onClick={loginInfo[`authCode`] ? () => verifyAuthCode() : undefined}
         >
-          가입하기
-        </span>
+          <AuthButton
+            logo=""
+            text="인증 코드 확인하기"
+            width="100%"
+            disabled={!loginInfo[`authCode`]}
+            loading={loading}
+          />
+        </div>
       </section>
     </div>
   );
 };
 
-export default NormalLogin;
+export default LoginAuthenticate;
