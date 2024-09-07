@@ -184,3 +184,38 @@ export const loginAPI = async (
     throw error;
   }
 };
+
+// 구글로 회원가입
+export const googleOauthSignup = async (
+  username: string,
+  email: string,
+  userPic: string,
+  userId: string
+) => {
+  try {
+    const response = await fetch("/auth/signup/google", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        userPic,
+        userId,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};

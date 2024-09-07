@@ -347,7 +347,7 @@ export const handleNext = (next: string, setStage: (value: string) => void) => {
 // 성공적으로 위도 경도를 불러왔을 때
 const successCallback = async (
   position: GeolocationPosition,
-  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+  setInfo: React.Dispatch<React.SetStateAction<any>>
 ) => {
   const lat = position.coords.latitude;
   const lng = position.coords.longitude;
@@ -355,7 +355,7 @@ const successCallback = async (
   try {
     // 위도 경도로 주소 알아내기
     const location = await fetchAddressByLatLng(lat, lng);
-    setUserSignup((prev) => ({
+    setInfo((prev: any) => ({
       ...prev,
       location,
     }));
@@ -371,11 +371,11 @@ const errorCallback = (error: GeolocationPositionError) => {
 
 // 위도 경도를 알아내는 함수
 export const getUserLocation = (
-  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+  setInfo: React.Dispatch<React.SetStateAction<any>>
 ) => {
   // 위치 정보 요청
   navigator.geolocation.getCurrentPosition(
-    (position) => successCallback(position, setUserSignup),
+    (position) => successCallback(position, setInfo),
     errorCallback,
     {
       enableHighAccuracy: true,
@@ -387,12 +387,12 @@ export const getUserLocation = (
 
 // ip를 알아내는 함수
 export const fetchIPInfo = async (
-  setUserSignup: React.Dispatch<React.SetStateAction<UserSignupType>>
+  setInfo: React.Dispatch<React.SetStateAction<any>>
 ) => {
   try {
     const res = await fetchIPAPI();
     const ip = res;
-    setUserSignup((prev) => ({
+    setInfo((prev: any) => ({
       ...prev,
       ip,
     }));
@@ -470,4 +470,24 @@ export const validAuthCode = (value: string) => {
   const isValidAuthCode = /^\d{6}$/.test(value);
 
   return isValidAuthCode;
+};
+
+export const validUserId = (value: string, messages: string[]) => {
+  if (!/^(?=.*[a-z])[a-z0-9]{4,16}$/.test(value)) {
+    if (value.length < 4 || value.length > 16) {
+      messages.push("아이디는 4자 이상 16자 이하로 정해주세요");
+    }
+
+    if (/[^a-z0-9]/.test(value)) {
+      messages.push("아이디는 영문 소문자와 숫자의 조합이어야 합니다.");
+    }
+
+    if (/^\d+$/.test(value)) {
+      messages.push("영문 소문자는 적어도 한 글자 이상 포함되어야 합니다.");
+    }
+
+    return false;
+  }
+
+  return true;
 };

@@ -21,3 +21,11 @@ export interface UserSignupValidType {
 export interface LoginInfoType {
   [key: string]: string;
 }
+
+export interface SignupInfoType {
+  [key: string]:
+    | string
+    | {
+        [key: string]: boolean;
+      };
+}

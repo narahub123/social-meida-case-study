@@ -18,6 +18,7 @@ interface ListInputProps {
   birth: BirthType;
   setFocused: (value: string) => void;
   setBirth: React.Dispatch<React.SetStateAction<BirthType>>;
+  width?: string;
 }
 
 const ListInput = ({
@@ -28,6 +29,7 @@ const ListInput = ({
   birth,
   setFocused,
   setBirth,
+  width = "100px",
 }: ListInputProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -77,6 +79,7 @@ const ListInput = ({
         )
       }
       ref={ref}
+      style={{ width }}
     >
       <div
         className={`list-input-wrapper${
