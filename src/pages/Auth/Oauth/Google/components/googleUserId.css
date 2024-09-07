@@ -1,0 +1,64 @@
+.google-oauth-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.google-oauth-content-header {
+  width: 100%;
+}
+.google-oauth-content-header-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.google-oauth-content-main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.google-oauth-content-main-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.google-oauth-content-main-item-title {
+  font-weight: bold;
+}
+.google-oauth-content-main-item-detail {
+  font-size: 14px;
+}
+.filled-input {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.filled-input-container {
+  box-sizing: border-box;
+  border: 2px solid var(--color-point);
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.filled-input-title {
+}
+.filled-input-input {
+  box-sizing: border-box;
+  border: none;
+  font-size: 18px;
+  padding: 5px;
+  outline: none;
+}
+.filled-input-message {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  color: red;
+}
+
+.filled-input-message-item {
+}
+.google-oauth-content-bottom {
+}
