@@ -4,7 +4,7 @@ import { SignupInfoType } from "../../../../../types/auth.types";
 import { languageList } from "../../../../../data/settingsData";
 import LanguageCheck from "../../../EmailSignup/components/LanguageCheck";
 import { LuLoader2 } from "react-icons/lu";
-import { signupAPI } from "../../../../../apis/auth.apis";
+import { googleOauthSignup, signupAPI } from "../../../../../apis/auth.apis";
 
 interface GoogleLanguageProps {
   signupInfo: SignupInfoType;
@@ -50,10 +50,10 @@ const GoogleLanguage = ({
 
   const handleGoogleSignup = async (signupInfo: SignupInfoType) => {
     setLoding(true);
-    await signupAPI(signupInfo)
-      .then((success) => {
-        if (success) {
-          console.log("로그인 페이지로 이동");
+    await googleOauthSignup(signupInfo)
+      .then((res) => {
+        if (res.success === "ok") {
+          setStage("login");
         }
       })
       .catch((err) => console.log(err))

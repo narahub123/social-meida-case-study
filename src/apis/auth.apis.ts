@@ -1,4 +1,4 @@
-import { UserSignupType } from "../types/auth.types";
+import { SignupInfoType, UserSignupType } from "../types/auth.types";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -186,23 +186,41 @@ export const loginAPI = async (
 };
 
 // 구글로 회원가입
-export const googleOauthSignup = async (
-  username: string,
-  email: string,
-  userPic: string,
-  userId: string
-) => {
+export const googleOauthSignup = async (signupInfo: SignupInfoType) => {
   try {
-    const response = await fetch("/auth/signup/google", {
+    const response = await fetch(`${baseUrl}/auth/signup/google`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupInfo),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// 이메일에 소셜 통합히기
+export const integrateSocialAPI = async (email: string, social: string) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/signup/integrate`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username,
         email,
-        userPic,
-        userId,
+        social,
       }),
     });
 

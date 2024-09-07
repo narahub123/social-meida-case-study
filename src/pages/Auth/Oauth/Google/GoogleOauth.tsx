@@ -7,17 +7,26 @@ import GoogleAlarm from "./components/GoogleAlarm";
 import GoogleSetAlarm from "./components/GoogleSetAlarm";
 import GoogleLanguage from "./components/GoogleLanguage";
 import { fetchIPInfo, getUserLocation } from "../../../../utils/auth.utils";
+import GoogleDuplicate from "./components/GoogleDuplicate";
 
 interface GoogleOauthProps {
   signupInfo: SignupInfoType;
   setSignupInfo: React.Dispatch<React.SetStateAction<SignupInfoType>>;
+  openGoogleSignup: boolean;
   setOpenGoogleSignup: React.Dispatch<React.SetStateAction<boolean>>;
+  duplicate: string;
+  setDuplicate: React.Dispatch<React.SetStateAction<string>>;
+  setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const GoogleOauth = ({
   signupInfo,
   setSignupInfo,
+  openGoogleSignup,
   setOpenGoogleSignup,
+  duplicate,
+  setDuplicate,
+  setOpenLogin,
 }: GoogleOauthProps) => {
   const [stage, setStage] = useState("userId");
   useEffect(() => {
@@ -25,12 +34,12 @@ const GoogleOauth = ({
     getUserLocation(setSignupInfo);
     // ip
     fetchIPInfo(setSignupInfo);
-
-    setSignupInfo((prev) => ({
-      ...prev,
-      password: "test@1234",
-    }));
   }, []);
+
+  if (stage === "login") {
+    setOpenGoogleSignup(false);
+  }
+
   return (
     <div className="google-oauth">
       <div className="google-oauth-wrapper">
@@ -39,7 +48,18 @@ const GoogleOauth = ({
             className="google-oauth-close"
             onClick={() => setOpenGoogleSignup(false)}
           />
-          {stage === "userId" && (
+          {duplicate === "duplicate" && (
+            <GoogleDuplicate
+              signupInfo={signupInfo}
+              setSignupInfo={setSignupInfo}
+              setStage={setStage}
+              setDuplicate={setDuplicate}
+              openGoogleSignup={openGoogleSignup}
+              setOpenGoogleSignup={setOpenGoogleSignup}
+              setOpenLogin={setOpenLogin}
+            />
+          )}
+          {!duplicate && stage === "userId" && (
             <GoogleUserId
               signupInfo={signupInfo}
               setSignupInfo={setSignupInfo}

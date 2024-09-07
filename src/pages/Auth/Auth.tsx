@@ -3,10 +3,9 @@ import "./auth.css";
 import AuthButton from "./components/AuthButton";
 import EmailSignup from "./EmailSignup/EmailSignup";
 import Login from "./Login/Login";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { app } from "../../../firebase";
 import GoogleOauth from "./Oauth/Google/GoogleOauth";
 import { SignupInfoType } from "../../types/auth.types";
+import { handleGoogleClick } from "../../utils/auth.utils";
 
 const Auth = () => {
   const [openEmailSignup, setOpenEmailSignup] = useState(false);
@@ -15,35 +14,10 @@ const Auth = () => {
   const [signupInfo, setSignupInfo] = useState<SignupInfoType>({
     email: "",
   });
+  const [duplicate, setDuplicate] = useState("");
 
   const handleLogin = () => {
     setOpenLogin(!openLogin);
-  };
-  const handleGoogleClick = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const auth = getAuth(app);
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      const username = user.displayName as string;
-      const email = user.email as string;
-      const userPic = user.photoURL as string;
-      const userId = user.uid as string;
-
-      setSignupInfo((prev) => ({
-        ...prev,
-        username: username,
-        email: email,
-        userPic: userPic,
-        userId: userId,
-      }));
-
-      // const data = await res.json();
-      setOpenGoogleSignup(!openGoogleSignup);
-    } catch (error) {
-      console.log("Could not login with google", error);
-    }
   };
 
   console.log(signupInfo);
@@ -58,7 +32,11 @@ const Auth = () => {
         <GoogleOauth
           signupInfo={signupInfo}
           setSignupInfo={setSignupInfo}
+          openGoogleSignup={openGoogleSignup}
           setOpenGoogleSignup={setOpenGoogleSignup}
+          duplicate={duplicate}
+          setDuplicate={setDuplicate}
+          setOpenLogin={setOpenLogin}
         />
       )}
       <div className="auth">
@@ -67,7 +45,14 @@ const Auth = () => {
           <div className="auth-signup-btns">
             <div
               className="auth-signup-btns-wrapper"
-              onClick={handleGoogleClick}
+              onClick={() =>
+                handleGoogleClick(
+                  setSignupInfo,
+                  setDuplicate,
+                  setOpenGoogleSignup,
+                  openGoogleSignup
+                )
+              }
             >
               <AuthButton
                 logo="/images/google-logo.webp"

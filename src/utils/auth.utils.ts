@@ -6,10 +6,13 @@ import { fetchAddressByLatLng, fetchIPAPI } from "../apis/test.apis";
 import { genderList } from "../pages/Auth/data/authData";
 import {
   BirthType,
+  SignupInfoType,
   UserSignupType,
   UserSignupValidType,
 } from "../types/auth.types";
 import { debounce } from "./debounce";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { app } from "../../firebase";
 
 // NormalInput.tsx
 export const handleClick = (
@@ -490,4 +493,45 @@ export const validUserId = (value: string, messages: string[]) => {
   }
 
   return true;
+};
+
+// 구글 계정
+export const handleGoogleClick = async (
+  setSignupInfo: React.Dispatch<React.SetStateAction<SignupInfoType>>,
+  setDuplicate: React.Dispatch<React.SetStateAction<string>>,
+  setOpenGoogleSignup: React.Dispatch<React.SetStateAction<boolean>>,
+  openGoogleSignup: boolean
+) => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth(app);
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    const username = user.displayName as string;
+    const email = user.email as string;
+    const userPic = user.photoURL as string;
+    const userId = user.uid as string;
+
+    setSignupInfo((prev) => ({
+      ...prev,
+      username: username,
+      email: email,
+      userPic: userPic,
+      userId: userId,
+    }));
+
+    await checkEmailDuplicateAPI(email)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err.message);
+        if (err.message === "이미 존재하는 이메일입니다.") {
+          setDuplicate("duplicate");
+        }
+      });
+
+    setOpenGoogleSignup(true);
+  } catch (error) {
+    console.log("로그인 실패", error);
+  }
 };
