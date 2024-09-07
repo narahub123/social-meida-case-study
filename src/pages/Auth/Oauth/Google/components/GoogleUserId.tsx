@@ -5,7 +5,7 @@ import AuthButton from "../../../components/AuthButton";
 import { validUserId } from "../../../../../utils/auth.utils";
 import ListInput from "../../../components/ListInput";
 import { dates, months, years } from "../../../data/authData";
-import GenderInputSignup from "./genderInputSignup";
+import GenderInputSignup from "./GenderInputSignup";
 
 interface GoogleUserIdProps {
   signupInfo: SignupInfoType;
