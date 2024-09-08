@@ -12,12 +12,14 @@ import {
 } from "../../utils/auth.utils";
 import { useSearchParams } from "react-router-dom";
 import NaverOauthSignup from "./Oauth/Naver/NaverOauthSignup";
+import KakaoOauthSignup from "./Oauth/Kakao/KakaoOauthSignup";
 
 const Auth = () => {
   const [openEmailSignup, setOpenEmailSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openGoogleSignup, setOpenGoogleSignup] = useState(false);
   const [openNaverSignup, setOpenNaverSignup] = useState(false);
+  const [openKakaoSignup, setOpenKakaoSignup] = useState(false);
   const [signupInfo, setSignupInfo] = useState<SignupInfoType>({
     email: "",
   });
@@ -49,11 +51,27 @@ const Auth = () => {
   // 네이버 모달창 띄우기
   useEffect(() => {
     const naver = searchParams.get("naver");
+    const kakao = searchParams.get("kakao");
 
-    if (!naver) return;
+    console.log(kakao);
+
+    if (!naver && !kakao) return;
 
     if (naver === "success") {
       setOpenNaverSignup(true);
+    } else if (kakao === "success") {
+      const username = searchParams.get("username") as string;
+      const userPic = searchParams.get("userPic") as string;
+      const email = searchParams.get("email") as string;
+
+      setSignupInfo((prev) => ({
+        ...prev,
+        username,
+        userPic,
+        email,
+      }));
+
+      setOpenKakaoSignup(true);
     }
   }, []);
 
@@ -68,8 +86,6 @@ const Auth = () => {
   const handleKakaoSignup = () => {
     window.location.href = KAKAO_API_URL;
   };
-
-  console.log(openNaverSignup);
 
   return (
     <>
@@ -91,6 +107,7 @@ const Auth = () => {
       {openNaverSignup && (
         <NaverOauthSignup setOpenNaverSignup={setOpenNaverSignup} />
       )}
+      {openKakaoSignup && <KakaoOauthSignup />}
       <div className="auth">
         <section className="auth-signup">
           <div className="auth-signup-title">지금 가입하세요</div>

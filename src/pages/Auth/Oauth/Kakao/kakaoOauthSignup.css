@@ -1,0 +1,49 @@
+.kakao-oauth-signup {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.305);
+}
+
+.kakao-oauth-signup-wrapper {
+  position: absolute;
+  width: 70%;
+  max-width: 600px;
+  height: 600px;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  border-radius: 20px;
+  transform: translate(-50%, -50%);
+}
+
+.kakao-oauth-signup-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.kakao-oauth-signup-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.kakao-oauth-signup-main {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.kakao-oauth-signup-main-header {
+}
+.kakao-oauth-signup-main-header-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.kakao-oauth-signup-main-content {
+}
+.kakao-oauth-signup-main-bottom {
+}
