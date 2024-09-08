@@ -1,26 +1,63 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./auth.css";
 import AuthButton from "./components/AuthButton";
 import EmailSignup from "./EmailSignup/EmailSignup";
 import Login from "./Login/Login";
 import GoogleOauth from "./Oauth/Google/GoogleOauth";
 import { SignupInfoType } from "../../types/auth.types";
-import { handleGoogleClick } from "../../utils/auth.utils";
+import {
+  fetchIPInfo,
+  getUserLocation,
+  handleGoogleClick,
+} from "../../utils/auth.utils";
+import { useSearchParams } from "react-router-dom";
+import NaverOauthSignup from "./Oauth/Naver/NaverOauthSignup";
 
 const Auth = () => {
   const [openEmailSignup, setOpenEmailSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openGoogleSignup, setOpenGoogleSignup] = useState(false);
+  const [openNaverSignup, setOpenNaverSignup] = useState(false);
   const [signupInfo, setSignupInfo] = useState<SignupInfoType>({
     email: "",
   });
   const [duplicate, setDuplicate] = useState("");
+  const [searchParams] = useSearchParams();
+  const naver_state = `${signupInfo.ip}_${signupInfo.location}`;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const naver_redirect_url = `${baseUrl}/auth/naver/callback`;
+  const naver_api_url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
+    import.meta.env.VITE_NAVER_CLIENT_ID
+  }&redirect_uri=${naver_redirect_url}&state=${naver_state}`;
+
+  // 주소 ip 알아내기
+  useEffect(() => {
+    // 주소
+    getUserLocation(setSignupInfo);
+    // ip
+    fetchIPInfo(setSignupInfo);
+  }, []);
+
+  // 네이버 모달창 띄우기
+  useEffect(() => {
+    const naver = searchParams.get("naver");
+
+    if (!naver) return;
+
+    if (naver === "success") {
+      setOpenNaverSignup(true);
+    }
+  }, []);
 
   const handleLogin = () => {
     setOpenLogin(!openLogin);
   };
 
-  console.log(signupInfo);
+  const handleNaverSignup = () => {
+    window.location.href = naver_api_url;
+  };
+
+  console.log(openNaverSignup);
 
   return (
     <>
@@ -38,6 +75,9 @@ const Auth = () => {
           setDuplicate={setDuplicate}
           setOpenLogin={setOpenLogin}
         />
+      )}
+      {openNaverSignup && (
+        <NaverOauthSignup setOpenNaverSignup={setOpenNaverSignup} />
       )}
       <div className="auth">
         <section className="auth-signup">
@@ -59,11 +99,15 @@ const Auth = () => {
                 text="구글에서 가입하기"
               />
             </div>
-
-            <AuthButton
-              logo="/images/naver-logo.webp"
-              text="네이버에서 가입하기"
-            />
+            <div
+              className="auth-signup-btns-wrapper"
+              onClick={() => handleNaverSignup()}
+            >
+              <AuthButton
+                logo="/images/naver-logo.webp"
+                text="네이버에서 가입하기"
+              />
+            </div>
             <AuthButton
               logo="/images/kakao-logo.webp"
               text="카카오에서 가입하기"

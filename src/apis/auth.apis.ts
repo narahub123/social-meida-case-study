@@ -1,4 +1,5 @@
 import { SignupInfoType, UserSignupType } from "../types/auth.types";
+import { PreferencesType } from "../types/settings.types";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -188,7 +189,7 @@ export const loginAPI = async (
 // 구글로 회원가입
 export const googleOauthSignup = async (signupInfo: SignupInfoType) => {
   try {
-    const response = await fetch(`${baseUrl}/auth/signup/google`, {
+    const response = await fetch(`${baseUrl}/auth/google/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -222,6 +223,31 @@ export const integrateSocialAPI = async (email: string, social: string) => {
         email,
         social,
       }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// 네이버 설정 저장하기
+export const saveSettingsAPI = async (settings: PreferencesType) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/naver/settings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(settings),
     });
 
     if (!response.ok) {

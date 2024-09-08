@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SignupInfoType } from "../../../../../types/auth.types";
 import AlarmCheck from "../../../EmailSignup/components/AlarmCheck";
+import { AlarmType } from "../../../../../types/settings.types";
 
 interface GoogleSetAlarmProps {
   signupInfo: SignupInfoType;
@@ -13,7 +14,7 @@ const GoogleSetAlarm = ({
   setSignupInfo,
   setStage,
 }: GoogleSetAlarmProps) => {
-  const [alarms, setAlarms] = useState({
+  const [alarms, setAlarms] = useState<AlarmType>({
     message: false,
     comment: false,
     following: false,

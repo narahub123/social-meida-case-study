@@ -5,18 +5,12 @@ import {
 } from "react-icons/io5";
 import "./alarmCheck.css";
 import { useState } from "react";
+import { AlarmType } from "../../../../types/settings.types";
 interface AlarmCheckProps {
   title: string;
   detail: string;
   subField: string;
-  setAlarms: React.Dispatch<
-    React.SetStateAction<{
-      message: boolean;
-      comment: boolean;
-      following: boolean;
-      newPost: boolean;
-    }>
-  >;
+  setAlarms: React.Dispatch<React.SetStateAction<AlarmType>>;
   index: number;
 }
 const AlarmCheck = ({

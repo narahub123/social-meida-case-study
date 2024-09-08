@@ -1,11 +1,19 @@
-import "./stage8.css";
-import { handleNext } from "../../../../utils/auth.utils";
-import { Stage0Props } from "./Stage0";
-import AlarmCheck from "./AlarmCheck";
 import { useEffect, useState } from "react";
-import { AlarmType } from "../../../../types/settings.types";
+import AlarmCheck from "../../../EmailSignup/components/AlarmCheck";
+import {
+  AlarmType,
+  PreferencesType,
+} from "../../../../../types/settings.types";
 
-const Stage8 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
+interface NaverSetAlarmProps {
+  setNaverSignupInfo: React.Dispatch<React.SetStateAction<PreferencesType>>;
+  setStage: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const NaverSetAlarms = ({
+  setNaverSignupInfo,
+  setStage,
+}: NaverSetAlarmProps) => {
   const [alarms, setAlarms] = useState<AlarmType>({
     message: false,
     comment: false,
@@ -14,20 +22,18 @@ const Stage8 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
   });
 
   useEffect(() => {
-    setUserSignup((prev) => ({
+    setNaverSignupInfo((prev) => ({
       ...prev,
       alarms,
     }));
   }, [alarms]);
 
   return (
-    <>
-      <section className="email-signup-section">
-        <div className="email-signup-title">
-          알림 설정을 할 목록을 선택해주세요.
-        </div>
+    <div className="naver-oauth-signup-main">
+      <section className="naver-oauth-signup-main-header">
+        <div className="naver-oauth-signup-main-header-title">알림 설정</div>
       </section>
-      <section className="email-signup-section">
+      <section className="naver-oauth-signup-main-content">
         <div className="email-signup-check-list">
           <AlarmCheck
             title="메시지"
@@ -59,16 +65,17 @@ const Stage8 = ({ userSignup, setUserSignup, setStage }: Stage0Props) => {
           />
         </div>
       </section>
-      <section className="email-signup-section">
+      <section className="naver-oauth-signup-main-bottom">
         <button
           className={`email-signup-button valid`}
-          onClick={() => handleNext("language", setStage)}
+          onClick={() => setStage("language")}
+          style={{ width: "100%" }}
         >
           다음
         </button>
       </section>
-    </>
+    </div>
   );
 };
 
-export default Stage8;
+export default NaverSetAlarms;

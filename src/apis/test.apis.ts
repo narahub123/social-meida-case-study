@@ -27,7 +27,12 @@ export const fetchAddressByLatLng = async (lat: number, lng: number) => {
 // ip 주소 알아내기
 export const fetchIPAPI = async () => {
   try {
-    const response = await fetch(`https://api.ipify.org?format=json`);
+    const response = await fetch(`https://api64.ipify.org?format=json`);
+
+    if (!response.ok) {
+      // HTTP 상태 코드가 200이 아닐 경우 에러 처리
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
     const data = await response.json();
     const ip = data.ip;
