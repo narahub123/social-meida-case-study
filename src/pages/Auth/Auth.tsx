@@ -23,12 +23,20 @@ const Auth = () => {
   });
   const [duplicate, setDuplicate] = useState("");
   const [searchParams] = useSearchParams();
+
+  // 네이버 로그인
   const naver_state = `${signupInfo.ip}_${signupInfo.location}`;
   const baseUrl = import.meta.env.VITE_BASE_URL;
   const naver_redirect_url = `${baseUrl}/auth/naver/callback`;
   const naver_api_url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
     import.meta.env.VITE_NAVER_CLIENT_ID
   }&redirect_uri=${naver_redirect_url}&state=${naver_state}`;
+
+  // 카카오 로그인
+  const REST_API_KEY: string = import.meta.env.VITE_KAKAO_REST_API_KEY;
+  const REDIRECT_URI: string = (import.meta.env.VITE_KAKAO_REDIRECT_URL =
+    "http://localhost:8080/auth/kakao/callback");
+  const KAKAO_API_URL: string = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=profile_nickname,profile_image, account_email`;
 
   // 주소 ip 알아내기
   useEffect(() => {
@@ -55,6 +63,10 @@ const Auth = () => {
 
   const handleNaverSignup = () => {
     window.location.href = naver_api_url;
+  };
+
+  const handleKakaoSignup = () => {
+    window.location.href = KAKAO_API_URL;
   };
 
   console.log(openNaverSignup);
@@ -108,10 +120,15 @@ const Auth = () => {
                 text="네이버에서 가입하기"
               />
             </div>
-            <AuthButton
-              logo="/images/kakao-logo.webp"
-              text="카카오에서 가입하기"
-            />
+            <div
+              className="auth-signup-btns-wrapper"
+              onClick={() => handleKakaoSignup()}
+            >
+              <AuthButton
+                logo="/images/kakao-logo.webp"
+                text="카카오에서 가입하기"
+              />
+            </div>
 
             <div className="auth-signup-divider">
               <p className="auth-signup-divider-line"></p>
