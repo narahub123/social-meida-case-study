@@ -5,6 +5,7 @@ import { languageList } from "../../../../../data/settingsData";
 import LanguageCheck from "../../../EmailSignup/components/LanguageCheck";
 import { LuLoader2 } from "react-icons/lu";
 import { googleOauthSignup, signupAPI } from "../../../../../apis/auth.apis";
+import { useNavigate } from "react-router-dom";
 
 interface GoogleLanguageProps {
   signupInfo: SignupInfoType;
@@ -16,6 +17,7 @@ const GoogleLanguage = ({
   setSignupInfo,
   setStage,
 }: GoogleLanguageProps) => {
+  const navigate = useNavigate();
   const [loading, setLoding] = useState(false);
   const [selected, setSelected] = useState("Korean");
   const [langList, setLangList] = useState<(LanguageListType | undefined)[]>(
@@ -53,7 +55,7 @@ const GoogleLanguage = ({
     await googleOauthSignup(signupInfo)
       .then((res) => {
         if (res.success === "ok") {
-          setStage("login");
+          navigate("/");
         }
       })
       .catch((err) => console.log(err))
