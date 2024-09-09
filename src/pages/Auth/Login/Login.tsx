@@ -1,10 +1,11 @@
 import { LuX } from "react-icons/lu";
 import "./login.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoginInfoType } from "../../../types/auth.types";
 import LoginList from "./pages/LoginList";
 import NormalLogin from "./pages/NormalLogin";
 import LoginAuthenticate from "./pages/LoginAuthenticate";
+import { fetchIPInfo, getUserLocation } from "../../../utils/auth.utils";
 
 export interface LoginProps {
   setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +17,15 @@ const Login = ({ setOpenLogin }: LoginProps) => {
   });
 
   const [stage, setStage] = useState("loginList");
+
+  // ip, 주소
+  useEffect(() => {
+    // 주소
+    getUserLocation(setLoginInfo);
+    // ip
+    fetchIPInfo(setLoginInfo);
+  }, []);
+
   console.log(loginInfo);
 
   return (

@@ -39,12 +39,18 @@ const LoginNormalInput = ({
 
       if (classifiedField === "wrong") {
         setMessage("잘못된 형식의 정보입니다. 다시 확인해 주세요");
-        setLoginInfo({ wrong: "" });
+        setLoginInfo((prev) => ({
+          ...prev,
+          wrong: "",
+        }));
         return;
       }
       // 중간에 포멧이 바뀔 수도 있기 때문에
       // 기존 정보를 가지고 업데이트 하기 보다는 새로 작성하는 방법을 사용
-      setLoginInfo({ [classifiedField]: value });
+      setLoginInfo((prev) => ({
+        ...prev,
+        [classifiedField]: value,
+      }));
       setMessage("");
     }
     // 필드가 확정된 경우

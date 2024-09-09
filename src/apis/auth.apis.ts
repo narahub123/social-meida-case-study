@@ -1,4 +1,8 @@
-import { SignupInfoType, UserSignupType } from "../types/auth.types";
+import {
+  LoginInfoType,
+  SignupInfoType,
+  UserSignupType,
+} from "../types/auth.types";
 import { PreferencesType } from "../types/settings.types";
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -157,35 +161,6 @@ export const requestAuthCode = async (userId?: string, email?: string) => {
   }
 };
 
-// 로그인 요청
-export const loginAPI = async (
-  password: string,
-  userId?: string,
-  email?: string
-) => {
-  try {
-    const response = await fetch(`${baseUrl}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId, email, password }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-
-      throw errorData;
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 // 구글로 회원가입
 export const googleOauthSignup = async (signupInfo: SignupInfoType) => {
   try {
@@ -248,6 +223,31 @@ export const saveSettingsAPI = async (settings: PreferencesType) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(settings),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// 로그인 요청
+export const loginAPI = async (loginInfo: LoginInfoType) => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginInfo),
     });
 
     if (!response.ok) {

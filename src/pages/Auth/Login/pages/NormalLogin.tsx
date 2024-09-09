@@ -5,6 +5,7 @@ import { LoginInfoType } from "../../../../types/auth.types";
 import LoginDisabledInput from "../components/LoginDisabledInput";
 import AuthButton from "../../components/AuthButton";
 import { loginAPI } from "../../../../apis/auth.apis";
+import { useNavigate } from "react-router-dom";
 
 interface NormalLoginProps extends LoginProps {
   loginInfo: LoginInfoType;
@@ -18,6 +19,7 @@ const NormalLogin = ({
   setLoginInfo,
   setStage,
 }: NormalLoginProps) => {
+  const navigate = useNavigate();
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
@@ -26,6 +28,7 @@ const NormalLogin = ({
     value: "",
   });
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
   useEffect(() => {
@@ -68,20 +71,24 @@ const NormalLogin = ({
     });
   }, []);
 
-  const handleLogin = async (
-    password: string,
-    userId?: string,
-    email?: string
-  ) => {
+  console.log(loginInfo);
+
+  const handleLogin = async (loginInfo: LoginInfoType) => {
     setLoading(true);
-    await loginAPI(password, userId, email)
-      .then((res) => console.log(res))
+    await loginAPI(loginInfo)
+      .then((res) => {
+        console.log(res);
+        // 로그인 성공시 이동
+        navigate("/");
+      })
       .catch((err) => {
         console.log(err);
         if (err.success === "unautenticated") {
           setStage("loginAuthCode");
         } else if (err.success === "unregistered") {
           setStage("loginList");
+        } else if (err.success === "wrongpassword") {
+          setMessage("비밀번호가 일치하지 않습니다.");
         }
       })
       .finally(() => {
@@ -109,18 +116,14 @@ const NormalLogin = ({
           setLoginInfo={setLoginInfo}
           width="100%"
         />
+        {message && <p>{message}</p>}
       </section>
       <section className="login-main-btn">
         <div
           className="login-main-wrapper"
           onClick={
             loginInfo[`password`] || !loading
-              ? () =>
-                  handleLogin(
-                    loginInfo.password,
-                    loginInfo.userId,
-                    loginInfo.email
-                  )
+              ? () => handleLogin(loginInfo)
               : undefined
           }
         >

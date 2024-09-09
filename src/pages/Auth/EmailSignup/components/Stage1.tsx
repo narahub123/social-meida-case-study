@@ -29,7 +29,10 @@ const Stage1 = ({ userSignup, setUserSignup, setStage }: Stage1Props) => {
     const userId = userSignup.userId as string;
 
     await verifyAuthCodeAPI(authCode, userId)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        
+      })
       .catch((err) => {
         console.log(err);
 

@@ -49,7 +49,9 @@ const LoginList = ({
     };
   }, []);
 
-  const abled = Object.values(loginInfo).every((value) => value !== "");
+  const abled =
+    (loginInfo[`userId`] && loginInfo[`userId`] !== "") ||
+    (loginInfo[`email`] && loginInfo[`email`] !== "");
 
   const handleNext = (
     value: string,
