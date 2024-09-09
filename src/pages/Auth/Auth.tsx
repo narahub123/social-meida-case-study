@@ -119,7 +119,7 @@ const Auth = () => {
                   setSignupInfo,
                   setDuplicate,
                   setOpenGoogleSignup,
-                  openGoogleSignup
+                  setOpenLogin
                 )
               }
             >

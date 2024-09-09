@@ -58,15 +58,18 @@ export const verifyAuthCodeAPI = async (
   }
 };
 
-// 이메일 중복 체크
-export const checkEmailDuplicateAPI = async (email: string) => {
+// 이메일 중복 체크, 소셜 회원 가입시 이메일 중복 이외에도 소셜로 이미 가입되어 있는지 여부 확인
+export const checkEmailDuplicateAPI = async (
+  email: string,
+  social?: string
+) => {
   try {
     const response = await fetch(`${baseUrl}/auth/checkExistingEmail`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ email, social }),
     });
 
     if (!response.ok) {

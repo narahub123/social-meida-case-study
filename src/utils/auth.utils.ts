@@ -500,7 +500,7 @@ export const handleGoogleClick = async (
   setSignupInfo: React.Dispatch<React.SetStateAction<SignupInfoType>>,
   setDuplicate: React.Dispatch<React.SetStateAction<string>>,
   setOpenGoogleSignup: React.Dispatch<React.SetStateAction<boolean>>,
-  openGoogleSignup: boolean
+  setOpenLogin: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   try {
     const provider = new GoogleAuthProvider();
@@ -521,16 +521,22 @@ export const handleGoogleClick = async (
       userId: userId,
     }));
 
-    await checkEmailDuplicateAPI(email)
-      .then((res) => console.log(res))
+    await checkEmailDuplicateAPI(email, "google")
+      .then((res) => {
+        console.log(res);
+        setOpenGoogleSignup(true);
+      })
       .catch((err) => {
         console.log(err.message);
         if (err.message === "이미 존재하는 이메일입니다.") {
           setDuplicate("duplicate");
+          setOpenGoogleSignup(true);
+        }
+        if (err.message === "이미 등록된 소셜 계정입니다.") {
+          setOpenGoogleSignup(false);
+          setOpenLogin(true);
         }
       });
-
-    setOpenGoogleSignup(true);
   } catch (error) {
     console.log("로그인 실패", error);
   }
