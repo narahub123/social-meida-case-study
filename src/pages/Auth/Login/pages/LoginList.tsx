@@ -4,6 +4,7 @@ import AuthDivider from "../../components/AuthDivider";
 import LoginNormalInput from "../components/LoginNormalInput";
 import { LoginProps } from "../Login";
 import { LoginInfoType } from "../../../../types/auth.types";
+import { googleLoginAPI } from "../../../../apis/auth.apis";
 
 interface LoginListProps extends LoginProps {
   loginInfo: LoginInfoType;
@@ -20,6 +21,7 @@ const LoginList = ({
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
+  const state = `${loginInfo.ip}_${loginInfo.location}`;
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
   useEffect(() => {
@@ -63,6 +65,13 @@ const LoginList = ({
     setStage(value);
   };
 
+  const handleGoogleLogin = async () => {
+    const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=email profile&state=${state}`;
+  };
+
   return (
     <div className="login-main">
       <section className="login-main-header">
@@ -70,7 +79,10 @@ const LoginList = ({
         <div className="login-main-header-title">PlayGround에 가입하세요</div>
       </section>
       <section className="login-main-content">
-        <AuthButton logo="/images/google-logo.webp" text="구글 로그인" />
+        <div className="login-main-wrapper" onClick={() => handleGoogleLogin()}>
+          <AuthButton logo="/images/google-logo.webp" text="구글 로그인" />
+        </div>
+
         <AuthButton logo="/images/naver-logo.webp" text="네이버 로그인" />
         <AuthButton logo="/images/kakao-logo.webp" text="카카오 로그인" />
         <AuthDivider text="또는" />

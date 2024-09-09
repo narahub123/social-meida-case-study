@@ -266,3 +266,21 @@ export const loginAPI = async (loginInfo: LoginInfoType) => {
     throw error;
   }
 };
+
+export const googleLoginAPI = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/auth/google/login`);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw errorData;
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
