@@ -27,8 +27,8 @@ const Auth = () => {
   const [searchParams] = useSearchParams();
 
   // 네이버 로그인
-  const naver_state = `${signupInfo.ip}_${signupInfo.location}`;
   const baseUrl = import.meta.env.VITE_BASE_URL;
+  const naver_state = `${signupInfo.ip}_${signupInfo.location}`;
   const naver_redirect_url = `${baseUrl}/auth/naver/callback`;
   const naver_api_url = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
     import.meta.env.VITE_NAVER_CLIENT_ID

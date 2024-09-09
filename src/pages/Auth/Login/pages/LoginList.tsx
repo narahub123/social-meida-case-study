@@ -21,7 +21,7 @@ const LoginList = ({
   const divRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [focused, setFocused] = useState(false);
-  const state = `${loginInfo.ip}_${loginInfo.location}`;
+  let state = `${loginInfo.ip}_${loginInfo.location}`;
 
   // input 필드를 감싸는 div 이외의 부분을 클릭하면 focus가 풀림
   useEffect(() => {
@@ -65,11 +65,28 @@ const LoginList = ({
     setStage(value);
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleLogin = () => {
     const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_REDIRECT_URI;
+    const GOOGLE_REDIRECT_URI = import.meta.env.VITE_GOOGLE_LOGIN_REDIRECT_URI;
+    state += "_google";
 
     window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=email profile&state=${state}`;
+  };
+
+  const handleNaverLogin = () => {
+    const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
+    const NAVER_REDIRECT_URI = import.meta.env.VITE_NAVER_LOGIN_REDIRECT_URI;
+    state += "_naver";
+
+    window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${NAVER_REDIRECT_URI}&state=${state}`;
+  };
+
+  const handleKakaoLogin = () => {
+    const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_REST_API_KEY;
+    const KAKAO_REDIRECT_URI = import.meta.env.VITE_KAKAO_LOGIN_REDIRECT_URL;
+    state += "_kakao";
+
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&state=${state}`;
   };
 
   return (
@@ -82,9 +99,12 @@ const LoginList = ({
         <div className="login-main-wrapper" onClick={() => handleGoogleLogin()}>
           <AuthButton logo="/images/google-logo.webp" text="구글 로그인" />
         </div>
-
-        <AuthButton logo="/images/naver-logo.webp" text="네이버 로그인" />
-        <AuthButton logo="/images/kakao-logo.webp" text="카카오 로그인" />
+        <div className="login-main-wrapper" onClick={() => handleNaverLogin()}>
+          <AuthButton logo="/images/naver-logo.webp" text="네이버 로그인" />
+        </div>
+        <div className="login-main-wrapper" onClick={() => handleKakaoLogin()}>
+          <AuthButton logo="/images/kakao-logo.webp" text="카카오 로그인" />
+        </div>
         <AuthDivider text="또는" />
         <LoginNormalInput
           title="사용자 아이디 혹은 이메일 주소"
