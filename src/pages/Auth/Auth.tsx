@@ -10,11 +10,12 @@ import {
   getUserLocation,
   handleGoogleClick,
 } from "../../utils/auth.utils";
-import { useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import NaverOauthSignup from "./Oauth/Naver/NaverOauthSignup";
 import KakaoOauthSignup from "./Oauth/Kakao/KakaoOauthSignup";
 
 const Auth = () => {
+  const [params] = useSearchParams();
   const [openEmailSignup, setOpenEmailSignup] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openGoogleSignup, setOpenGoogleSignup] = useState(false);
@@ -73,6 +74,15 @@ const Auth = () => {
 
       setOpenKakaoSignup(true);
     }
+  }, []);
+
+  // 에러 메시지 존재 확인하기
+  useEffect(() => {
+    const error = params.get("error");
+    if (!error) return;
+
+    // 전달 받은 에러를 화면에 표시해야 함
+    console.log(error);
   }, []);
 
   const handleLogin = () => {
