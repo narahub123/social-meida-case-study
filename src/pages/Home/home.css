@@ -1,0 +1,37 @@
+.home {
+  width: 100%;
+}
+
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.home-tablist {
+  width: 100%;
+}
+
+.home-tablist-wrapper {
+  display: flex;
+  align-items: center;
+}
+.home-tablist-item {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.home-tablist-item-text {
+  box-sizing: border-box;
+  border-bottom: 3px solid transparent;
+  padding: 20px;
+  transition: border-bottom 0.3s ease;
+  cursor: pointer;
+}
+
+.home-tablist-item-text.active {
+  border-bottom: 3px solid var(--color-point);
+  transition: border-bottom 0.3s ease;
+}
