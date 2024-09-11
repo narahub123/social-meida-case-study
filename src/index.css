@@ -3,6 +3,7 @@
   --color-bg: white;
   --color-point: cornflowerblue;
   --color-point-hover: rgba(100, 148, 237, 0.9);
+  --progress: 75.36;
 }
 
 html.dark {
