@@ -2,6 +2,7 @@
   --color-basic: black;
   --color-bg: white;
   --color-point: cornflowerblue;
+  --color-point-hover: rgba(100, 148, 237, 0.9);
 }
 
 html.dark {

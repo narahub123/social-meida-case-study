@@ -16,7 +16,7 @@ const Home = () => {
       });
 
       if (!response.ok) {
-        if (response.status === 403) {
+        if (response.status === 403 || response.status === 401) {
           navigate("/auth");
         }
       }

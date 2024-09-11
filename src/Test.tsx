@@ -1,13 +1,15 @@
+import "./test.css";
 import { Outlet, useLocation } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
 
 function Test() {
   const { pathname } = useLocation();
 
   return (
-    <>
-      {pathname.includes("/auth") ? "" : "헤더"}
+    <div className="test">
+      {pathname.includes("/auth") ? "" : <Sidebar />}
       <Outlet />
-    </>
+    </div>
   );
 }
 

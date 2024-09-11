@@ -1,0 +1,229 @@
+.sidebar {
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+  height: 100vh;
+}
+.sidebar-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+.sidebar-logo {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 20px 10px;
+}
+
+.sidebar-list {
+  flex: 1;
+}
+
+.sidebar-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 10px;
+}
+.sidebar-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sidebar-list-item-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.sidebar-list-item-container:hover {
+  background-color: #eee;
+}
+
+.sidebar-list-item-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+.sidebar-list-item-text {
+  font-size: 18px;
+}
+
+.sidebar-write {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.sidebar-btn {
+  position: relative;
+  box-sizing: border-box;
+  border: none;
+  background-color: var(--color-point);
+  color: #fff;
+  width: 100%;
+
+  cursor: pointer;
+}
+.sidebar-btn:hover {
+  background-color: var(--color-point-hover);
+}
+.sidebar-bottom {
+  position: relative;
+  padding: 20px 0;
+  font-size: 18px;
+}
+
+.sidebar-bottom-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.sidebar-bottom-profile-photo {
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 720px) {
+  .sidebar {
+    width: 60px;
+    transition: all 0.3s linear;
+  }
+  .sidebar-wrapper {
+    padding-left: 4px;
+  }
+  .sidebar-logo-small {
+    visibility: visible;
+    max-height: 50px;
+    opacity: 1;
+    transition: all 0.3s linear;
+  }
+  .sidebar-logo-large {
+    visibility: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+  .sidebar-list-item-container {
+    transition: all 0.3s linear;
+  }
+  .sidebar-list-item-container:hover {
+    box-sizing: border-box;
+    border-radius: 50%;
+  }
+  .sidebar-list-item-text {
+    visibility: hidden;
+    max-height: 0;
+    max-width: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+
+  .sidebar-btn {
+    border-radius: 50%;
+    padding: 16px 16px;
+    margin-right: 4px;
+  }
+  .sidebar-btn-small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+  }
+  .sidebar-btn-large {
+    display: none;
+  }
+
+  .sidebar-bottom-info {
+    visibility: hidden;
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+  .sidebar-bottom-more {
+    visibility: hidden;
+    max-width: 0;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+}
+
+@media screen and (min-width: 721px) {
+  .sidebar {
+    width: 250px;
+    transition: all 0.3s linear;
+  }
+  .sidebar-logo-small {
+    visibility: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s linear;
+  }
+  .sidebar-logo-large {
+    visibility: visible;
+    max-height: 50px;
+    opacity: 1;
+    transition: all 0.3s linear;
+  }
+  .sidebar-wrapper {
+    padding-left: 10px;
+  }
+  .sidebar-list-item-container {
+    gap: 10px;
+    transition: all 0.3s linear;
+  }
+  .sidebar-list-item-text {
+    visibility: visible;
+    max-width: 100px;
+    max-height: 50px;
+    opacity: 1;
+    transition: all 0.3s linear;
+  }
+  .sidebar-btn {
+    padding: 20px 30px;
+    border-radius: 30px;
+    margin-right: 10px;
+  }
+  .sidebar-btn-small {
+    display: none;
+  }
+  .sidebar-btn-large {
+    display: block;
+  }
+
+  .sidebar-bottom-info {
+    visibility: visible;
+    max-width: 200px;
+    max-height: 50px;
+    opacity: 1;
+    transition: all 0.3s linear;
+    flex: 1;
+    width: 100%;
+  }
+  .sidebar-bottom-more {
+    visibility: visible;
+    max-width: 50px;
+    max-height: 50px;
+    opacity: 1;
+    transition: all 0.3s linear;
+    font-size: 18px;
+    padding: 10px;
+  }
+}
