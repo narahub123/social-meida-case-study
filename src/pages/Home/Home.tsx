@@ -180,6 +180,12 @@ const Home = () => {
     const newImgUrls = imgUrls.filter((img) => img !== url);
 
     setImgUrls(newImgUrls);
+    
+    // 가장 처음 사진으로 이동
+    setImgNum(1);
+    if (!previewContainerRef.current) return;
+
+    previewContainerRef.current.style.setProperty("--preview-width", `-${0}px`);
   };
 
   // 오른쪽 이동
@@ -318,6 +324,7 @@ const Home = () => {
                             imgNum === idx + 1 ? " active" : ""
                           }`}
                           onClick={() => handleDotMove(idx)}
+                          key={idx}
                         />
                       ))}
                     </div>
@@ -459,11 +466,11 @@ const Home = () => {
               </div>
               <div className="home-write-type-icons-container">
                 <span className="home-write-type-icons">
+                  {/* 이미지 추가하기 */}
                   <div
                     className="home-write-type-icons-icon-wrapper"
                     onClick={() => fileRef.current?.click()}
                   >
-                    {/* 이미지 추가하기 */}
                     <FaRegImage
                       className="home-write-type-icons-icon icon"
                       title="미디어"
@@ -476,6 +483,7 @@ const Home = () => {
                       onChange={(e) => handleImagesChange(e)}
                     />
                   </div>
+                  {/* 투표 */}
                   <div className="home-write-type-icons-icon-wrapper">
                     <FaListUl
                       className="home-write-type-icons-icon icon"
