@@ -12,12 +12,18 @@ import {
   FaUserCheck,
   FaRegImage,
   FaListUl,
-  FaRegFaceSmile,
 } from "react-icons/fa6";
 import { FaMapMarkerAlt, FaRegSmile } from "react-icons/fa";
 import { RiCalendarScheduleLine } from "react-icons/ri";
 import { BsFillPatchCheckFill } from "react-icons/bs";
-import { LuCheck, LuAtSign, LuPlus } from "react-icons/lu";
+import {
+  LuCheck,
+  LuAtSign,
+  LuPlus,
+  LuX,
+  LuArrowRight,
+  LuArrowLeft,
+} from "react-icons/lu";
 import useClickOutside from "../../hooks/useClickOutside";
 
 const Home = () => {
@@ -26,6 +32,8 @@ const Home = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const writeRef = useRef<HTMLElement>(null);
   const progressRef = useRef<SVGCircleElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
   const MAX_TEXT = 144;
 
   // 탭 상태 : 추천, 팔로잉 중
@@ -52,6 +60,42 @@ const Home = () => {
   // 글
   const [text, setText] = useState("");
 
+  // 이미지
+  const [imgUrls, setImgUrls] = useState<(string | ArrayBuffer | null)[]>([]);
+
+  // 이미지 로딩
+  const [loading, setLoading] = useState(false);
+
+  // 슬라이드
+  const [imgNum, setImgNum] = useState(1);
+
+  // 필요한 데이터 불러오기 (테스트)
+  useEffect(() => {
+    const baseUrl = import.meta.env.VITE_BASE_URL;
+    const fetchData = async () => {
+      const response = await fetch(`${baseUrl}/test/enter`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        if (response.status === 403 || response.status === 401) {
+          navigate("/auth");
+        }
+      }
+
+      const data = await response.json();
+
+      return data;
+    };
+
+    fetchData();
+  }, []);
+
+  // 글쓰기 및 진행 보여주기
   const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -89,31 +133,99 @@ const Home = () => {
     setCmtDropdown(!cmtDropdown);
   };
 
-  // 필요한 데이터 불러오기 (테스트)
-  useEffect(() => {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
-    const fetchData = async () => {
-      const response = await fetch(`${baseUrl}/test/enter`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+  // 이미지 추가하기
+  const handleImagesChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const urls: (string | ArrayBuffer | null)[] = [];
+    if (!e.target.files) return;
 
-      if (!response.ok) {
-        if (response.status === 403 || response.status === 401) {
-          navigate("/auth");
+    const files = e.target.files;
+
+    setLoading(true);
+    // 각 파일을 비동기로 읽기
+    const readFiles = async (
+      file: File
+    ): Promise<string | ArrayBuffer | null> => {
+      return new Promise((resolve, reject) => {
+        if (file && file.type.startsWith("image/")) {
+          const reader = new FileReader();
+
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(null);
+
+          reader.readAsDataURL(file);
+        } else {
+          resolve(null);
         }
-      }
-
-      const data = await response.json();
-
-      return data;
+      });
     };
 
-    fetchData();
-  }, []);
+    // 파일들을 순차적으로 처리하고 결과를 저장
+    for (const file of files) {
+      try {
+        const result = await readFiles(file);
+        urls.push(result);
+      } catch (error) {
+        console.error("파일 처리 중 오류 발생", error);
+        urls.push(null);
+      }
+    }
+
+    // 기존 이미지 URL에 새로운 URL 추가
+    setImgUrls((prevUrls) => [...prevUrls, ...urls]);
+    setLoading(false);
+  };
+
+  // 이미지 삭제
+  const handleRemoveImages = (url: string) => {
+    const newImgUrls = imgUrls.filter((img) => img !== url);
+
+    setImgUrls(newImgUrls);
+  };
+
+  // 오른쪽 이동
+  const handleMoveRight = () => {
+    if (!previewContainerRef.current) return;
+    const width = Math.floor(
+      previewContainerRef.current.getBoundingClientRect().width
+    );
+
+    previewContainerRef.current.style.setProperty(
+      "--preview-width",
+      `-${width * imgNum}px`
+    );
+
+    setImgNum((prev) => prev + 1);
+  };
+
+  // 왼족 이동
+  const handleMoveLeft = () => {
+    if (!previewContainerRef.current) return;
+    const width = Math.floor(
+      previewContainerRef.current.getBoundingClientRect().width
+    );
+
+    previewContainerRef.current.style.setProperty(
+      "--preview-width",
+      `-${width * (imgNum - 2)}px`
+    );
+
+    setImgNum((prev) => prev - 1);
+  };
+
+  // 점 이동
+  const handleDotMove = (index: number) => {
+    if (!previewContainerRef.current) return;
+    const width = Math.floor(
+      previewContainerRef.current.getBoundingClientRect().width
+    );
+
+    previewContainerRef.current.style.setProperty(
+      "--preview-width",
+      `-${width * index}px`
+    );
+
+    setImgNum(index + 1);
+  };
 
   return (
     <div className="home">
@@ -169,8 +281,62 @@ const Home = () => {
                   ref={inputRef}
                   onChange={(e) => handleText(e)}
                 />
+                {/* 이미지 프리뷰 */}
+                <div
+                  className="home-write-type-input-imagepreview"
+                  ref={previewContainerRef}
+                >
+                  <div className="home-write-type-input-imagepreview-wrapper">
+                    <div
+                      className={`home-write-type-input-imagepreview-container`}
+                    >
+                      {imgUrls.map((url) => {
+                        if (typeof url === "string") {
+                          return (
+                            <div
+                              className="home-write-type-input-imagepreview-item"
+                              key={url}
+                            >
+                              <LuX
+                                className="home-write-type-input-imagepreview-item-remove"
+                                onClick={() => handleRemoveImages(url)}
+                              />
+                              <img
+                                src={url}
+                                alt="이미지"
+                                className="home-write-type-input-imagepreview-item-img"
+                              />
+                            </div>
+                          );
+                        }
+                      })}
+                    </div>
+                    <div className="home-write-type-input-imagepreview-dots">
+                      {imgUrls.map((_, idx) => (
+                        <p
+                          className={`home-write-type-input-imagepreview-dots-dot${
+                            imgNum === idx + 1 ? " active" : ""
+                          }`}
+                          onClick={() => handleDotMove(idx)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {imgUrls.length > 1 && imgNum !== 1 && (
+                    <LuArrowLeft
+                      className="home-write-type-input-imagepreview-moveleft"
+                      onClick={handleMoveLeft}
+                    />
+                  )}
+                  {imgUrls.length > 1 && imgUrls.length > imgNum && (
+                    <LuArrowRight
+                      className="home-write-type-input-imagepreview-moveright"
+                      onClick={handleMoveRight}
+                    />
+                  )}
+                </div>
                 {/* home-write에 포커스이 있는 경우에만 보이게 하기 */}
-                {isFocused && (
+                {(isFocused || imgUrls.length !== 0 || text !== "") && (
                   <div className="home-write-type-comment">
                     <div className="home-write-type-comment-container">
                       {cmtSetting === "all" && location == "asia" ? (
@@ -293,10 +459,21 @@ const Home = () => {
               </div>
               <div className="home-write-type-icons-container">
                 <span className="home-write-type-icons">
-                  <div className="home-write-type-icons-icon-wrapper">
+                  <div
+                    className="home-write-type-icons-icon-wrapper"
+                    onClick={() => fileRef.current?.click()}
+                  >
+                    {/* 이미지 추가하기 */}
                     <FaRegImage
                       className="home-write-type-icons-icon icon"
                       title="미디어"
+                    />
+                    <input
+                      type="file"
+                      hidden
+                      ref={fileRef}
+                      multiple
+                      onChange={(e) => handleImagesChange(e)}
                     />
                   </div>
                   <div className="home-write-type-icons-icon-wrapper">
@@ -326,6 +503,7 @@ const Home = () => {
                 </span>
                 <span className="home-write-type-right">
                   <span className="home-write-type-extra">
+                    {/* 프로그레시브 서클 */}
                     <svg
                       className="home-write-type-extra-progress-svg"
                       width={30}
@@ -363,7 +541,9 @@ const Home = () => {
                       />
                     </div>
                   </span>
-                  <button className="home-write-type-btn">게시하기</button>
+                  <button className="home-write-type-btn">
+                    {loading ? "loading.." : "게시하기"}
+                  </button>
                 </span>
               </div>
             </div>

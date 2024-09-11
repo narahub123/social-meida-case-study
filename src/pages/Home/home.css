@@ -81,12 +81,119 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-
   border-bottom: 1px solid #eee;
 }
 .home-write-type-input {
   padding: 10px;
 }
+
+/* 이미지 프리뷰  */
+.home-write-type-input-imagepreview {
+  position: relative;
+}
+.home-write-type-input-imagepreview-wrapper {
+  overflow: hidden;
+}
+.home-write-type-input-imagepreview-container {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 100%);
+
+  transition: all 0.3s ease;
+}
+
+.home-write-type-input-imagepreview-container {
+  transform: translateX(var(--preview-width)); /* 동적으로 변해야 함 */
+
+  transition: all 0.3s ease;
+}
+.home-write-type-input-imagepreview-moveleft {
+  position: absolute;
+  top: 40%;
+  left: 10px;
+  font-size: 30px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  opacity: 0.5;
+  padding: 5px;
+  cursor: pointer;
+}
+.home-write-type-input-imagepreview-moveleft:hover {
+  background-color: #000000b3;
+}
+.home-write-type-input-imagepreview-moveright {
+  position: absolute;
+  top: 40%;
+  right: 10px;
+  font-size: 30px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  opacity: 0.5;
+  padding: 5px;
+  cursor: pointer;
+}
+.home-write-type-input-imagepreview-moveright:hover {
+  background-color: #000000b3;
+}
+.home-write-type-input-imagepreview-item {
+  position: relative;
+  width: 100%;
+  object-fit: cover;
+}
+
+.home-write-type-input-imagepreview-item-remove {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  font-size: 25px;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.home-write-type-input-imagepreview-item-remove:hover {
+  background-color: #000000b3;
+}
+.home-write-type-input-imagepreview-item-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.home-write-type-input-imagepreview-dots {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  bottom: 10px;
+}
+.home-write-type-input-imagepreview-dots-dot {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  opacity: 0.5;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.home-write-type-input-imagepreview-dots-dot.active {
+  opacity: 0.7;
+}
+/* ----------------- */
 .home-write-type-comment {
   position: relative;
   gap: 5px;

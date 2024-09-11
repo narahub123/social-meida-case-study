@@ -4,6 +4,7 @@
   --color-point: cornflowerblue;
   --color-point-hover: rgba(100, 148, 237, 0.9);
   --progress: 75.36;
+  --preview-width: 0;
 }
 
 html.dark {
