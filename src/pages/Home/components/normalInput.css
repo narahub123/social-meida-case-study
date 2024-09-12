@@ -1,0 +1,81 @@
+.input-normal {
+  flex: 1;
+  position: relative;
+  height: 71.2px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-normal.focused {
+  box-sizing: border-box;
+  border: 2px solid var(--color-point);
+  padding-top: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-normal.invalid {
+  box-sizing: border-box;
+  border: 2px solid red;
+  padding-top: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-normal-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 27.6px 10px 10px 10px;
+  transition: all 0.3s ease-in-out;
+}
+.input-normal-info.focused {
+  padding: 10px 10px 5px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-normal-info-title {
+  font-size: 18px;
+
+  transition: all 0.3s ease-in-out;
+}
+.input-normal-info-title.focused {
+  font-size: 13px;
+
+  color: var(--color-point);
+
+  transition: all 0.3s ease-in-out;
+}
+.input-normal-info-textcount {
+  display: none;
+  font-size: 13px;
+}
+.input-normal-info-textcount.focused {
+  display: block;
+}
+.input-normal-input {
+  /* 공통 요소 */
+  position: relative;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+
+  /* 변경 요소 */
+  padding: 8.8px;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-normal-input.focused {
+  padding: 9.2px 10px 10px 10px;
+  font-size: 18px;
+  height: 40.2px;
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}

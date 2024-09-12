@@ -23,8 +23,13 @@ import {
   LuX,
   LuArrowRight,
   LuArrowLeft,
+  LuMinus,
 } from "react-icons/lu";
 import useClickOutside from "../../hooks/useClickOutside";
+import NormalInput from "./components/NormalInput";
+import { VoteType } from "../../types/home.types";
+import SelectItem from "./components/SelectItem";
+import { createArrayFromZero } from "./data/home.data";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -68,6 +73,27 @@ const Home = () => {
 
   // 슬라이드
   const [imgNum, setImgNum] = useState(1);
+
+  // 투표 보이기
+  const [isVoting, setIsVoting] = useState(false);
+
+  // 투표 상태
+  const [vote, setVote] = useState<VoteType>({
+    choices: {
+      choice1: "",
+      choice2: "",
+    },
+    duration: {
+      date: undefined,
+      hour: undefined,
+      min: undefined,
+    },
+  });
+
+  const choices = Object.values(vote[`choices`]);
+
+  // 투표 포커스 여부 확인
+  const [focused, setFocused] = useState(false);
 
   // 필요한 데이터 불러오기 (테스트)
   useEffect(() => {
@@ -180,7 +206,7 @@ const Home = () => {
     const newImgUrls = imgUrls.filter((img) => img !== url);
 
     setImgUrls(newImgUrls);
-    
+
     // 가장 처음 사진으로 이동
     setImgNum(1);
     if (!previewContainerRef.current) return;
@@ -232,6 +258,23 @@ const Home = () => {
 
     setImgNum(index + 1);
   };
+
+  // 선택지 추가
+  const addChoices = (num: number) => {
+    const choice = `choice${num}`;
+
+    setVote((prev) => ({
+      ...prev,
+      choices: {
+        ...prev.choices,
+        [choice]: "",
+      },
+    }));
+  };
+
+  // 선택지 삭제
+  const deleteChoice = (num: number) => {};
+  console.log(vote);
 
   return (
     <div className="home">
@@ -342,6 +385,143 @@ const Home = () => {
                     />
                   )}
                 </div>
+                {/* 투표 */}
+                {isVoting && (
+                  <div
+                    className="vote"
+                    tabIndex={1}
+                    onFocus={() => setFocused(true)}
+                  >
+                    {/* 투표 타이틀 */}
+                    <section className="vote-title">질문하기</section>
+                    <div className="vote-wrapper">
+                      {/* 투표 선택지 */}
+                      <section className="vote-choices">
+                        {/* choice1 */}
+                        <div className="vote-choices-wrapper">
+                          <NormalInput
+                            id={"choice1"}
+                            text={"선택 1"}
+                            vote={vote}
+                            setVote={setVote}
+                          />
+                          <span className={`vote-choice-add`}>
+                            {choices.length > 2 ? (
+                              <LuMinus
+                                className={`vote-choice-delete-icon icon active`}
+                                onClick={() => deleteChoice(1)}
+                              />
+                            ) : (
+                              <LuMinus
+                                className={`vote-choice-delete-icon icon`}
+                              />
+                            )}
+                          </span>
+                        </div>
+                        {/* choice2 */}
+                        <div className="vote-choices-wrapper">
+                          <NormalInput
+                            id={"choice2"}
+                            text={"선택 2"}
+                            vote={vote}
+                            setVote={setVote}
+                          />
+                          <span className={`vote-choice-add`}>
+                            {choices.length > 2 ? (
+                              <LuMinus
+                                className={`vote-choice-add-icon icon active`}
+                                onClick={() => deleteChoice(2)}
+                              />
+                            ) : (
+                              <LuPlus
+                                className={`vote-choice-add-icon icon${
+                                  choices.length === 2 ? " active" : ""
+                                }`}
+                                onClick={() => addChoices(3)}
+                              />
+                            )}
+                          </span>
+                        </div>
+                        {/* choice3 */}
+                        {typeof vote["choices"]["choice3"] === "string" && (
+                          <div className="vote-choices-wrapper">
+                            <NormalInput
+                              id={"choice3"}
+                              text={"선택 3 (선택사항)"}
+                              vote={vote}
+                              setVote={setVote}
+                            />
+                            <span className={`vote-choice-add`}>
+                              {choices.length > 3 ? (
+                                <LuMinus
+                                  className={`vote-choice-add-icon icon active`}
+                                  onClick={() => deleteChoice(3)}
+                                />
+                              ) : (
+                                <LuPlus
+                                  className={`vote-choice-add-icon icon${
+                                    choices.length === 3 ? " active" : ""
+                                  }`}
+                                  onClick={() => addChoices(4)}
+                                />
+                              )}
+                            </span>
+                          </div>
+                        )}
+                        {/* choice4 */}
+                        {typeof vote["choices"]["choice4"] === "string" && (
+                          <div className="vote-choices-wrapper">
+                            <NormalInput
+                              id={"choice4"}
+                              text={"선택 4 (선택사항)"}
+                              vote={vote}
+                              setVote={setVote}
+                            />
+                            <span className={`vote-choice-add`}>
+                              <LuMinus
+                                className={`vote-choice-add-icon icon active`}
+                                onClick={() => deleteChoice(4)}
+                              />
+                            </span>
+                          </div>
+                        )}
+                      </section>
+                      {/* 투표 기간 */}
+                      <section className="vote-duration">
+                        <div className="vote-duration-title">투표기간</div>
+                        <div className="vote-duration-container">
+                          <SelectItem
+                            title={"일"}
+                            id="date"
+                            array={createArrayFromZero(8)}
+                            vote={vote}
+                            setVote={setVote}
+                          />
+                          <SelectItem
+                            title={"시간"}
+                            id="hour"
+                            array={createArrayFromZero(24)}
+                            vote={vote}
+                            setVote={setVote}
+                          />
+                          <SelectItem
+                            title={"분"}
+                            id="min"
+                            array={createArrayFromZero(60)}
+                            vote={vote}
+                            setVote={setVote}
+                          />
+                        </div>
+                      </section>
+                      {/* 투표 취소 버튼 */}
+                      <section className="vote-button">
+                        <button className="vote-button-btn">
+                          투표 취소하기
+                        </button>
+                      </section>
+                    </div>
+                  </div>
+                )}
                 {/* home-write에 포커스이 있는 경우에만 보이게 하기 */}
                 {(isFocused || imgUrls.length !== 0 || text !== "") && (
                   <div className="home-write-type-comment">
@@ -465,6 +645,7 @@ const Home = () => {
                 )}
               </div>
               <div className="home-write-type-icons-container">
+                {/* 아이콘들  */}
                 <span className="home-write-type-icons">
                   {/* 이미지 추가하기 */}
                   <div
@@ -484,12 +665,18 @@ const Home = () => {
                     />
                   </div>
                   {/* 투표 */}
-                  <div className="home-write-type-icons-icon-wrapper">
+                  <div
+                    className={`home-write-type-icons-icon-wrapper${
+                      isVoting ? " selected" : ""
+                    }`}
+                    onClick={() => setIsVoting(!isVoting)}
+                  >
                     <FaListUl
-                      className="home-write-type-icons-icon icon"
+                      className={`home-write-type-icons-icon icon`}
                       title="투표"
                     />
                   </div>
+                  {/* 이모티콘 */}
                   <div className="home-write-type-icons-icon-wrapper">
                     <FaRegSmile
                       className="home-write-type-icons-icon icon"
