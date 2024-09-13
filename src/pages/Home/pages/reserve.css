@@ -1,0 +1,124 @@
+.reserve {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.reserve-wrapper {
+  position: absolute;
+  width: 80%;
+  max-width: 600px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+/* 헤더 */
+.reserve-header {
+  padding: 20px 20px 0 20px;
+  display: flex;
+  align-items: center;
+}
+
+.reserve-header-close {
+  padding: 10px;
+}
+.reserve-header-title {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.reserve-header-confirm {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 20px;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  padding: 7px 15px;
+}
+/* -----------------------------  헤더 끝 ----------------------*/
+/* 내용 시작 */
+.reserve-content {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reserve-content-message-container {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.reserve-content-message-icon {
+  color: #555;
+}
+.reserve-content-message-text {
+  font-size: 14px;
+  color: #999;
+}
+
+.reserve-content-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.reserve-content-item-title {
+  color: #999;
+}
+.reserve-content-item-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reserve-content-item-wrapper {
+  padding: 10px;
+  border-radius: 50%;
+}
+.reserve-content-item-wrapper:hover {
+  background-color: #eee;
+}
+
+.reserve-content-calendar-wrapper {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 250px;
+  z-index: 99999999;
+}
+
+/* -----------------------------  내용 끝 ----------------------*/
+
+/* 바닥 */
+.reserve-footer {
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  width: 100%;
+}
+
+.reserve-footer-text {
+  padding: 20px;
+  color: var(--color-point);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.reserve-footer-text:hover {
+  color: var(--color-point-hover);
+}

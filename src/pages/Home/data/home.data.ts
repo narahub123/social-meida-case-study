@@ -90,3 +90,12 @@ export const colorArray = [
     code: "1F3FF",
   },
 ];
+
+const today = new Date();
+const year = today.getFullYear();
+// 예약 년 목록
+export const yearArr = Array.from({ length: 3 }, (_, i) => year + i);
+// 예약 월 목록
+export const monthArr = Array.from({ length: 12 }, (_, i) => i + 1);
+// 예약 일 목록
+export const dateArr = Array.from({ length: 30 }, (_, i) => i + 1);

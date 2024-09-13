@@ -1,0 +1,71 @@
+.select-one {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.select-one.focused {
+  border: 2px solid var(--color-point);
+}
+.select-one-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.select-one-info-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+.select-one-info-title {
+  color: #999;
+  font-size: 14px;
+}
+.select-one-info-text {
+  font-size: 18px;
+}
+.select-one-icon-container {
+  padding: 10px;
+}
+
+.select-one-icon {
+  font-size: 18px;
+}
+
+.select-one-list-container {
+  /* 고정 */
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 100%;
+  background-color: #fff;
+  overflow-y: auto;
+  /* 변동 */
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.select-one-list-container.open {
+  visibility: visible;
+  max-height: 300px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.select-one-list-item {
+  padding: 7px;
+}
+
+.select-one-list-item:hover {
+  background-color: var(--color-point);
+  color: #fff;
+}
+
+.select-one-list-item.selected {
+  background-color: var(--color-point);
+  color: #fff;
+}

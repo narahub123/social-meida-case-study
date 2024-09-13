@@ -31,6 +31,7 @@ import { VoteType } from "../../types/home.types";
 import SelectItem from "./components/SelectItem";
 import { createArrayFromZero } from "./data/home.data";
 import Emoticons from "./pages/Emoticons";
+import Reserve from "./pages/Reserve";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -699,6 +700,7 @@ const Home = () => {
                       title="이모티콘"
                     />
                   </div>
+                  {/* 예약 */}
                   <div className="home-write-type-icons-icon-wrapper">
                     <RiCalendarScheduleLine
                       className="home-write-type-icons-icon icon"
@@ -762,6 +764,7 @@ const Home = () => {
           </div>
         </section>
         <section className="home-postlist">포스트 리스트</section>
+        <Reserve />
       </div>
     </div>
   );
