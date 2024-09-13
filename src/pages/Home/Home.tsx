@@ -30,6 +30,7 @@ import NormalInput from "./components/NormalInput";
 import { VoteType } from "../../types/home.types";
 import SelectItem from "./components/SelectItem";
 import { createArrayFromZero } from "./data/home.data";
+import Emoticons from "./pages/Emoticons";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -94,6 +95,9 @@ const Home = () => {
 
   // 투표 포커스 여부 확인
   const [focused, setFocused] = useState(false);
+
+  // 이모지 모달 열기
+  const [openEmojiModal, setOpenEmojiModal] = useState(false);
 
   // 필요한 데이터 불러오기 (테스트)
   useEffect(() => {
@@ -275,6 +279,15 @@ const Home = () => {
   // 선택지 삭제
   const deleteChoice = (num: number) => {};
   console.log(vote);
+
+  console.log(text);
+
+  // 이모지 추가
+  useEffect(() => {
+    if (!inputRef.current) return;
+
+    inputRef.current.value = text;
+  }, [text]);
 
   return (
     <div className="home">
@@ -677,7 +690,10 @@ const Home = () => {
                     />
                   </div>
                   {/* 이모티콘 */}
-                  <div className="home-write-type-icons-icon-wrapper">
+                  <div
+                    className="home-write-type-icons-icon-wrapper"
+                    onClick={() => setOpenEmojiModal(!openEmojiModal)}
+                  >
                     <FaRegSmile
                       className="home-write-type-icons-icon icon"
                       title="이모티콘"
@@ -741,6 +757,7 @@ const Home = () => {
                   </button>
                 </span>
               </div>
+              {openEmojiModal && <Emoticons setText={setText} />}
             </div>
           </div>
         </section>
