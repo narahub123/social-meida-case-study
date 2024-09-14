@@ -37,7 +37,9 @@ const SelectOne = ({ title, id, unit, list }: SelectOneProps) => {
       </div>
       <ul className={`select-one-list-container${openList ? " open" : ""}`}>
         {list.map((a) => (
-          <li className="select-one-list-item">{a + unit}</li>
+          <li className="select-one-list-item" key={a}>
+            {a + unit}
+          </li>
         ))}
       </ul>
     </div>

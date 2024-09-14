@@ -1,0 +1,50 @@
+.calendar-accordian {
+}
+.calendar-accordian-title {
+  padding: 10px;
+  background-color: #eee;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+.calendar-accordian-container {
+  /* 고정 */
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+
+  /* 변동 */
+  visibility: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.calendar-accordian-container.open {
+  /* 변동 */
+  visibility: visible;
+  max-height: 120px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.calendar-accordian-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.calendar-accordian-item:hover {
+  border: 1px solid #ccc;
+}
+
+.calendar-accordian-item.past {
+  cursor: default;
+  color: #999;
+}
+.calendar-accordian-item.past:hover {
+  border: 1px solid transparent;
+}

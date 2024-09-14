@@ -1,9 +1,11 @@
 import { LuCalendar, LuCalendarDays, LuChevronDown, LuX } from "react-icons/lu";
 import "./reserve.css";
 import { RiCalendarScheduleLine } from "react-icons/ri";
-import SelectOne from "../components/SelectOne";
-import { dateArr, monthArr, yearArr } from "../data/home.data";
-import Calendar from "../../../components/Calendar/Calendar";
+import SelectOne from "../../components/SelectOne";
+import { dateArr, monthArr, yearArr } from "../../data/home.data";
+import Calendar from "../../../../components/Calendar/Calendar";
+import CalendarHeader from "../../../../components/Calendar/CalendarHeader";
+import CalendarContainer from "../../../../components/Calendar/CalendarContainer";
 
 const Reserve = () => {
   return (
@@ -52,8 +54,10 @@ const Reserve = () => {
               <span>
                 <div className="reserve-content-item-wrapper">
                   <LuCalendarDays className=" icon" />
+                  {/* 달력 */}
                   <div className="reserve-content-calendar-wrapper">
-                    <Calendar />
+                    <CalendarContainer />
+                    <div className="calendar-footer">바닥</div>
                   </div>
                 </div>
               </span>

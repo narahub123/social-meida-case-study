@@ -31,7 +31,7 @@ import { VoteType } from "../../types/home.types";
 import SelectItem from "./components/SelectItem";
 import { createArrayFromZero } from "./data/home.data";
 import Emoticons from "./pages/Emoticons";
-import Reserve from "./pages/Reserve";
+import Reserve from "./pages/Reserve/Reserve";
 
 const Home = () => {
   const navigate = useNavigate();
