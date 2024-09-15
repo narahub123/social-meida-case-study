@@ -27,6 +27,9 @@ const Calendar = ({
   const datesArr: Date[] = dates(currentYearMonth);
 
   const handleSelectDate = (date: Date) => {
+    // 날짜에 현재 시간 추가하기
+    date.setHours(today.getHours(), today.getMinutes(), today.getSeconds());
+
     setSelectedDate(date);
   };
 
@@ -59,8 +62,10 @@ const Calendar = ({
               <p
                 className={`calendar-item-text${
                   day === 0 ? " sunday" : day === 6 ? " saturday" : ""
-                }${today.getMonth() < date.getMonth() ? " next" : ""}${
-                  today.getMonth() > date.getMonth() ? " last" : ""
+                }${
+                  currentYearMonth.getMonth() < date.getMonth() ? " next" : ""
+                }${
+                  currentYearMonth.getMonth() > date.getMonth() ? " last" : ""
                 }${
                   convertDateToYYYYMMDD(today) === convertDateToYYYYMMDD(date)
                     ? " today"

@@ -1,0 +1,17 @@
+.calendar-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-footer-btn {
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  color: var(--color-point);
+  cursor: pointer;
+}
+
+.calendar-footer-btn:hover {
+  font-weight: bold;
+  color: var(--color-point-hover);
+}

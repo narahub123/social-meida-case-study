@@ -1,20 +1,20 @@
 import "./calendarHeader.css";
 import { LuChevronDown, LuChevronUp } from "react-icons/lu";
 import { FaCaretUp } from "react-icons/fa6";
-import { accordianYearArr } from "./data/calendar.data";
-import { useState } from "react";
-import CalendarAccordian from "./components/CalendarAccordian";
 
 interface CalendarHeaderProps {
   currentYearMonth: Date;
   setCurrentYearMonth: React.Dispatch<React.SetStateAction<Date>>;
+  showList: boolean;
+  setShowList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const CalendarHeader = ({
   currentYearMonth,
   setCurrentYearMonth,
+  showList,
+  setShowList,
 }: CalendarHeaderProps) => {
-  const [showList, setShowList] = useState(false);
   // 달 추가
   const handlePlusMonth = () => {
     const date = new Date(currentYearMonth);
@@ -32,8 +32,6 @@ const CalendarHeader = ({
     setCurrentYearMonth(date);
   };
 
-  // 년 목록
-  const years = accordianYearArr();
   return (
     <div className="calendar-header">
       <div className="calendar-header-wrapper">
@@ -51,22 +49,16 @@ const CalendarHeader = ({
           />
         </span>
         <span className="calendar-header-right">
-          <LuChevronUp onClick={handlePlusMonth} />
-          <LuChevronDown onClick={handleMinusMonth} />
+          <LuChevronUp
+            className="calendar-header-right-icon icon"
+            onClick={handlePlusMonth}
+          />
+          <LuChevronDown
+            className="calendar-header-right-icon icon"
+            onClick={handleMinusMonth}
+          />
         </span>
       </div>
-      {showList && (
-        <ul className="calendar-accordian-list">
-          {years.map((year) => (
-            <CalendarAccordian
-              year={year}
-              key={year}
-              currentYearMonth={currentYearMonth}
-              setCurrentYearMonth={setCurrentYearMonth}
-            />
-          ))}
-        </ul>
-      )}
     </div>
   );
 };

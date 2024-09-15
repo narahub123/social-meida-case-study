@@ -9,7 +9,7 @@ const today = new Date();
 // 아코디언 년 목록 개수
 const NUM_OF_ACCORDIAN = 5;
 
-// 이번달 일 목록
+// 이번 달 일 목록
 const curMonthDates = (target: Date) => {
   const date = new Date(target);
   const dates: Date[] = [];
@@ -22,20 +22,20 @@ const curMonthDates = (target: Date) => {
 
   for (let i = 1; i <= lastDate; i++) {
     const curDate = new Date(date.getFullYear(), date.getMonth(), i);
-
     dates.push(curDate);
   }
 
   return dates;
 };
 
-// 다음달 목록
+// 다음 달 목록
 const nextDates = (target: Date) => {
   const date = new Date(target);
   const dates: Date[] = [];
   const day = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDay();
 
-  for (let i = day; 0 < 6 - i; i++) {
+  // 다음 달의 첫 주의 일 가져오기
+  for (let i = 1; i <= 6 - day; i++) {
     dates.push(new Date(date.getFullYear(), date.getMonth() + 1, i));
   }
 
@@ -44,19 +44,34 @@ const nextDates = (target: Date) => {
 
 // 추가될 지난달의 일 배열
 const lastMonthDatesArr = (target: Date) => {
-  const dates = [];
+  const dates: Date[] = [];
   const date = new Date(target);
 
   // 이 달 첫날의 요일
-  const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  const firstDayOfWeek = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  ).getDay();
 
-  for (let i = 0; i < day; i--) {
-    const lastDate = new Date(date.getFullYear(), date.getMonth(), -i);
+  // 지난달의 마지막 날짜 구하기
+  const lastDateOfPrevMonth = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    0
+  ).getDate();
 
+  // 지난달의 마지막 주 가져오기
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    const lastDate = new Date(
+      date.getFullYear(),
+      date.getMonth() - 1,
+      lastDateOfPrevMonth - i
+    );
     dates.push(lastDate);
   }
 
-  return dates;
+  return dates.reverse(); // 날짜를 순서대로 배열하기 위해 역순 정렬
 };
 
 export const dates = (target: Date) => {
@@ -76,6 +91,7 @@ export const convertDateToYYYYMMDD = (target: Date) => {
     .padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}`;
 };
 
+// 년 목록
 export const accordianYearArr = () => {
   const year = today.getFullYear();
   return Array.from(

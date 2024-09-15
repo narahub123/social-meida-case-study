@@ -30,5 +30,9 @@
   gap: 5px;
 }
 
+.calendar-header-right-icon {
+  cursor: pointer;
+}
+
 .calendar-accordian-list {
 }

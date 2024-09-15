@@ -1,13 +1,16 @@
-import { LuCalendar, LuCalendarDays, LuChevronDown, LuX } from "react-icons/lu";
 import "./reserve.css";
+import { LuCalendarDays, LuX } from "react-icons/lu";
 import { RiCalendarScheduleLine } from "react-icons/ri";
 import SelectOne from "../../components/SelectOne";
 import { dateArr, monthArr, yearArr } from "../../data/home.data";
-import Calendar from "../../../../components/Calendar/Calendar";
-import CalendarHeader from "../../../../components/Calendar/CalendarHeader";
 import CalendarContainer from "../../../../components/Calendar/CalendarContainer";
+import { useState } from "react";
 
 const Reserve = () => {
+  const [selectedDate, setSelectedDate] = useState<Date>();
+
+  console.log(selectedDate);
+
   return (
     <div className="reserve">
       <div className="reserve-wrapper">
@@ -50,14 +53,15 @@ const Reserve = () => {
                   list={dateArr}
                 />
               </span>
-
               <span>
                 <div className="reserve-content-item-wrapper">
                   <LuCalendarDays className=" icon" />
                   {/* 달력 */}
                   <div className="reserve-content-calendar-wrapper">
-                    <CalendarContainer />
-                    <div className="calendar-footer">바닥</div>
+                    <CalendarContainer
+                      selectedDate={selectedDate}
+                      setSelectedDate={setSelectedDate}
+                    />
                   </div>
                 </div>
               </span>

@@ -5,18 +5,23 @@ import { convertDateToYYYYMMDD } from "../data/calendar.data";
 
 interface CalendarAccordianProps {
   year: number;
-  currentYearMonth: Date;
   setCurrentYearMonth: React.Dispatch<React.SetStateAction<Date>>;
+  setShowList: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const CalendarAccordian = ({
   year,
-  currentYearMonth,
   setCurrentYearMonth,
+  setShowList,
 }: CalendarAccordianProps) => {
   const liRef = useRef<HTMLLIElement>(null);
   const [openAccordian, setOpenAccordian] = useState(false);
   useClickOutside(liRef, setOpenAccordian);
   const curMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+
+  const handleCurrentYearMonth = (target: Date) => {
+    setCurrentYearMonth(target);
+    setShowList(false);
+  };
   return (
     <li className="calendar-accordian" ref={liRef}>
       <p
@@ -44,7 +49,7 @@ const CalendarAccordian = ({
                 convertDateToYYYYMMDD(curMonth) >
                 convertDateToYYYYMMDD(targetMonth)
                   ? undefined
-                  : () => setCurrentYearMonth(targetMonth)
+                  : () => handleCurrentYearMonth(targetMonth)
               }
             >
               {month}
