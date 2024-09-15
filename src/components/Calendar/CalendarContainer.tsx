@@ -49,7 +49,7 @@ const CalendarContainer = ({
         />
       )}
 
-      <CalendarFooter />
+      <CalendarFooter setSelectedDate={setSelectedDate} />
     </div>
   );
 };

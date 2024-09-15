@@ -100,6 +100,9 @@ const Home = () => {
   // 이모지 모달 열기
   const [openEmojiModal, setOpenEmojiModal] = useState(false);
 
+  // 예약 모달 열기
+  const [openReserveModal, setOpenReserveModal] = useState(false);
+
   // 필요한 데이터 불러오기 (테스트)
   useEffect(() => {
     const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -701,7 +704,10 @@ const Home = () => {
                     />
                   </div>
                   {/* 예약 */}
-                  <div className="home-write-type-icons-icon-wrapper">
+                  <div
+                    className="home-write-type-icons-icon-wrapper"
+                    onClick={() => setOpenReserveModal(!openReserveModal)}
+                  >
                     <RiCalendarScheduleLine
                       className="home-write-type-icons-icon icon"
                       title="예약하기"
@@ -764,7 +770,12 @@ const Home = () => {
           </div>
         </section>
         <section className="home-postlist">포스트 리스트</section>
-        <Reserve />
+        {openReserveModal && (
+          <Reserve
+            openReserveModal={openReserveModal}
+            setOpenReserveModal={setOpenReserveModal}
+          />
+        )}
       </div>
     </div>
   );

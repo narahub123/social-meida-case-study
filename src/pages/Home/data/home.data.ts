@@ -99,3 +99,10 @@ export const yearArr = Array.from({ length: 3 }, (_, i) => year + i);
 export const monthArr = Array.from({ length: 12 }, (_, i) => i + 1);
 // 예약 일 목록
 export const dateArr = Array.from({ length: 30 }, (_, i) => i + 1);
+
+// 예약 시 목록
+export const hourArr = Array.from({ length: 24 }, (_, i) => i);
+// 예약 분 목록
+export const minuteArr = Array.from({ length: 60 }, (_, i) => i);
+
+export const ampm = [0, 1];

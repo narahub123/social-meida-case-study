@@ -26,6 +26,7 @@
 }
 .select-one-info-text {
   font-size: 18px;
+  height: 18px;
 }
 .select-one-icon-container {
   padding: 10px;
@@ -33,6 +34,13 @@
 
 .select-one-icon {
   font-size: 18px;
+  transform: rotate(0deg);
+  transition: all 0.3s ease-in-out;
+}
+
+.select-one-icon.open {
+  transform: rotate(-180deg);
+  transition: all 0.3s ease-in-out;
 }
 
 .select-one-list-container {
@@ -43,6 +51,7 @@
   width: 100%;
   background-color: #fff;
   overflow-y: auto;
+  z-index: 1;
   /* 변동 */
   visibility: hidden;
   max-height: 0;

@@ -32,6 +32,7 @@
 
 .reserve-header-close {
   padding: 10px;
+  cursor: pointer;
 }
 .reserve-header-title {
   flex: 1;
@@ -93,7 +94,9 @@
 .reserve-content-item-wrapper:hover {
   background-color: #eee;
 }
-
+.reverse-content-item-message {
+  color: red;
+}
 .reserve-content-calendar-wrapper {
   position: absolute;
   right: 0;

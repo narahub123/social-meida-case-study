@@ -1,5 +1,6 @@
 export const daysStartWithSunday = ["일", "월", "화", "수", "목", "금", "토"];
 export const daysStartWithMonday = ["월", "화", "수", "목", "금", "토", "일"];
+const amPm = ["오전", "오후"];
 
 // 날짜 목록 만들기
 // 달의 날짜 배열 만들기
@@ -98,4 +99,19 @@ export const accordianYearArr = () => {
     { length: NUM_OF_ACCORDIAN },
     (_, i) => year - Math.floor(NUM_OF_ACCORDIAN / 2) + i
   );
+};
+
+// 포멧 한국 시간
+export const convertDateToKoreanZone = (target: Date | undefined) => {
+  if (target === undefined) return;
+
+  // 날짜 및 시간 형식화
+  const formattedDate = `${target.getFullYear()}년 ${
+    target.getMonth() + 1
+  }월 ${target.getDate()}일(${daysStartWithSunday[target.getDay()]})`;
+  const formattedTime = `${target.getHours() >= 12 ? amPm[1] : amPm[0]} ${
+    target.getHours() > 13 ? target.getHours() - 12 : target.getHours()
+  }:${target.getMinutes().toString().padStart(2, "0")}`;
+
+  return `${formattedDate} ${formattedTime}`;
 };
