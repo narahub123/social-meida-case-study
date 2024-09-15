@@ -1,0 +1,25 @@
+.post-more-modal {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.post-more-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.post-more-item-icon {
+}
+.post-more-item-text {
+  display: flex;
+  
+}
