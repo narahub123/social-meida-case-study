@@ -1,0 +1,107 @@
+.post {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+.post-wrapper {
+  display: flex;
+  gap: 10px;
+  padding: 0 30px;
+}
+
+.post-left {
+}
+.post-profile-photo-wrapper {
+}
+.post-profile-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post-right {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-main-header-left {
+  display: flex;
+  align-items: center;
+  color: #999;
+  gap: 4px;
+}
+.post-main-username {
+  color: #000;
+}
+.post-main-userid-wrapper {
+  display: flex;
+}
+.post-main-userid {
+}
+.dot {
+  width: 3px;
+  height: 3px;
+  background-color: #999;
+  border-radius: 50%;
+}
+.post-main-more {
+}
+
+/* 푸터 */
+.post-main-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-main-footer-item {
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+  color: #555;
+}
+.post-main-footer-item.comment:hover {
+  color: blue;
+  .post-main-footer-item-icon {
+    border-radius: 50%;
+    background-color: rgba(0, 0, 255, 0.3);
+  }
+}
+
+.post-main-footer-item.retweet:hover {
+  color: green;
+  .post-main-footer-item-icon {
+    border-radius: 50%;
+    background-color: rgba(0, 128, 0, 0.3);
+  }
+}
+.post-main-footer-item.favorite:hover {
+  color: red;
+  .post-main-footer-item-icon {
+    border-radius: 50%;
+    background-color: rgba(255, 0, 0, 0.3);
+  }
+}
+.post-main-footer-item.view:hover {
+  color: violet;
+  .post-main-footer-item-icon {
+    border-radius: 50%;
+    background-color: rgba(238, 130, 238, 0.3);
+  }
+}
+.post-main-footer-item-icon {
+  padding: 4px;
+}
+.post-main-footer-item-icon.favorite {
+  color: red;
+}
+.post-main-footer-item-text {
+  font-size: 14px;
+}

@@ -32,6 +32,7 @@ import SelectItem from "./components/SelectItem";
 import { createArrayFromZero } from "./data/home.data";
 import Emoticons from "./pages/Emoticons";
 import Reserve from "./pages/Reserve/Reserve";
+import Post from "../Post/Post";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -769,13 +770,16 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <section className="home-postlist">포스트 리스트</section>
+        {/* 예약 모달 */}
         {openReserveModal && (
           <Reserve
             openReserveModal={openReserveModal}
             setOpenReserveModal={setOpenReserveModal}
           />
         )}
+        <section className="home-postlist">
+          <Post />
+        </section>
       </div>
     </div>
   );
