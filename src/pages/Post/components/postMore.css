@@ -7,6 +7,7 @@
   border: 1px solid #ccc;
   border-radius: 15px;
   padding: 10px;
+  z-index: 1;
 }
 
 .post-more-item {
@@ -21,5 +22,4 @@
 }
 .post-more-item-text {
   display: flex;
-  
 }

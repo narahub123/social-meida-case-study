@@ -53,6 +53,62 @@
   border-radius: 50%;
 }
 .post-main-more {
+  cursor: pointer;
+}
+
+/* 메인 */
+.post-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.post-main-content-text {
+}
+.post-main-content-extra {
+}
+.post-main-content-extra-photos-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.post-main-content-extra-photos {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 100%);
+
+  transition: all 0.3s ease;
+  transform: translateX(var(--preview-width));
+}
+.post-main-content-extra-photos-photo {
+  width: 100%;
+  border-radius: 30px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.post-main-content-extra-photos-dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.dot-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.dot-indicator.selected {
+  opacity: 1;
+}
+
+.dot-indicator:hover {
+  opacity: 1;
 }
 
 /* 푸터 */
