@@ -12,6 +12,7 @@ import { PostInfoType } from "../../types/post.types";
 import PostImages from "./components/PostImages";
 import PostVote from "./components/PostVote";
 import PostCommentModal from "./components/PostCommentModal";
+import PostRetweet from "./components/PostRetweet";
 
 const Post = () => {
   const containerRef = useRef(null);
@@ -20,6 +21,7 @@ const Post = () => {
   // 더보기
   const [openMore, setOpenMore] = useState(false);
   const [openCommentModal, setOpenCommentModal] = useState(false);
+  const [openRetweetModal, setOPenRetweetModal] = useState(false);
 
   useClickOutside(containerRef, setOpenMore);
   // 정보
@@ -137,7 +139,11 @@ const Post = () => {
                 {postInfo && postInfo.comments ? postInfo.comments.length : 0}
               </p>
             </span>
-            <span className="post-main-footer-item retweet">
+            {/* 리트윗 */}
+            <span
+              className="post-main-footer-item retweet"
+              onClick={() => setOPenRetweetModal(!openRetweetModal)}
+            >
               <AiOutlineRetweet className="post-main-footer-item-icon icon" />
               <p className="post-main-footer-item-text">
                 {postInfo && postInfo.retweets ? postInfo.retweets.length : 0}
@@ -167,6 +173,14 @@ const Post = () => {
             <PostCommentModal
               userInfo={userInfo}
               setOpenCommentModal={setOpenCommentModal}
+            />
+          )}
+          {openRetweetModal && (
+            <PostRetweet
+              userInfo={userInfo}
+              postInfo={postInfo}
+              setPostInfo={setPostInfo}
+              setOPenRetweetModal={setOPenRetweetModal}
             />
           )}
         </div>
