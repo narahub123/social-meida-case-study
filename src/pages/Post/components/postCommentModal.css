@@ -58,7 +58,7 @@
   justify-content: space-between;
 }
 
-button {
+.post-comment-modal-btn {
   box-sizing: border-box;
   border: none;
   border-radius: 10px;
@@ -68,19 +68,19 @@ button {
   cursor: pointer;
 }
 
-.post-comment-modal-close {
+.post-comment-modal-btn.close {
   background-color: red;
   color: #eee;
 }
-.post-comment-modal-close:hover {
+.post-comment-modal-btn.close:hover {
   background-color: rgba(255, 0, 0, 0.8);
 }
 
-.post-comment-modal-upload {
+.post-comment-modal-btn.upload {
   background-color: var(--color-point);
   color: #eee;
 }
 
-.post-comment-modal-upload:hover {
+.post-comment-modal-btn.upload:hover {
   background-color: var(--color-point-hover);
 }

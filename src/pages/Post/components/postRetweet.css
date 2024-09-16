@@ -56,3 +56,31 @@
   justify-content: space-between;
   color: var(--color-);
 }
+
+.post-retweet-btn {
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  padding: 5px;
+  width: 70px;
+  cursor: pointer;
+}
+
+.post-retweet-btn.close {
+  background-color: red;
+  color: #eee;
+}
+
+.post-retweet-btn.close:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.post-retweet-btn.upload {
+  background-color: var(--color-point);
+  color: #eee;
+}
+
+.post-retweet-btn.upload:hover {
+  background-color: var(--color-point-hover);
+}

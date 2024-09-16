@@ -43,12 +43,12 @@ const PostRetweet = ({
           <div className="post-retweet-icons">아이콘들</div>
           <div className="post-retweet-btns">
             <button
-              className="close"
+              className="post-retweet-btn close"
               onClick={() => setOPenRetweetModal(false)}
             >
               닫기
             </button>
-            <button className="upload">게시하기</button>
+            <button className="post-retweet-btn upload">게시하기</button>
           </div>
         </div>
       </div>

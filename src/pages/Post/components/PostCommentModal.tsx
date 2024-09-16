@@ -43,14 +43,12 @@ const PostCommentModal = ({
           </section>
           <section className="post-comment-modal-btns">
             <button
-              className="post-comment-modal-close button"
+              className="post-comment-modal-btn close"
               onClick={() => setOpenCommentModal(false)}
             >
               취소
             </button>
-            <button className="post-comment-modal-upload button">
-              게시하기
-            </button>
+            <button className="post-comment-modal-btn upload">게시하기</button>
           </section>
         </div>
       </div>
