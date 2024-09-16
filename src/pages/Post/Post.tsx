@@ -8,14 +8,16 @@ import { useRef, useState } from "react";
 import PostMore from "./components/PostMore";
 import useClickOutside from "../../hooks/useClickOutside";
 import { convertDateToYYYYMMDD } from "../../components/Calendar/data/calendar.data";
+import { PostInfoType } from "../../types/post.types";
+import PostImages from "./components/PostImages";
 
 const Post = () => {
   const containerRef = useRef(null);
-  const imagesRef = useRef<HTMLDivElement>(null);
+
   // 좋아요 여부
   // 더보기
   const [openMore, setOpenMore] = useState(false);
-  const [imgNum, setImgNum] = useState(0);
+
   useClickOutside(containerRef, setOpenMore);
   // 정보
   const [userInfo, setUserInfo] = useState<{
@@ -28,18 +30,14 @@ const Post = () => {
     block: false,
     report: false,
   });
-  const [postInfo, setPostInfo] = useState<{
-    text: string | undefined;
-    images: string[] | undefined;
-    postDate: Date;
-    userId: string;
-    comments: string[];
-    retweets: string[];
-    favorites: string[];
-    views: number;
-  }>({
+  const [postInfo, setPostInfo] = useState<PostInfoType>({
     text: "연습",
-    images: ["test/profile1.jpg", "test/profile2.jpg"],
+    images: [
+      "test/profile1.jpg",
+      "test/profile2.jpg",
+      "test/profile1.jpg",
+      "test/profile2.jpg",
+    ],
     postDate: new Date(),
     userId: "ihih",
     comments: [],
@@ -65,22 +63,6 @@ const Post = () => {
         favorites: [...postInfo.favorites, userInfo.userId] as string[],
       });
     }
-  };
-
-  // 사진 dot 핸들러
-  const handleDots = (index: number) => {
-    if (!imagesRef.current) return;
-
-    const width = Math.floor(imagesRef.current.getBoundingClientRect().width);
-
-    console.log(width);
-
-    imagesRef.current.style.setProperty(
-      "--preview-width",
-      `-${width * index}px`
-    );
-
-    setImgNum(index);
   };
 
   console.log(postInfo?.favorites);
@@ -130,30 +112,7 @@ const Post = () => {
           <div className="post-main-content">
             <div className="post-main-content-text">{postInfo.text}</div>
             <div className="post-main-content-extra">
-              <div className="post-main-content-extra-photos-wrapper">
-                <div
-                  className="post-main-content-extra-photos"
-                  ref={imagesRef}
-                  tabIndex={1}
-                >
-                  {postInfo.images?.map((img) => (
-                    <img
-                      src={img}
-                      className="post-main-content-extra-photos-photo"
-                    />
-                  ))}
-                </div>
-                <div className="post-main-content-extra-photos-dots">
-                  {postInfo.images?.map((_, i) => (
-                    <p
-                      className={`dot-indicator${
-                        imgNum === i ? " selected" : ""
-                      }`}
-                      onClick={() => handleDots(i)}
-                    />
-                  ))}
-                </div>
-              </div>
+              <PostImages postInfo={postInfo} setPostInfo={setPostInfo} />
             </div>
           </div>
           {/* 푸터 */}

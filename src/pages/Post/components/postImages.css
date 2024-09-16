@@ -1,0 +1,47 @@
+.post-images-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.post-images {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 100%);
+  outline: none;
+
+  transition: all 0.3s ease;
+  transform: translateX(var(--preview-width));
+}
+.post-images-photo {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 30px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.post-images-dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.dot-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.dot-indicator.selected {
+  opacity: 1;
+}
+
+.dot-indicator:hover {
+  opacity: 1;
+}
