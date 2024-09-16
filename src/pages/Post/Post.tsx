@@ -10,6 +10,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import { convertDateToYYYYMMDD } from "../../components/Calendar/data/calendar.data";
 import { PostInfoType } from "../../types/post.types";
 import PostImages from "./components/PostImages";
+import PostVote from "./components/PostVote";
 
 const Post = () => {
   const containerRef = useRef(null);
@@ -32,12 +33,11 @@ const Post = () => {
   });
   const [postInfo, setPostInfo] = useState<PostInfoType>({
     text: "연습",
-    images: [
-      "test/profile1.jpg",
-      "test/profile2.jpg",
-      "test/profile1.jpg",
-      "test/profile2.jpg",
-    ],
+    images: [],
+    votes: {
+      choice0: { text: "하하", selectors: [] },
+      choice1: { text: "호호", selectors: [] },
+    },
     postDate: new Date(),
     userId: "ihih",
     comments: [],
@@ -64,8 +64,6 @@ const Post = () => {
       });
     }
   };
-
-  console.log(postInfo?.favorites);
 
   return (
     <div className="post">
@@ -113,6 +111,11 @@ const Post = () => {
             <div className="post-main-content-text">{postInfo.text}</div>
             <div className="post-main-content-extra">
               <PostImages postInfo={postInfo} setPostInfo={setPostInfo} />
+              <PostVote
+                userInfo={userInfo}
+                postInfo={postInfo}
+                setPostInfo={setPostInfo}
+              />
             </div>
           </div>
           {/* 푸터 */}
