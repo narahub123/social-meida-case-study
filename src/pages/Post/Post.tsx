@@ -11,6 +11,7 @@ import { convertDateToYYYYMMDD } from "../../components/Calendar/data/calendar.d
 import { PostInfoType } from "../../types/post.types";
 import PostImages from "./components/PostImages";
 import PostVote from "./components/PostVote";
+import PostCommentModal from "./components/PostCommentModal";
 
 const Post = () => {
   const containerRef = useRef(null);
@@ -18,6 +19,7 @@ const Post = () => {
   // 좋아요 여부
   // 더보기
   const [openMore, setOpenMore] = useState(false);
+  const [openCommentModal, setOpenCommentModal] = useState(false);
 
   useClickOutside(containerRef, setOpenMore);
   // 정보
@@ -26,6 +28,7 @@ const Post = () => {
   }>({
     username: "하이요",
     userId: "hihihihi",
+    userPic: "/test/profile1.jpg",
     following: false,
     mute: false,
     block: false,
@@ -76,6 +79,10 @@ const Post = () => {
               className="post-profile-photo"
             />
           </figure>
+          {/* 답글과 연결하는 선 */}
+          {/* <div className="post-link">
+            <p className="post-bar"/>
+          </div> */}
         </div>
         <div className="post-right">
           {/* 헤더 */}
@@ -120,7 +127,11 @@ const Post = () => {
           </div>
           {/* 푸터 */}
           <div className="post-main-footer">
-            <span className="post-main-footer-item comment">
+            {/* 댓글 */}
+            <span
+              className="post-main-footer-item comment"
+              onClick={() => setOpenCommentModal(true)}
+            >
               <TbMessageCircle className="post-main-footer-item-icon icon" />
               <p className="post-main-footer-item-text">
                 {postInfo && postInfo.comments ? postInfo.comments.length : 0}
@@ -152,6 +163,12 @@ const Post = () => {
               <p className="post-main-footer-item-text">32</p>
             </span>
           </div>
+          {openCommentModal && (
+            <PostCommentModal
+              userInfo={userInfo}
+              setOpenCommentModal={setOpenCommentModal}
+            />
+          )}
         </div>
       </div>
     </div>

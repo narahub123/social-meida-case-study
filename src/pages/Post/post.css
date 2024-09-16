@@ -9,6 +9,9 @@
 }
 
 .post-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .post-profile-photo-wrapper {
 }
@@ -16,6 +19,17 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
+}
+.post-link {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  padding: 5px;
+}
+.post-bar {
+  width: 2.5px;
+  height: 100%;
+  background-color: #ccc;
 }
 
 .post-right {
