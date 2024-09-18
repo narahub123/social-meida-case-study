@@ -58,7 +58,7 @@ const PostMore = ({ userInfo, setUserInfo, setOpenMore }: PostMoreProps) => {
         <span className="post-more-item-text">
           <LuAtSign className="icon" />
           <span>{userInfo.userId} 님 </span>
-          <span>{userInfo.block ? "차단풀기" : "차단하기"}</span>
+          <span>{userInfo.block ? "차단 해제하기" : "차단하기"}</span>
         </span>
       </li>
       <li className="post-more-item">

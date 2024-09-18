@@ -1,0 +1,77 @@
+.user-page {
+}
+.user-page-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.user-page-background-wrapper {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+.user-page-background {
+  width: 100%;
+}
+.user-page-profile-wrapper {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  border-radius: 50%;
+}
+.user-page-profile {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid #000;
+}
+.user-page-follow {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  padding: 10px;
+}
+
+.user-page-follow-alarm {
+  border: 2px solid #999;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.user-page-follow-btn {
+  padding: 5px 10px;
+  border: 2px solid #999;
+  border-radius: 20px;
+}
+
+.user-page-info {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.user-page-info-user {
+  .user-page-username {
+    font-weight: bold;
+  }
+  .user-page-userId {
+    color: #999;
+  }
+}
+.user-page-info-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.user-page-regdate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-page-info-follow {
+  display: flex;
+  gap: 10px;
+}
