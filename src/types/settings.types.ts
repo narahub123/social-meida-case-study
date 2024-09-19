@@ -13,3 +13,8 @@ export interface LanguageListType {
 export interface AlarmType {
   [key: string]: boolean;
 }
+
+export interface MessageSettingsType {
+  permission: string;
+  showRead: boolean;
+}

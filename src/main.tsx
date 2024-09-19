@@ -13,6 +13,7 @@ import Replies from "./pages/UserPage/pages/Replies.tsx";
 import Media from "./pages/UserPage/pages/Media.tsx";
 import Favorites from "./pages/UserPage/pages/Favorites.tsx";
 import Message from "./pages/Message/Message.tsx";
+import MessageSettings from "./pages/Message/pages/MessageSettings.tsx";
 
 const login = false;
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/messages",
         element: <Message />,
+      },
+      {
+        path: "/messages/settings",
+        element: <MessageSettings />,
       },
     ],
   },

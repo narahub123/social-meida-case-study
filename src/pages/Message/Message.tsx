@@ -1,6 +1,7 @@
 import { LuArrowLeft, LuMailPlus, LuSearch, LuSettings } from "react-icons/lu";
 import "./message.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Message = () => {
   const [focused, setFocused] = useState(false);
@@ -25,9 +26,12 @@ const Message = () => {
           <p className="message-header-title">쪽지</p>
         </span>
         <span className="message-header-right">
-          <div className="message-header-item-wrapper">
+          <Link
+            to={`/messages/settings`}
+            className="message-header-item-wrapper"
+          >
             <LuSettings className="message-header-item icon" />
-          </div>
+          </Link>
           <div className="message-header-item-wrapper">
             <LuMailPlus className="message-header-item icon" />
           </div>
