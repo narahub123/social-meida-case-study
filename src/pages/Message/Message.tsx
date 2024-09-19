@@ -2,6 +2,7 @@ import { LuArrowLeft, LuMailPlus, LuSearch, LuSettings } from "react-icons/lu";
 import "./message.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import MessageCompose from "./pages/MessageCompose";
 
 const Message = () => {
   const [focused, setFocused] = useState(false);
@@ -11,6 +12,8 @@ const Message = () => {
   const [section, setSection] = useState("total");
   // 검색 결과
   const [results, setResult] = useState([]);
+  // 쪽지 생성
+  const [openCompose, setOpenCompose] = useState(false);
 
   // 검색
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +35,10 @@ const Message = () => {
           >
             <LuSettings className="message-header-item icon" />
           </Link>
-          <div className="message-header-item-wrapper">
+          <div
+            className="message-header-item-wrapper"
+            onClick={() => setOpenCompose(true)}
+          >
             <LuMailPlus className="message-header-item icon" />
           </div>
         </span>
@@ -129,6 +135,7 @@ const Message = () => {
           )}
         </div>
       </section>
+      {openCompose && <MessageCompose />}
     </div>
   );
 };
