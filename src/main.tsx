@@ -14,6 +14,8 @@ import Media from "./pages/UserPage/pages/Media.tsx";
 import Favorites from "./pages/UserPage/pages/Favorites.tsx";
 import Message from "./pages/Message/Message.tsx";
 import MessageSettings from "./pages/Message/pages/MessageSettings.tsx";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const login = false;
 const router = createBrowserRouter([
@@ -73,6 +75,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );

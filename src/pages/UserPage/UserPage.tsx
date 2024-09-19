@@ -1,9 +1,9 @@
 import { LuBell, LuCalendar, LuMail, LuMoreHorizontal } from "react-icons/lu";
 import "./userPage.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { convertDateToKoreanZone } from "../../components/Calendar/data/calendar.data";
 import UserPageMore from "./components/UserPageMore";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside";
 
 const UserPage = () => {

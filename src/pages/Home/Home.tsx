@@ -33,9 +33,23 @@ import { createArrayFromZero } from "./data/home.data";
 import Emoticons from "./pages/Emoticons";
 import Reserve from "./pages/Reserve/Reserve";
 import Post from "../Post/Post";
+import { getUserInfo } from "../../apis/user.apis";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signInFailure,
+  signInStart,
+  signInSuccess,
+} from "../../store/user/userSlice";
+import { RootState } from "../../store/store";
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser, error, loading } = useSelector(
+    (state: RootState) => state.user
+  );
+  console.log(currentUser);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const writeRef = useRef<HTMLElement>(null);
@@ -72,7 +86,7 @@ const Home = () => {
   const [imgUrls, setImgUrls] = useState<(string | ArrayBuffer | null)[]>([]);
 
   // 이미지 로딩
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   // 슬라이드
   const [imgNum, setImgNum] = useState(1);
@@ -105,29 +119,45 @@ const Home = () => {
   const [openReserveModal, setOpenReserveModal] = useState(false);
 
   // 필요한 데이터 불러오기 (테스트)
+  // useEffect(() => {
+  //   const baseUrl = import.meta.env.VITE_BASE_URL;
+  //   const fetchData = async () => {
+  //     const response = await fetch(`${baseUrl}/test/enter`, {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",
+  //     });
+
+  //     if (!response.ok) {
+  //       if (response.status === 403 || response.status === 401) {
+  //         navigate("/auth");
+  //       }
+  //     }
+
+  //     const data = await response.json();
+
+  //     return data;
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
-    const baseUrl = import.meta.env.VITE_BASE_URL;
-    const fetchData = async () => {
-      const response = await fetch(`${baseUrl}/test/enter`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-
-      if (!response.ok) {
-        if (response.status === 403 || response.status === 401) {
-          navigate("/auth");
-        }
-      }
-
-      const data = await response.json();
-
-      return data;
+    dispatch(signInStart());
+    const fetchUserInfo = async () => {
+      await getUserInfo()
+        .then((res) => {
+          console.log(res);
+          dispatch(signInSuccess(res));
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(signInFailure(err));
+        });
     };
 
-    fetchData();
+    fetchUserInfo();
   }, []);
 
   // 글쓰기 및 진행 보여주기
@@ -175,7 +205,7 @@ const Home = () => {
 
     const files = e.target.files;
 
-    setLoading(true);
+    // setLoading(true);
     // 각 파일을 비동기로 읽기
     const readFiles = async (
       file: File
@@ -207,7 +237,7 @@ const Home = () => {
 
     // 기존 이미지 URL에 새로운 URL 추가
     setImgUrls((prevUrls) => [...prevUrls, ...urls]);
-    setLoading(false);
+    // setLoading(false);
   };
 
   // 이미지 삭제
