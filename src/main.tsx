@@ -12,6 +12,7 @@ import Posts from "./pages/UserPage/pages/Posts.tsx";
 import Replies from "./pages/UserPage/pages/Replies.tsx";
 import Media from "./pages/UserPage/pages/Media.tsx";
 import Favorites from "./pages/UserPage/pages/Favorites.tsx";
+import Message from "./pages/Message/Message.tsx";
 
 const login = false;
 const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
             element: <Favorites />,
           },
         ],
+      },
+      {
+        path: "/messages",
+        element: <Message />,
       },
     ],
   },

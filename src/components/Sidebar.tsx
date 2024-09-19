@@ -9,6 +9,7 @@ import {
 import { MdOutlineLocalPostOffice } from "react-icons/md";
 
 import "./sidebar.css";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -39,10 +40,10 @@ const Sidebar = () => {
               </div>
             </li>
             <li className="sidebar-list-item">
-              <div className="sidebar-list-item-container">
+              <Link to={`/messages`} className="sidebar-list-item-container">
                 <MdOutlineLocalPostOffice className="sidebar-list-item-icon" />
                 <span className="sidebar-list-item-text">메세지</span>
-              </div>
+              </Link>
             </li>
             <li className="sidebar-list-item">
               <div className="sidebar-list-item-container">

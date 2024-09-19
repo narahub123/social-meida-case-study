@@ -1,0 +1,118 @@
+.message {
+  padding: 10px;
+  width: 100%;
+}
+
+/* 헤더 */
+.message-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.message-header-left {
+}
+
+.message-header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.message-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.message-header-item-wrapper {
+  box-sizing: border-box;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-header-item-wrapper:hover {
+  background-color: #eee;
+}
+
+.message-header-item {
+  font-size: 18px;
+}
+
+/* 검색 */
+.message-search {
+}
+.message-search-container {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.message-search-blur {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.message-search-input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding: 10px 30px;
+  outline: none;
+}
+
+.message-search-input-icon {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.message-search-input-icon.focused {
+  left: 45px;
+}
+
+.message-search-list {
+}
+.message-search-list-container {
+  display: flex;
+  flex-direction: column;
+}
+.message-search-list-message {
+  text-align: center;
+  padding: 50px;
+  color: #555;
+}
+
+.message-search-tablist {
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+}
+
+.message-search-tablist-item {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message-search-tablist-item:hover {
+  background-color: #eee;
+}
+.message-search-tablist-item-text {
+  padding: 10px;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+.message-search-tablist-item-text.active {
+  border-bottom: 3px solid var(--color-point);
+}
+
+/* 메시지 목록 */
+.message-list {
+}
