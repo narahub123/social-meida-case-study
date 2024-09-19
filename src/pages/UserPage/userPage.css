@@ -7,15 +7,16 @@
 }
 .user-page-background-wrapper {
   width: 100%;
-  height: 100px;
+  height: 200px;
   overflow: hidden;
 }
 .user-page-background {
   width: 100%;
+  object-fit: none;
 }
 .user-page-profile-wrapper {
   position: absolute;
-  top: 45px;
+  top: 145px;
   left: 20px;
   box-sizing: border-boxs;
   border: 1px solid #ccc;
@@ -68,12 +69,16 @@
   gap: 15px;
 }
 .user-page-info-user {
-  .user-page-username {
-    font-weight: bold;
-  }
-  .user-page-userId {
-    color: #999;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.user-page-username {
+  font-weight: bold;
+  font-size: 18px;
+}
+.user-page-userId {
+  color: #999;
 }
 .user-page-info-dates {
   display: flex;
@@ -98,9 +103,17 @@
 
 .user-page-tablist-tab {
   text-decoration: none;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-page-tablist-tab:hover {
+  background-color: #eee;
 }
 .user-page-tablist-tab.active {
   .user-page-tablist-tab-text {
+    font-weight: bold;
     box-sizing: border-box;
     border-bottom: 3px solid var(--color-point);
   }

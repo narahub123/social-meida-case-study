@@ -1,0 +1,18 @@
+.media {
+}
+.media-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.media-item {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+.media-item-img {
+  width: 100%;
+  height: 100%;
+}

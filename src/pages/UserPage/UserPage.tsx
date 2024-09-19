@@ -1,11 +1,13 @@
 import { LuBell, LuCalendar, LuMail, LuMoreHorizontal } from "react-icons/lu";
 import "./userPage.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { convertDateToKoreanZone } from "../../components/Calendar/data/calendar.data";
 import UserPageMore from "./components/UserPageMore";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useClickOutside from "../../hooks/useClickOutside";
 
 const UserPage = () => {
+  const moreRef = useRef<HTMLSpanElement>(null);
   const [userInfo, setUserInfo] = useState<{
     [key: string]: string | string[] | Date;
   }>({
@@ -21,6 +23,8 @@ const UserPage = () => {
   });
 
   const [openMore, setOpenMore] = useState(false);
+
+  useClickOutside(moreRef, setOpenMore);
   return (
     <div className="user-page">
       <div className="user-page-header">
@@ -44,6 +48,7 @@ const UserPage = () => {
             className="user-page-follow-item"
             title="더보기"
             onClick={() => setOpenMore(!openMore)}
+            ref={moreRef}
           >
             <LuMoreHorizontal className="user-page-follow-alarm icon" />
             {openMore && <UserPageMore userInfo={userInfo} />}
