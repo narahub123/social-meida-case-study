@@ -8,6 +8,10 @@ import Preferences from "./pages/Settings/Preferences/Preferences.tsx";
 import Home from "./pages/Home/Home.tsx";
 import Auth from "./pages/Auth/Auth.tsx";
 import UserPage from "./pages/UserPage/UserPage.tsx";
+import Posts from "./pages/UserPage/pages/Posts.tsx";
+import Replies from "./pages/UserPage/pages/Replies.tsx";
+import Media from "./pages/UserPage/pages/Media.tsx";
+import Favorites from "./pages/UserPage/pages/Favorites.tsx";
 
 const login = false;
 const router = createBrowserRouter([
@@ -34,6 +38,24 @@ const router = createBrowserRouter([
       {
         path: ":userId",
         element: <UserPage />,
+        children: [
+          {
+            index: true,
+            element: <Posts />,
+          },
+          {
+            path: "/:userId/replies",
+            element: <Replies />,
+          },
+          {
+            path: "/:userId/media",
+            element: <Media />,
+          },
+          {
+            path: "/:userId/favorites",
+            element: <Favorites />,
+          },
+        ],
       },
     ],
   },

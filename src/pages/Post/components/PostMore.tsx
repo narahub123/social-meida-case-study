@@ -13,7 +13,7 @@ import {
 
 interface PostMoreProps {
   userInfo: {
-    [key: string]: string | boolean;
+    [key: string]: string | boolean | string[];
   };
   setUserInfo: React.Dispatch<
     React.SetStateAction<{
